@@ -1,15 +1,11 @@
 import 'package:compare_prices/data/example/example_repository.dart';
-import 'package:compare_prices/di/providers.dart';
 import 'package:compare_prices/ui/example/example_page_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class ExamplePageViewModel extends StateNotifier<ExamplePageState> {
-  ExamplePageViewModel(this._reader) : super(const ExamplePageState());
-
-  final Reader _reader;
-
-  late final ExampleRepository _repository = _reader(exampleRepositoryProvider);
+  ExamplePageViewModel(this._repository) : super(const ExamplePageState());
+  late final ExampleRepository _repository;
 
   void incrementCounter() {
     state = state.copyWith(counter: state.counter + 1);
