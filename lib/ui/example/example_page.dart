@@ -15,7 +15,6 @@ class ExamplePage extends HookWidget {
       ),
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -35,6 +34,32 @@ class ExamplePage extends HookWidget {
                     onPressed: viewModel.decrementCounter, child: Text("-1")),
                 OutlinedButton(
                     onPressed: viewModel.clearCounter, child: Text("clear")),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Divider(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                OutlinedButton(
+                    onPressed: viewModel.clearWord, child: Text("clear Word")),
+                OutlinedButton(
+                    onPressed: viewModel.fetchWordFromRepository,
+                    child: Text("Fetch Word")),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    state.fetchedWord,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ),
               ],
             ),
           ],
