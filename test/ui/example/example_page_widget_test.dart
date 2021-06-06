@@ -58,7 +58,7 @@ void main() {
 
       await tester.tap(find.text('Fetch Word'));
       await tester.pump();
-      expect(find.text('hoge'), findsOneWidget);
+      expect(find.text('hog'), findsOneWidget);
 
       await tester.tap(find.text('clear Word'));
       await tester.pump();

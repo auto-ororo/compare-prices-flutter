@@ -7,24 +7,36 @@ on:
     branches:
       - '**'
 
+env:
+  JAVA_VERSION: 12.x
+  FLUTTER_VERSION: 2.12.0
+
 jobs:
   analyze_and_test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+      -
     - name: Setup Java
       uses: actions/setup-java@v1
       with:
-        java-version: '12.x'
+        java-version: ${{ env.JAVA_VERSION }}
+
     - name: Setup Flutter
       uses: subosito/flutter-action@v1
       with:
-        channel: 'stable'
+        java-version: ${{ env.FLUTTER_VERSION }}
+
     - name: Get Pub Pachages
       run: flutter pub get
+
     - name: Generate Dart Files
       run: flutter pub run build_runner build --delete-conflicting-outputs~
+
     - name: Analyze
+      if: always()
       run: flutter analyze
+
     - name: Test
+      if: always()
       run: flutter test --verbose
