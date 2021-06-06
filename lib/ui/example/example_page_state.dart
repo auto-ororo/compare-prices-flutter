@@ -7,5 +7,6 @@ class ExamplePageState with _$ExamplePageState {
   const factory ExamplePageState({
     @Default(0) int counter,
     @Default("") String fetchedWord,
+    String? errorMessage,
   }) = _ExamplePageState;
 }

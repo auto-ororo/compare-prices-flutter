@@ -5,10 +5,10 @@ import 'package:compare_prices/ui/example/example_page_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Repository
-final _exampleRepositoryProvider =
+final exampleRepositoryProvider =
     Provider.autoDispose<ExampleRepository>((ref) => FirstExampleRepository());
 
 // ViewModel
 final examplePageViewModelProvider =
     StateNotifierProvider.autoDispose<ExamplePageViewModel, ExamplePageState>(
-        (ref) => ExamplePageViewModel(ref.read(_exampleRepositoryProvider)));
+        (ref) => ExamplePageViewModel(ref.read(exampleRepositoryProvider)));

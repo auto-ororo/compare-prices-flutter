@@ -29,7 +29,7 @@ class ExamplePageViewModel extends StateNotifier<ExamplePageState> {
       return result.when(success: (word) {
         state = state.copyWith(fetchedWord: word);
       }, failure: (error) {
-        throw error;
+        state = state.copyWith(errorMessage: error.toString());
       });
     });
   }
