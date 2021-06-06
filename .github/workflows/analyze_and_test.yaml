@@ -1,7 +1,7 @@
 name: flutter_analyze_and_test
 
 on:
-  push:
+  pull_request:
     paths-ignore:
       - '**.md'
     branches:
@@ -27,7 +27,7 @@ jobs:
       with:
         java-version: ${{ env.FLUTTER_VERSION }}
 
-    - name: Get Pub Pachages
+    - name: Get Pub Packages
       run: flutter pub get
 
     - name: Generate Dart Files
