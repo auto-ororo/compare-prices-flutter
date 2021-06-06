@@ -11,19 +11,20 @@ jobs:
   analyze_and_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Setup
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: 'stable'
-      - name: Get Pachages
-        run: flutter pub get
-      - name: Generate Files
-        run: flutter pub run build_runner build --delete-conflicting-outputs~
-      - name: Analyze
-        run: flutter analyze
-      - name: Test
-        run: flutter test --verbose
+    - uses: actions/checkout@v1
+    - name: Setup Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable'
+    - name: Get Pub Pachages
+      run: flutter pub get
+    - name: Generate Dart Files
+      run: flutter pub run build_runner build --delete-conflicting-outputs~
+    - name: Analyze
+      run: flutter analyze
+    - name: Test
+      run: flutter test --verbose
