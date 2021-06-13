@@ -1,5 +1,5 @@
-import 'package:compare_prices/data/base/result.dart';
-import 'package:compare_prices/data/example/example_repository.dart';
+import 'package:compare_prices/domain/entities/result.dart';
+import 'package:compare_prices/domain/repositories/example_repository.dart';
 
 class FirstExampleRepository extends ExampleRepository {
   @override

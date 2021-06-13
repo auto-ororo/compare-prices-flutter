@@ -1,5 +1,5 @@
-import 'package:compare_prices/data/base/result.dart';
-import 'package:compare_prices/data/example/example_repository.dart';
+import 'package:compare_prices/domain/entities/result.dart';
+import 'package:compare_prices/domain/repositories/example_repository.dart';
 import 'package:compare_prices/ui/example/example_page_state.dart';
 import 'package:compare_prices/ui/example/example_page_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';

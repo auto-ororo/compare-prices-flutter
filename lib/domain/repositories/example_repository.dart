@@ -1,4 +1,4 @@
-import '../base/result.dart';
+import '../entities/result.dart';
 
 abstract class ExampleRepository {
   Future<Result<String>> getExampleWord();

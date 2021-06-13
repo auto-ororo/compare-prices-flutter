@@ -1,4 +1,4 @@
-import 'package:compare_prices/data/example/example_repository.dart';
+import 'package:compare_prices/domain/repositories/example_repository.dart';
 import 'package:compare_prices/ui/example/example_page_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
