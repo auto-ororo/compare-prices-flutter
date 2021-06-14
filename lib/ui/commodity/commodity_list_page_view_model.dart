@@ -1,41 +1,24 @@
-import 'dart:math';
-
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/commodity_row.dart';
-import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/domain/usecases/get_inexpensive_commodity_list_use_case.dart';
+import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:compare_prices/ui/commodity/commodity_list_page_state.dart';
-import 'package:english_words/english_words.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
-import 'package:uuid/uuid.dart';
 
 class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
-  CommodityListPageViewModel() : super(const CommodityListPageState());
+  final GetInexpensiveCommodityListUseCase _getInexpensiveCommodityListUseCase;
 
-  void getList() {
-    var commodityRows = List<CommodityRow>.generate(50, (_) {
-      final id = Uuid().v4.toString();
-      final datetime = DateTime.now();
-      final commodity = Commodity(
-          id: Uuid().v4.toString(),
-          name: WordPair.random().asPascalCase,
-          createdAt: datetime,
-          updatedAt: datetime);
-      final shop = Shop(
-          id: Uuid().v4.toString(),
-          name: WordPair.random().asPascalCase,
-          createdAt: datetime,
-          updatedAt: datetime);
-      final price = Random().nextInt(1000);
+  CommodityListPageViewModel(this._getInexpensiveCommodityListUseCase)
+      : super(const CommodityListPageState());
 
-      return CommodityRow(
-          id: id,
-          commodity: commodity,
-          mostInexpensiveShop: shop,
-          price: price,
-          purchaseDate: datetime);
-    }).toList();
-    state = state.copyWith(commodityRows: commodityRows);
+  void getList() async {
+    final commodityRowsResult =
+        await _getInexpensiveCommodityListUseCase(NoParam());
+
+    commodityRowsResult.when(success: (commodityRows) {
+      state = state.copyWith(commodityRows: commodityRows);
+    }, failure: (exception) {
+      print(exception.toString());
+    });
   }
 
   void shuffleList() {

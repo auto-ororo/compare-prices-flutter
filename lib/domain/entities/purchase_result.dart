@@ -10,7 +10,7 @@ class PurchaseResult with _$PurchaseResult {
     required String shopId,
     required int price,
     required DateTime purchaseDate,
-    @Default(false) bool isEnabled,
+    @Default(true) bool isEnabled,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _PurchaseResult;

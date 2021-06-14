@@ -9,6 +9,6 @@ class Commodity with _$Commodity {
     required String name,
     required DateTime createdAt,
     required DateTime updatedAt,
-    @Default(false) bool isEnabled,
+    @Default(true) bool isEnabled,
   }) = _Commodity;
 }

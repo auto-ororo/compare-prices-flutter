@@ -35,7 +35,7 @@ void main() {
     test('throw error if fetchWord was failure', () async {
       final listener = Listener();
 
-      final error = Error();
+      final error = Exception();
 
       when(repository.getExampleWord())
           .thenAnswer((realInvocation) async => Result.failure(error));
