@@ -8,17 +8,24 @@ import 'package:compare_prices/ui/commodity/commodity_list_page_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
-  final GetInexpensiveCommodityListUseCase _getInexpensiveCommodityListUseCase;
+final commodityListPageViewModelProvider =
+    StateNotifierProvider<CommodityListPageViewModel, CommodityListPageState>(
+        (ref) => CommodityListPageViewModel(ref.read));
 
-  final FilterInexpensiveCommodityListByKeywordUseCase
-      _filterInexpensiveCommodityListByKeywordUseCase;
+class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
+  final Reader _reader;
+  late final GetInexpensiveCommodityListUseCase
+      _getInexpensiveCommodityListUseCase =
+      _reader(getInexpensiveCommodityListUseCaseProvider);
+
+  late final FilterInexpensiveCommodityListByKeywordUseCase
+      _filterInexpensiveCommodityListByKeywordUseCase =
+      _reader(filterInexpensiveCommodityListByKeywordUseCaseProvider);
 
   var _errorMessage = StreamController<String>();
   StreamController<String> get errorMessage => _errorMessage;
 
-  CommodityListPageViewModel(this._getInexpensiveCommodityListUseCase,
-      this._filterInexpensiveCommodityListByKeywordUseCase)
+  CommodityListPageViewModel(this._reader)
       : super(const CommodityListPageState());
 
   void getList() async {
@@ -45,7 +52,7 @@ class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
   void filter() {
     final list = _filterInexpensiveCommodityListByKeywordUseCase(
             FilterInexpensiveCommodityListByKeywordUseCaseParams(
-                list: state.commodityRows, searchWord: state.searchWord))
+                list: state.commodityRows, keyword: state.searchWord))
         .dataOrThrow;
 
     state = state.copyWith(filteredCommodityRows: list);
