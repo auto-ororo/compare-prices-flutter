@@ -8,9 +8,9 @@ import 'package:compare_prices/ui/commodity/commodity_list_page_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final commodityListPageViewModelProvider =
-    StateNotifierProvider<CommodityListPageViewModel, CommodityListPageState>(
-        (ref) => CommodityListPageViewModel(ref.read));
+final commodityListPageViewModelProvider = StateNotifierProvider.autoDispose<
+    CommodityListPageViewModel,
+    CommodityListPageState>((ref) => CommodityListPageViewModel(ref.read));
 
 class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
   final Reader _reader;
@@ -45,7 +45,7 @@ class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
     state = state.copyWith(filteredCommodityRows: list);
   }
 
-  void bindSearchWord(String word) {
+  void updateSearchWord(String word) {
     state = state.copyWith(searchWord: word);
   }
 

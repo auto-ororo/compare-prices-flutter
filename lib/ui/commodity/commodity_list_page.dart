@@ -1,3 +1,4 @@
+import 'package:compare_prices/main.dart';
 import 'package:compare_prices/ui/commodity/commodity_row_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,6 +19,7 @@ class CommodityListPage extends HookWidget {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         viewModel.getList();
 
+        print("viewModel.errorMessage.stream.listen");
         viewModel.errorMessage.stream.listen((errorMessage) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage)),
@@ -25,7 +27,7 @@ class CommodityListPage extends HookWidget {
         });
       });
 
-      return () => {};
+      return () {};
     }, const []);
 
     useEffect(() {
@@ -53,7 +55,7 @@ class CommodityListPage extends HookWidget {
                   hintText: "商品名、店舗を入力してください"),
               controller: textEditingController,
               onChanged: (word) {
-                viewModel.bindSearchWord(word);
+                viewModel.updateSearchWord(word);
               },
             ),
           ),
@@ -72,7 +74,7 @@ class CommodityListPage extends HookWidget {
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            print("action button tapped");
+            Navigator.of(context).pushNamed(Const.addPurchaseResult);
           }),
     );
   }
