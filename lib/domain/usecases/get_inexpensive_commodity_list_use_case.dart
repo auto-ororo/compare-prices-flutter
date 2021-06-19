@@ -15,13 +15,13 @@ class GetInexpensiveCommodityListUseCase
       this._shopRepository, this._purchaseResultRepository);
 
   @override
-  Future<Result<List<CommodityRow>>> call(NoParam _) async {
-    try {
+  Future<Result<List<CommodityRow>>> call(NoParam params) {
+    return Result.guardFuture(() async {
       final commodities = await _commodityRepository.getEnabledCommodities();
 
       var index = 0;
 
-      var list = List<CommodityRow>.empty(growable: true);
+      var list = <CommodityRow>[];
 
       for (final element in commodities) {
         final purchaseResult = await _purchaseResultRepository
@@ -49,14 +49,7 @@ class GetInexpensiveCommodityListUseCase
         index++;
         list.add(row);
       }
-
-      return Result.success(list);
-    } catch (e) {
-      if (e is Exception) {
-        return Result.failure(e);
-      } else {
-        return Result.failure(Exception(e.toString()));
-      }
-    }
+      return list;
+    });
   }
 }

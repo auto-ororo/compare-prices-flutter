@@ -105,6 +105,11 @@ class _SampleData {
         name: "りんご",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now()),
+    Commodity(
+        id: "c11",
+        name: "バナナ",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
   ];
 
   factory _SampleData() {

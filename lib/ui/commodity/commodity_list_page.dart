@@ -13,8 +13,15 @@ class CommodityListPage extends HookWidget {
     final textEditingController = useTextEditingController();
 
     useEffect(() {
+      // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         viewModel.getList();
+
+        viewModel.errorMessage.stream.listen((errorMessage) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(errorMessage)),
+          );
+        });
       });
 
       return () => {};
@@ -37,8 +44,8 @@ class CommodityListPage extends HookWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+              decoration: const InputDecoration(
+                  border: const OutlineInputBorder(),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
                   labelText: "商品名",
@@ -62,7 +69,7 @@ class CommodityListPage extends HookWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             print("action button tapped");
           }),
