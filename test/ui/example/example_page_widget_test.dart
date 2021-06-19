@@ -5,10 +5,11 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:compare_prices/data/base/result.dart';
-import 'package:compare_prices/data/example/example_repository.dart';
-import 'package:compare_prices/di/providers.dart';
-import 'package:compare_prices/main.dart';
+import 'package:compare_prices/data/providers.dart';
+import 'package:compare_prices/domain/entities/result.dart';
+import 'package:compare_prices/domain/repositories/example_repository.dart';
+import 'package:compare_prices/ui/example/example_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
@@ -23,10 +24,14 @@ void main() {
       final repository = MockExampleRepository();
 
       // Build our app and trigger a frame.
-      await tester.pumpWidget(ProviderScope(overrides: [
-        exampleRepositoryProvider.overrideWithProvider(
-            Provider.autoDispose<ExampleRepository>((ref) => repository)),
-      ], child: MyApp()));
+      await tester.pumpWidget(ProviderScope(
+          overrides: [
+            exampleRepositoryProvider.overrideWithProvider(
+                Provider.autoDispose<ExampleRepository>((ref) => repository)),
+          ],
+          child: MaterialApp(
+            home: ExamplePage(),
+          )));
 
       expect(find.text('0'), findsOneWidget);
 
@@ -48,10 +53,14 @@ void main() {
       final repository = MockExampleRepository();
 
       // Build our app and trigger a frame.
-      await tester.pumpWidget(ProviderScope(overrides: [
-        exampleRepositoryProvider.overrideWithProvider(
-            Provider.autoDispose<ExampleRepository>((ref) => repository)),
-      ], child: MyApp()));
+      await tester.pumpWidget(ProviderScope(
+          overrides: [
+            exampleRepositoryProvider.overrideWithProvider(
+                Provider.autoDispose<ExampleRepository>((ref) => repository)),
+          ],
+          child: MaterialApp(
+            home: ExamplePage(),
+          )));
 
       when(repository.getExampleWord())
           .thenAnswer((realInvocation) => Future.value(Result.success("hoge")));
