@@ -1,8 +1,11 @@
+import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../common/picker_form_field.dart';
 import 'add_purchase_result_page_view_model.dart';
 
 class AddPurchaseResultPage extends HookWidget {
@@ -19,10 +22,15 @@ class AddPurchaseResultPage extends HookWidget {
     final priceInputController = useTextEditingController();
     priceInputController.text = state.price.toString();
 
+    final commodityInputController = useTextEditingController();
+    commodityInputController.text = state.selectedCommodity?.name ?? "選択してください";
+
+    final shopInputController = useTextEditingController();
+    shopInputController.text = state.selectedShop?.name ?? "選択してください";
+
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        print("viewModel.errorMessage.stream.listen");
         viewModel.errorMessage.stream.listen((errorMessage) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage)),
@@ -48,6 +56,30 @@ class AddPurchaseResultPage extends HookWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+              child: PickerFormField(
+                  labelText: "商品",
+                  controller: commodityInputController,
+                  onTap: () async {
+                    final selectedCommodity = await Navigator.of(context).pushNamed<Commodity>(RouteName.selectCommodityDialog);
+
+                    if (selectedCommodity != null) {
+                      viewModel.updateSelectedCommodity(selectedCommodity);
+                    }
+                  }),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+              child: PickerFormField(
+                  labelText: "店舗",
+                  controller: shopInputController,
+                  onTap: () {
+                    Navigator.of(context).pushNamed(RouteName.selectShopDialog);
+                  }),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
               child: TextFormField(
                 textAlign: TextAlign.end,
                 keyboardType: TextInputType.number,
@@ -63,29 +95,20 @@ class AddPurchaseResultPage extends HookWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-              child: TextFormField(
-                textAlign: TextAlign.end,
-                readOnly: true,
-                enableInteractiveSelection: false,
-                controller: dateInputController,
-                decoration: const InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
+              child: PickerFormField(
                   labelText: "購入日",
-                ),
-                onTap: () async {
-                  final picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: new DateTime(2016),
-                      lastDate:
-                          new DateTime.now().add(new Duration(days: 360)));
+                  controller: dateInputController,
+                  onTap: () async {
+                    final picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2021),
+                        lastDate: DateTime.now().add(Duration(days: 360)));
 
-                  if (picked != null) {
-                    viewModel.updatePurchaseDate(picked);
-                  }
-                },
-              ),
+                    if (picked != null) {
+                      viewModel.updatePurchaseDate(picked);
+                    }
+                  }),
             ),
             Spacer(),
             Padding(

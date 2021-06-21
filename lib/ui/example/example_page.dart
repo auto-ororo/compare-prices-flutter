@@ -69,7 +69,7 @@ class ExamplePage extends HookWidget {
               children: [
                 OutlinedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(Const.routeCommodityList);
+                      Navigator.of(context).pushNamed(RouteName.commodityListPage);
                     },
                     child: Text("底値リストへ")),
               ],

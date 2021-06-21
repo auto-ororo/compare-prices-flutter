@@ -1,5 +1,6 @@
 import 'package:compare_prices/main.dart';
 import 'package:compare_prices/ui/commodity/commodity_row_widget.dart';
+import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -46,14 +47,10 @@ class CommodityListPage extends HookWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
-            child: TextField(
-              decoration: const InputDecoration(
-                  border: const OutlineInputBorder(),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
-                  labelText: "商品名",
-                  hintText: "商品名、店舗を入力してください"),
+            child: SearchTextField(
               controller: textEditingController,
+              labelText: "検索",
+              hintText: "商品名、店舗名を入力下ください。",
               onChanged: (word) {
                 viewModel.updateSearchWord(word);
               },
@@ -74,7 +71,7 @@ class CommodityListPage extends HookWidget {
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            Navigator.of(context).pushNamed(Const.addPurchaseResult);
+            Navigator.of(context).pushNamed(RouteName.addPurchaseResultPage);
           }),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/ui/add_purchase_result/add_purchase_result_page_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -26,6 +27,10 @@ class AddPurchaseResultPageViewModel
 
   void updatePrice(String priceStr) {
     state = state.copyWith(price: int.parse(priceStr));
+  }
+
+  void updateSelectedCommodity(Commodity selectedCommodity) {
+    state = state.copyWith(selectedCommodity: selectedCommodity);
   }
 
   @override
