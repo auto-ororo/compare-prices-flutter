@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:compare_prices/domain/entities/purchase_result.dart';
 import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 
@@ -53,9 +54,8 @@ class SamplePurchaseResultRepository extends PurchaseResultRepository {
 
   @override
   Future<PurchaseResult?> getEnabledPurchaseResultById(String id) async {
-    return _sampleData.purchaseResults.firstWhere(
-        (element) => (element.id == id) && element.isEnabled,
-        orElse: null);
+    return _sampleData.purchaseResults
+        .firstWhereOrNull((element) => (element.id == id) && element.isEnabled);
   }
 
   @override

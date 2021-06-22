@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/repositories/commodity_repository.dart';
 
@@ -24,16 +25,14 @@ class SampleCommodityRepository extends CommodityRepository {
 
   @override
   Future<Commodity?> getEnabledCommodityById(String id) async {
-    return _sampleData.commodities.firstWhere(
-        (element) => (element.id == id) && element.isEnabled,
-        orElse: null);
+    return _sampleData.commodities
+        .firstWhereOrNull((element) => (element.id == id) && element.isEnabled);
   }
 
   @override
   Future<Commodity?> getEnabledCommodityByName(String name) async {
-    return _sampleData.commodities.firstWhere(
-        (element) => (element.name == name) && element.isEnabled,
-        orElse: null);
+    return _sampleData.commodities.firstWhereOrNull(
+        (element) => (element.name == name) && element.isEnabled);
   }
 
   @override
