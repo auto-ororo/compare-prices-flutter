@@ -13,12 +13,13 @@ class EditCommodityDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = editCommodityDialogViewModelProvider(this.commodity.copyWith());
+    final provider =
+        editCommodityDialogViewModelProvider(this.commodity.copyWith());
     final state = useProvider(provider);
 
     final viewModel = useProvider(provider.notifier);
-    final textEditingController = useTextEditingController();
-    textEditingController.text = state.commodity.name;
+    final textEditingController =
+        useTextEditingController(text: state.commodity.name);
 
     useEffect(() {
       // 初期処理
@@ -40,8 +41,12 @@ class EditCommodityDialog extends HookWidget {
     return AlertDialog(
       title: Text("編集"),
       content: TextField(
-        decoration: const InputDecoration(labelText: "商品名"),
+        decoration: const InputDecoration(
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
+            labelText: "商品名"),
         controller: textEditingController,
+        onChanged: viewModel.updateName,
       ),
       actions: [
         TextButton(
@@ -51,7 +56,7 @@ class EditCommodityDialog extends HookWidget {
             child: const Text("キャンセル")),
         TextButton(
             onPressed: () {
-              viewModel.updateCommodity(textEditingController.text);
+              viewModel.updateCommodity();
             },
             child: const Text("更新")),
       ],

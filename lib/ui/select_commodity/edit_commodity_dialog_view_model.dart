@@ -29,16 +29,19 @@ class EditCommodityDialogViewModel
   EditCommodityDialogViewModel(this._reader, commodity)
       : super(EditCommodityDialogState(commodity: commodity));
 
-  void updateCommodity(String name) {
-    final commodity = state.commodity.copyWith(name: name);
-    _updateCommodityUseCase(commodity).then((result) {
+  void updateCommodity() {
+    _updateCommodityUseCase(state.commodity).then((result) {
       result.when(success: (_) {
-        _onCommodityUpdated.add(commodity);
+        _onCommodityUpdated.add(state.commodity);
       }, failure: (exception) {
         print("getList failed ${exception.toString()}");
         _errorMessage.add(exception.errorMessage());
       });
     });
+  }
+
+  void updateName(String name) {
+    state = state.copyWith(commodity: state.commodity.copyWith(name: name));
   }
 
   @override
