@@ -15,18 +15,7 @@ class AddPurchaseResultPage extends HookWidget {
     final viewModel =
         useProvider(addPurchaseResultPageViewModelProvider.notifier);
 
-    final dateInputController = useTextEditingController();
-    dateInputController.text =
-        DateFormat('yyyy-MM-dd').format(state.purchaseDate ?? DateTime.now());
-
     final priceInputController = useTextEditingController();
-    priceInputController.text = state.price.toString();
-
-    final commodityInputController = useTextEditingController();
-    commodityInputController.text = state.selectedCommodity?.name ?? "選択してください";
-
-    final shopInputController = useTextEditingController();
-    shopInputController.text = state.selectedShop?.name ?? "選択してください";
 
     useEffect(() {
       // 初期処理
@@ -58,9 +47,10 @@ class AddPurchaseResultPage extends HookWidget {
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
               child: PickerFormField(
                   labelText: "商品",
-                  controller: commodityInputController,
+                  text: state.selectedCommodity?.name ?? "選択して下さい",
                   onTap: () async {
-                    final selectedCommodity = await Navigator.of(context).pushNamed<Commodity>(RouteName.selectCommodityDialog);
+                    final selectedCommodity = await Navigator.of(context)
+                        .pushNamed<Commodity>(RouteName.selectCommodityDialog);
 
                     if (selectedCommodity != null) {
                       viewModel.updateSelectedCommodity(selectedCommodity);
@@ -72,7 +62,7 @@ class AddPurchaseResultPage extends HookWidget {
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
               child: PickerFormField(
                   labelText: "店舗",
-                  controller: shopInputController,
+                  text: state.selectedShop?.name ?? "選択して下さい",
                   onTap: () {
                     Navigator.of(context).pushNamed(RouteName.selectShopDialog);
                   }),
@@ -83,6 +73,7 @@ class AddPurchaseResultPage extends HookWidget {
               child: TextFormField(
                 textAlign: TextAlign.end,
                 keyboardType: TextInputType.number,
+                controller: priceInputController,
                 onChanged: (priceStr) {
                   viewModel.updatePrice(priceStr);
                 },
@@ -97,7 +88,8 @@ class AddPurchaseResultPage extends HookWidget {
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
               child: PickerFormField(
                   labelText: "購入日",
-                  controller: dateInputController,
+                  text: DateFormat('yyyy-MM-dd')
+                      .format(state.purchaseDate ?? DateTime.now()),
                   onTap: () async {
                     final picked = await showDatePicker(
                         context: context,
