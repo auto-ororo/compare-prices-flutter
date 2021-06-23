@@ -6,7 +6,7 @@ class SampleCommodityRepository extends CommodityRepository {
   final _sampleData = _SampleData();
 
   @override
-  Future<void> addCommodity(Commodity commodity) async {
+  Future<void> createCommodity(Commodity commodity) async {
     _sampleData.commodities.add(commodity);
   }
 

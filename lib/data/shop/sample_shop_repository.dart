@@ -6,7 +6,7 @@ class SampleShopRepository extends ShopRepository {
   final _sampleData = _SampleData();
 
   @override
-  Future<void> addShop(Shop shop) async {
+  Future<void> createShop(Shop shop) async {
     _sampleData.shops.add(shop);
   }
 

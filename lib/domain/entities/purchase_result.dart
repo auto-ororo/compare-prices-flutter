@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'purchase_result.freezed.dart';
 
@@ -14,4 +15,19 @@ class PurchaseResult with _$PurchaseResult {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _PurchaseResult;
+
+  static PurchaseResult create(
+      {required String commodityId,
+      required String shopId,
+      required int price,
+      required DateTime purchaseDate}) {
+    return PurchaseResult(
+        id: Uuid().v4(),
+        commodityId: commodityId,
+        shopId: shopId,
+        price: price,
+        purchaseDate: purchaseDate,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now());
+  }
 }

@@ -6,7 +6,7 @@ class SamplePurchaseResultRepository extends PurchaseResultRepository {
   final _sampleData = _SampleData();
 
   @override
-  Future<void> addPurchaseResult(PurchaseResult purchaseResult) async {
+  Future<void> createPurchaseResult(PurchaseResult purchaseResult) async {
     _sampleData.purchaseResults.add(purchaseResult);
   }
 

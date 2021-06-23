@@ -1,7 +1,7 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 
 abstract class CommodityRepository {
-  Future<void> addCommodity(Commodity commodity);
+  Future<void> createCommodity(Commodity commodity);
 
   Future<void> updateCommodity(Commodity commodity);
 

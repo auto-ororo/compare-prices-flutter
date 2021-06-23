@@ -1,9 +1,9 @@
 import 'package:compare_prices/domain/entities/shop.dart';
-import 'package:compare_prices/ui/add_purchase_result/add_purchase_result_page.dart';
-import 'package:compare_prices/ui/commodity/commodity_list_page.dart';
+import 'package:compare_prices/ui/bottom_price/bottom_price_list_page.dart';
+import 'package:compare_prices/ui/commodity/select/select_commodity_page.dart';
+import 'package:compare_prices/ui/create_purchase_result/create_purchase_result_page.dart';
 import 'package:compare_prices/ui/example/example_page.dart';
-import 'package:compare_prices/ui/select_commodity/select_commodity_dialog.dart';
-import 'package:compare_prices/ui/select_shop/select_shop_dialog.dart';
+import 'package:compare_prices/ui/shop/select/select_shop_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,10 +13,10 @@ void main() => runApp(ProviderScope(child: MyApp()));
 
 class RouteName {
   static const examplePage = 'example';
-  static const commodityListPage = 'commodity-list';
-  static const addPurchaseResultPage = 'add-purchase-result';
-  static const selectCommodityDialog = 'select-commodity';
-  static const selectShopDialog = 'select-shop';
+  static const bottomPriceListPage = 'bottom-price-list';
+  static const createPurchaseResultPage = 'create-purchase-result';
+  static const selectCommodityPage = 'select-bottom_price';
+  static const selectShopPage = 'select-shop';
 }
 
 class MyApp extends StatelessWidget {
@@ -25,26 +25,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.blueAccent),
-      initialRoute: RouteName.commodityListPage,
+      initialRoute: RouteName.bottomPriceListPage,
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
-          case RouteName.commodityListPage:
-            return MaterialPageRoute(builder: (context) => CommodityListPage());
-          case RouteName.addPurchaseResultPage:
+          case RouteName.bottomPriceListPage:
             return MaterialPageRoute(
-                builder: (context) => AddPurchaseResultPage());
+                builder: (context) => BottomPriceListPage());
+          case RouteName.createPurchaseResultPage:
+            return MaterialPageRoute(
+                builder: (context) => CreatePurchaseResultPage());
           case RouteName.examplePage:
             return MaterialPageRoute(builder: (context) => ExamplePage());
-          case RouteName.selectCommodityDialog:
+          case RouteName.selectCommodityPage:
             return MaterialPageRoute<Commodity>(
-                builder: (context) => SelectCommodityDialog(),
+                builder: (context) => SelectCommodityPage(),
                 fullscreenDialog: true);
-          case RouteName.selectShopDialog:
+          case RouteName.selectShopPage:
             return MaterialPageRoute<Shop>(
-                builder: (context) => SelectShopDialog(),
-                fullscreenDialog: true);
+                builder: (context) => SelectShopPage(), fullscreenDialog: true);
           default:
-            return MaterialPageRoute(builder: (context) => CommodityListPage());
+            return MaterialPageRoute(
+                builder: (context) => BottomPriceListPage());
         }
       },
     );

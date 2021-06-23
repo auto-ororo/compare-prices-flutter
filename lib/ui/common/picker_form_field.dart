@@ -2,23 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class PickerFormField extends HookWidget {
-  const PickerFormField({
-    Key? key,
-    required this.labelText,
-    required this.text,
-    required this.onTap,
-  }) : super(key: key);
+  const PickerFormField(
+      {Key? key,
+      required this.labelText,
+      required this.text,
+      required this.onTap,
+      this.validator})
+      : super(key: key);
 
   final String text;
   final String labelText;
   final Function() onTap;
+  final Function()? validator;
 
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController(text: text);
 
     useEffect(() {
-      controller.text = text;
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        controller.text = text;
+      });
     }, [text]);
 
     return TextFormField(
@@ -30,6 +34,11 @@ class PickerFormField extends HookWidget {
               const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
           labelText: labelText,
         ),
+        validator: (_) {
+          if (validator != null) {
+            return validator!();
+          }
+        },
         onTap: onTap);
   }
 }
