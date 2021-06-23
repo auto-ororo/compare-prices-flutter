@@ -1,7 +1,7 @@
 import 'package:compare_prices/domain/entities/purchase_result.dart';
 
 abstract class PurchaseResultRepository {
-  Future<void> addPurchaseResult(PurchaseResult purchaseResult);
+  Future<void> createPurchaseResult(PurchaseResult purchaseResult);
 
   Future<void> updatePurchaseResult(PurchaseResult purchaseResult);
 

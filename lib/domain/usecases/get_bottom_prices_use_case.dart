@@ -1,5 +1,5 @@
 import 'package:compare_prices/data/providers.dart';
-import 'package:compare_prices/domain/entities/commodity_row.dart';
+import 'package:compare_prices/domain/entities/bottom_price.dart';
 import 'package:compare_prices/domain/entities/result.dart';
 import 'package:compare_prices/domain/repositories/commodity_repository.dart';
 import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
@@ -7,12 +7,11 @@ import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final getInexpensiveCommodityListUseCaseProvider =
-    Provider.autoDispose<GetInexpensiveCommodityListUseCase>(
-        (ref) => GetInexpensiveCommodityListUseCase(ref.read));
+final getBottomPricesUseCaseProvider =
+    Provider.autoDispose<GetBottomPricesUseCase>(
+        (ref) => GetBottomPricesUseCase(ref.read));
 
-class GetInexpensiveCommodityListUseCase
-    extends FutureUseCase<List<CommodityRow>, NoParam> {
+class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
   final Reader _reader;
 
   late final CommodityRepository _commodityRepository =
@@ -21,16 +20,16 @@ class GetInexpensiveCommodityListUseCase
   late final PurchaseResultRepository _purchaseResultRepository =
       _reader(purchaseResultRepositoryProvider);
 
-  GetInexpensiveCommodityListUseCase(this._reader);
+  GetBottomPricesUseCase(this._reader);
 
   @override
-  Future<Result<List<CommodityRow>>> call(NoParam params) {
+  Future<Result<List<BottomPrice>>> call(NoParam params) {
     return Result.guardFuture(() async {
       final commodities = await _commodityRepository.getEnabledCommodities();
 
       var index = 0;
 
-      var list = <CommodityRow>[];
+      var list = <BottomPrice>[];
 
       for (final element in commodities) {
         final purchaseResult = await _purchaseResultRepository
@@ -48,7 +47,7 @@ class GetInexpensiveCommodityListUseCase
 
         if (newestPurchaseResult == null) continue;
 
-        final row = CommodityRow(
+        final row = BottomPrice(
             id: index.toString(),
             commodity: element,
             mostInexpensiveShop: shop,

@@ -1,7 +1,7 @@
 import 'package:compare_prices/domain/entities/shop.dart';
 
 abstract class ShopRepository {
-  Future<void> addShop(Shop shop);
+  Future<void> createShop(Shop shop);
 
   Future<void> updateShop(Shop shop);
 

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/repositories/shop_repository.dart';
 
@@ -5,7 +6,7 @@ class SampleShopRepository extends ShopRepository {
   final _sampleData = _SampleData();
 
   @override
-  Future<void> addShop(Shop shop) async {
+  Future<void> createShop(Shop shop) async {
     _sampleData.shops.add(shop);
   }
 
@@ -24,16 +25,14 @@ class SampleShopRepository extends ShopRepository {
 
   @override
   Future<Shop?> getEnabledShopById(String id) async {
-    return _sampleData.shops.firstWhere(
-        (element) => (element.id == id) && element.isEnabled,
-        orElse: null);
+    return _sampleData.shops
+        .firstWhereOrNull((element) => (element.id == id) && element.isEnabled);
   }
 
   @override
   Future<Shop?> getEnabledShopByName(String name) async {
-    return _sampleData.shops.firstWhere(
-        (element) => (element.name == name) && element.isEnabled,
-        orElse: null);
+    return _sampleData.shops.firstWhereOrNull(
+        (element) => (element.name == name) && element.isEnabled);
   }
 
   @override

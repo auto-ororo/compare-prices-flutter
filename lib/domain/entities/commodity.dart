@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'commodity.freezed.dart';
 
@@ -11,4 +12,12 @@ class Commodity with _$Commodity {
     required DateTime updatedAt,
     @Default(true) bool isEnabled,
   }) = _Commodity;
+
+  static Commodity createByName(String name) {
+    return Commodity(
+        id: Uuid().v4(),
+        name: name,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now());
+  }
 }

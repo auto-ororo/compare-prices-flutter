@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'shop.freezed.dart';
 
@@ -11,4 +12,12 @@ class Shop with _$Shop {
     required DateTime updatedAt,
     @Default(true) bool isEnabled,
   }) = _Shop;
+
+  static Shop createByName(String name) {
+    return Shop(
+        id: Uuid().v4(),
+        name: name,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now());
+  }
 }

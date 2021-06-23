@@ -1,13 +1,13 @@
-import 'package:compare_prices/domain/entities/commodity_row.dart';
+import 'package:compare_prices/domain/entities/bottom_price.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
-class CommodityRowWidget extends StatelessWidget {
-  const CommodityRowWidget(this._commodityRow, this._onTap) : super();
+class BottomPriceRow extends StatelessWidget {
+  const BottomPriceRow(this._bottomPrice, this._onTap) : super();
 
-  final CommodityRow _commodityRow;
+  final BottomPrice _bottomPrice;
 
   final void Function() _onTap;
 
@@ -26,7 +26,7 @@ class CommodityRowWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _commodityRow.commodity.name,
+                        _bottomPrice.commodity.name,
                         softWrap: true,
                         style: Theme.of(context).textTheme.headline5,
                       ),
@@ -39,12 +39,12 @@ class CommodityRowWidget extends StatelessWidget {
                               textBaseline: TextBaseline.alphabetic,
                               children: [
                                 Text(
-                                  _commodityRow.price.toString(),
+                                  _bottomPrice.price.toString(),
                                   style: Theme.of(context).textTheme.headline6,
                                 ),
                                 Flexible(
                                   child: Text(
-                                    _commodityRow.mostInexpensiveShop.name,
+                                    _bottomPrice.mostInexpensiveShop.name,
                                     softWrap: true,
                                     style:
                                         Theme.of(context).textTheme.bodyText1,
@@ -61,7 +61,8 @@ class CommodityRowWidget extends StatelessWidget {
                                 style: Theme.of(context).textTheme.caption,
                               ),
                               Text(
-                                DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                                DateFormat('yyyy-MM-dd')
+                                    .format(_bottomPrice.purchaseDate),
                                 style: Theme.of(context).textTheme.caption,
                               ),
                             ],
