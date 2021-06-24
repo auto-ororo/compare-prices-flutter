@@ -8,7 +8,10 @@ import 'example_page_view_model.dart';
 class ExamplePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(examplePageViewModelProvider);
+    final counter = useProvider(
+        examplePageViewModelProvider.select((value) => value.counter));
+    final fetchedWord = useProvider(
+        examplePageViewModelProvider.select((value) => value.fetchedWord));
     final viewModel = useProvider(examplePageViewModelProvider.notifier);
 
     return Scaffold(
@@ -22,7 +25,7 @@ class ExamplePage extends HookWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  state.counter.toString(),
+                  counter.toString(),
                   style: Theme.of(context).textTheme.headline3,
                 ),
               ],
@@ -58,7 +61,7 @@ class ExamplePage extends HookWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    state.fetchedWord,
+                    fetchedWord,
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ),

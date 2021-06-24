@@ -10,7 +10,8 @@ class CreateShopDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(createShopDialogViewModelProvider);
+    final name = useProvider(
+        createShopDialogViewModelProvider.select((value) => value.name));
     final viewModel = useProvider(createShopDialogViewModelProvider.notifier);
 
     useEffect(() {
@@ -34,7 +35,7 @@ class CreateShopDialog extends HookWidget {
       title: "店舗追加",
       labelText: "店舗名",
       submitText: "追加",
-      initialText: state.name,
+      initialText: name,
       onTextChanged: viewModel.updateName,
       onSubmitted: viewModel.createShop,
     );

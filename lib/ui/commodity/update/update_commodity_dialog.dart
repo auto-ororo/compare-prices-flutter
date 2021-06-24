@@ -15,7 +15,7 @@ class UpdateCommodityDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final provider = updateCommodityDialogViewModelProvider(this.commodity);
-    final state = useProvider(provider);
+    final commodity = useProvider(provider.select((value) => value.commodity));
 
     final viewModel = useProvider(provider.notifier);
 
@@ -38,7 +38,7 @@ class UpdateCommodityDialog extends HookWidget {
 
     return TextEditDialog(
       title: "商品編集",
-      initialText: state.commodity.name,
+      initialText: commodity.name,
       labelText: "商品名",
       submitText: "更新",
       onTextChanged: viewModel.updateName,

@@ -12,9 +12,13 @@ import '../update/update_shop_dialog.dart';
 class SelectShopPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(selectShopPageViewModelProvider);
+    final shops = useProvider(
+        selectShopPageViewModelProvider.select((value) => value.shops));
+    final filteredShops = useProvider(
+        selectShopPageViewModelProvider.select((value) => value.filteredShops));
+    final searchWord = useProvider(
+        selectShopPageViewModelProvider.select((value) => value.searchWord));
     final viewModel = useProvider(selectShopPageViewModelProvider.notifier);
-    final textEditingController = useTextEditingController();
 
     useEffect(() {
       // 初期処理
@@ -59,7 +63,7 @@ class SelectShopPage extends HookWidget {
         viewModel.filter();
       });
       return () => {};
-    }, [state.searchWord, state.shops]);
+    }, [searchWord, shops]);
 
     return Scaffold(
       appBar: AppBar(
@@ -84,7 +88,6 @@ class SelectShopPage extends HookWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: SearchTextField(
-              controller: textEditingController,
               labelText: "店舗名",
               hintText: "店舗名を入力してください。",
               onChanged: (word) {
@@ -94,9 +97,9 @@ class SelectShopPage extends HookWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: state.filteredShops.length,
+                itemCount: filteredShops.length,
                 itemBuilder: (context, index) {
-                  final shop = state.filteredShops[index];
+                  final shop = filteredShops[index];
                   return ListTile(
                     title: Text(shop.name),
                     onTap: () => viewModel.selectShop(shop),
