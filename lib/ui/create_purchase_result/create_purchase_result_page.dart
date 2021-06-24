@@ -13,24 +13,30 @@ import 'create_purchase_result_page_view_model.dart';
 class CreatePurchaseResultPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final _state = useProvider(createPurchaseResultPageViewModelProvider);
-    final _viewModel =
+    final selectedCommodity = useProvider(
+        createPurchaseResultPageViewModelProvider
+            .select((value) => value.selectedCommodity));
+    final selectedShop = useProvider(createPurchaseResultPageViewModelProvider
+        .select((value) => value.selectedShop));
+    final purchaseDate = useProvider(createPurchaseResultPageViewModelProvider
+        .select((value) => value.purchaseDate));
+    final viewModel =
         useProvider(createPurchaseResultPageViewModelProvider.notifier);
 
-    final _formKey = useMemoized(() => GlobalKey<FormState>());
+    final formKey = useMemoized(() => GlobalKey<FormState>());
 
-    final _debouncer = Debouncer();
+    final debouncer = Debouncer();
 
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        _viewModel.errorMessage.stream.listen((errorMessage) {
+        viewModel.errorMessage.stream.listen((errorMessage) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage)),
           );
         });
 
-        _viewModel.onPurchaseResultCreated.stream.listen((_) {
+        viewModel.onPurchaseResultCreated.stream.listen((_) {
           Navigator.of(context).pop();
         });
       });
@@ -45,7 +51,7 @@ class CreatePurchaseResultPage extends HookWidget {
           title: const Text('追加'),
         ),
         body: Form(
-          key: _formKey,
+          key: formKey,
           child: Column(
             children: [
               Expanded(
@@ -57,17 +63,17 @@ class CreatePurchaseResultPage extends HookWidget {
                             vertical: 16.0, horizontal: 8.0),
                         child: PickerFormField(
                           labelText: "商品",
-                          text: _state.selectedCommodity?.name ?? "選択して下さい",
+                          text: selectedCommodity?.name ?? "選択して下さい",
                           onTap: () async {
                             final selectedCommodity =
                                 await Navigator.of(context)
                                     .pushNamed<Commodity>(
                                         RouteName.selectCommodityPage);
 
-                            _viewModel
+                            viewModel
                                 .updateSelectedCommodity(selectedCommodity);
                           },
-                          validator: _viewModel.validateCommodity,
+                          validator: viewModel.validateCommodity,
                         ),
                       ),
                       Padding(
@@ -75,14 +81,14 @@ class CreatePurchaseResultPage extends HookWidget {
                             vertical: 16.0, horizontal: 8.0),
                         child: PickerFormField(
                           labelText: "店舗",
-                          text: _state.selectedShop?.name ?? "選択して下さい",
+                          text: selectedShop?.name ?? "選択して下さい",
                           onTap: () async {
                             final selectedShop = await Navigator.of(context)
                                 .pushNamed<Shop>(RouteName.selectShopPage);
 
-                            _viewModel.updateSelectedShop(selectedShop);
+                            viewModel.updateSelectedShop(selectedShop);
                           },
-                          validator: _viewModel.validateShop,
+                          validator: viewModel.validateShop,
                         ),
                       ),
                       Padding(
@@ -96,11 +102,11 @@ class CreatePurchaseResultPage extends HookWidget {
                                   vertical: 4.0, horizontal: 8),
                               labelText: "価格"),
                           validator: (_) {
-                            return _viewModel.validatePrice();
+                            return viewModel.validatePrice();
                           },
                           onChanged: (value) {
-                            _debouncer.run(() {
-                              _viewModel.updatePrice(value);
+                            debouncer.run(() {
+                              viewModel.updatePrice(value);
                             });
                           },
                         ),
@@ -110,8 +116,7 @@ class CreatePurchaseResultPage extends HookWidget {
                             vertical: 16.0, horizontal: 8.0),
                         child: PickerFormField(
                             labelText: "購入日",
-                            text: DateFormat('yyyy-MM-dd')
-                                .format(_state.purchaseDate),
+                            text: DateFormat('yyyy-MM-dd').format(purchaseDate),
                             onTap: () async {
                               final picked = await showDatePicker(
                                   context: context,
@@ -120,7 +125,7 @@ class CreatePurchaseResultPage extends HookWidget {
                                   lastDate:
                                       DateTime.now().add(Duration(days: 360)));
 
-                              _viewModel.updatePurchaseDate(picked);
+                              viewModel.updatePurchaseDate(picked);
                             }),
                       ),
                     ],
@@ -137,8 +142,8 @@ class CreatePurchaseResultPage extends HookWidget {
                       child: Text("登録", style: TextStyle(fontSize: 25)),
                     ),
                     onPressed: () async {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        _viewModel.submit();
+                      if (formKey.currentState?.validate() ?? false) {
+                        viewModel.submit();
                       }
                     },
                   ),

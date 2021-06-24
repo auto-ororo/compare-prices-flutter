@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class SearchTextField extends StatelessWidget {
   const SearchTextField(
       {Key? key,
-      required this.controller,
+      this.controller,
       required this.onChanged,
       this.labelText,
       this.hintText})
       : super(key: key);
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final Function(String) onChanged;
   final String? labelText;
   final String? hintText;

@@ -14,7 +14,7 @@ class UpdateShopDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final provider = updateShopDialogViewModelProvider(this.shop);
-    final state = useProvider(provider);
+    final shop = useProvider(provider.select((value) => value.shop));
 
     final viewModel = useProvider(provider.notifier);
 
@@ -37,7 +37,7 @@ class UpdateShopDialog extends HookWidget {
 
     return TextEditDialog(
       title: "店舗編集",
-      initialText: state.shop.name,
+      initialText: shop.name,
       labelText: "店舗名",
       submitText: "更新",
       onTextChanged: viewModel.updateName,

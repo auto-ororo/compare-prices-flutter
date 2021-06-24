@@ -10,7 +10,8 @@ class CreateCommodityDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(createCommodityDialogViewModelProvider);
+    final name = useProvider(
+        createCommodityDialogViewModelProvider.select((value) => value.name));
     final viewModel =
         useProvider(createCommodityDialogViewModelProvider.notifier);
 
@@ -34,7 +35,7 @@ class CreateCommodityDialog extends HookWidget {
     return TextEditDialog(
       title: "商品追加",
       labelText: "商品名",
-      initialText: state.name,
+      initialText: name,
       submitText: "追加",
       onTextChanged: viewModel.updateName,
       onSubmitted: viewModel.createCommodity,

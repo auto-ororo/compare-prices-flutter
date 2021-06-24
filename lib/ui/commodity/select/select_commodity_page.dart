@@ -12,10 +12,15 @@ import '../update/update_commodity_dialog.dart';
 class SelectCommodityPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(selectCommodityPageViewModelProvider);
+    final commodities = useProvider(selectCommodityPageViewModelProvider
+        .select((value) => value.commodities));
+    final filteredCommodities = useProvider(selectCommodityPageViewModelProvider
+        .select((value) => value.filteredCommodities));
+    final searchWord = useProvider(selectCommodityPageViewModelProvider
+        .select((value) => value.searchWord));
+
     final viewModel =
         useProvider(selectCommodityPageViewModelProvider.notifier);
-    final textEditingController = useTextEditingController();
 
     useEffect(() {
       // 初期処理
@@ -60,7 +65,7 @@ class SelectCommodityPage extends HookWidget {
         viewModel.filter();
       });
       return () => {};
-    }, [state.searchWord, state.commodities]);
+    }, [searchWord, commodities]);
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +90,6 @@ class SelectCommodityPage extends HookWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: SearchTextField(
-              controller: textEditingController,
               labelText: "商品名",
               hintText: "商品名を入力してください。",
               onChanged: (word) {
@@ -95,9 +99,9 @@ class SelectCommodityPage extends HookWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: state.filteredCommodities.length,
+                itemCount: filteredCommodities.length,
                 itemBuilder: (context, index) {
-                  final commodity = state.filteredCommodities[index];
+                  final commodity = filteredCommodities[index];
                   return ListTile(
                     title: Text(commodity.name),
                     onTap: () => viewModel.selectCommodity(commodity),
