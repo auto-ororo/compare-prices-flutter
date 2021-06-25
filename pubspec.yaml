@@ -26,6 +26,7 @@ dependencies:
   state_notifier:
   hooks_riverpod:
   flutter_hooks:
+  flutter_slidable:
   freezed_annotation:
   english_words:
   intl:

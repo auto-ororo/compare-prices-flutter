@@ -70,10 +70,11 @@ class BottomPriceListPage extends HookWidget {
                 itemCount: filteredBottomPrices.length,
                 itemBuilder: (context, index) {
                   final row = filteredBottomPrices[index];
-                  return BottomPriceRow(row, () {
-                    Navigator.pushNamed(
+                  return BottomPriceRow(row, () async {
+                    await Navigator.pushNamed(
                         context, RouteName.commodityPriceListPage,
                         arguments: {ArgumentName.commodity: row.commodity});
+                    viewModel.getList();
                   });
                 }),
           ),
