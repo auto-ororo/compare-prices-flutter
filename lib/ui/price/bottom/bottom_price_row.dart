@@ -1,8 +1,9 @@
 import 'package:compare_prices/domain/entities/bottom_price.dart';
+import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
+import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:intl/intl.dart';
 
 class BottomPriceRow extends StatelessWidget {
   const BottomPriceRow(this._bottomPrice, this._onTap) : super();
@@ -25,10 +26,14 @@ class BottomPriceRow extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        _bottomPrice.commodity.name,
-                        softWrap: true,
-                        style: Theme.of(context).textTheme.headline5,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: Text(
+                          _bottomPrice.commodity.name,
+                          softWrap: true,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -39,38 +44,40 @@ class BottomPriceRow extends StatelessWidget {
                               textBaseline: TextBaseline.alphabetic,
                               children: [
                                 Text(
-                                  _bottomPrice.price.toString(),
-                                  style: Theme.of(context).textTheme.headline6,
+                                  _bottomPrice.price.currency(),
+                                  style: Theme.of(context).textTheme.subtitle1,
                                 ),
                                 Flexible(
-                                  child: Text(
-                                    _bottomPrice.mostInexpensiveShop.name,
-                                    softWrap: true,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Text(
+                                      _bottomPrice.mostInexpensiveShop.name,
+                                      softWrap: true,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '最終購入日',
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                              Text(
-                                DateFormat('yyyy-MM-dd')
-                                    .format(_bottomPrice.purchaseDate),
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ],
                   ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '最終購入日',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    Text(
+                      _bottomPrice.purchaseDate.toFormattedString(),
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ],
                 ),
                 Icon(
                   Icons.keyboard_arrow_right_outlined,
@@ -78,8 +85,11 @@ class BottomPriceRow extends StatelessWidget {
                 )
               ],
             ),
-            Divider(
-              height: 2,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Divider(
+                height: 2,
+              ),
             )
           ],
         ),

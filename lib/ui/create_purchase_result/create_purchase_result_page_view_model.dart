@@ -8,10 +8,11 @@ import 'package:compare_prices/ui/create_purchase_result/create_purchase_result_
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final createPurchaseResultPageViewModelProvider =
-    StateNotifierProvider.autoDispose<CreatePurchaseResultPageViewModel,
-            CreatePurchaseResultPageState>(
-        (ref) => CreatePurchaseResultPageViewModel(ref.read));
+final createPurchaseResultPageViewModelProvider = StateNotifierProvider.family
+    .autoDispose<CreatePurchaseResultPageViewModel,
+            CreatePurchaseResultPageState, Commodity?>(
+        (ref, initialCommodity) =>
+            CreatePurchaseResultPageViewModel(ref.read, initialCommodity));
 
 class CreatePurchaseResultPageViewModel
     extends StateNotifier<CreatePurchaseResultPageState> {
@@ -29,8 +30,9 @@ class CreatePurchaseResultPageViewModel
 
   final date = DateTime.now();
 
-  CreatePurchaseResultPageViewModel(this._reader)
-      : super(CreatePurchaseResultPageState(purchaseDate: DateTime.now()));
+  CreatePurchaseResultPageViewModel(this._reader, Commodity? initialCommodity)
+      : super(CreatePurchaseResultPageState(
+            purchaseDate: DateTime.now(), selectedCommodity: initialCommodity));
 
   void updatePurchaseDate(DateTime? purchaseDate) {
     if (purchaseDate != null) {

@@ -7,10 +7,12 @@ class PickerFormField extends HookWidget {
       required this.labelText,
       required this.text,
       required this.onTap,
+      this.textAlign,
       this.validator})
       : super(key: key);
 
   final String text;
+  final TextAlign? textAlign;
   final String labelText;
   final Function() onTap;
   final Function()? validator;
@@ -27,6 +29,7 @@ class PickerFormField extends HookWidget {
 
     return TextFormField(
         readOnly: true,
+        textAlign: textAlign ?? TextAlign.start,
         enableInteractiveSelection: false,
         controller: controller,
         decoration: InputDecoration(

@@ -1,5 +1,4 @@
 import 'package:compare_prices/main.dart';
-import 'package:compare_prices/ui/bottom_price/bottom_price_row.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:compare_prices/ui/common/utils/debouncer.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'bottom_price_list_page_view_model.dart';
+import 'bottom_price_row.dart';
 
 class BottomPriceListPage extends HookWidget {
   @override
@@ -42,7 +42,7 @@ class BottomPriceListPage extends HookWidget {
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        print("execute filter list");
+        print("execute filter commodity");
         viewModel.filter();
       });
       return () => {};
@@ -71,7 +71,9 @@ class BottomPriceListPage extends HookWidget {
                 itemBuilder: (context, index) {
                   final row = filteredBottomPrices[index];
                   return BottomPriceRow(row, () {
-                    print("${row.commodity.name} Tapped!!");
+                    Navigator.pushNamed(
+                        context, RouteName.commodityPriceListPage,
+                        arguments: {ArgumentName.commodity: row.commodity});
                   });
                 }),
           ),

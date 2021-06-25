@@ -61,7 +61,7 @@ class SelectCommodityPage extends HookWidget {
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        print("execute filter list");
+        print("execute filter commodity");
         viewModel.filter();
       });
       return () => {};
