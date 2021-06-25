@@ -46,7 +46,9 @@ class CommodityPriceListPage extends HookWidget {
                 itemCount: commodityPrices.length,
                 itemBuilder: (context, index) {
                   final row = commodityPrices[index];
-                  return CommodityPriceRow(row);
+                  return CommodityPriceRow(row, () {
+                    viewModel.deletePurchaseResult(row.purchaseResultId);
+                  });
                 }),
           ),
         ],
