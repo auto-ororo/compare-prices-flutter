@@ -45,6 +45,12 @@ class CreatePurchaseResultPageViewModel
     state = state.copyWith(price: int.parse(priceStr));
   }
 
+  void updateCount(int? count) {
+    if (count != null) {
+      state = state.copyWith(count: count);
+    }
+  }
+
   void updateSelectedCommodity(Commodity? selectedCommodity) {
     if (selectedCommodity != null) {
       state = state.copyWith(selectedCommodity: selectedCommodity);
@@ -83,6 +89,7 @@ class CreatePurchaseResultPageViewModel
         commodityId: state.selectedCommodity!.id,
         shopId: state.selectedShop!.id,
         price: state.price,
+        count: state.count,
         purchaseDate: state.purchaseDate);
 
     _createPurchaseResultUseCase(params).then((result) {
