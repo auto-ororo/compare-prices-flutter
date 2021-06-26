@@ -4,9 +4,12 @@ import 'package:compare_prices/data/purchaseresult/sample_purchase_result_reposi
 import 'package:compare_prices/data/shop/sample_shop_repository.dart';
 import 'package:compare_prices/domain/repositories/commodity_repository.dart';
 import 'package:compare_prices/domain/repositories/example_repository.dart';
+import 'package:compare_prices/domain/repositories/infrastructure_config_repository.dart';
 import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'infrastructure_config/firebase_infrastructure_config_repository.dart';
 
 // Repository
 final exampleRepositoryProvider =
@@ -21,3 +24,7 @@ final shopRepositoryProvider =
 final purchaseResultRepositoryProvider =
     Provider.autoDispose<PurchaseResultRepository>(
         (ref) => SamplePurchaseResultRepository());
+
+final infrastructureConfigRepositoryProvider =
+    Provider.autoDispose<InfrastructureConfigRepository>(
+        (ref) => FirebaseInfrastructureConfigRepository());
