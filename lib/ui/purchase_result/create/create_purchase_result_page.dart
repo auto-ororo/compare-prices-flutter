@@ -1,31 +1,34 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/main.dart';
-import 'package:compare_prices/ui/common/utils/debouncer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
-import '../common/picker_form_field.dart';
+import '../../common/extensions/datetime_extensions.dart';
+import '../../common/picker_form_field.dart';
 import 'create_purchase_result_page_view_model.dart';
 
 class CreatePurchaseResultPage extends HookWidget {
+  final Commodity? initialCommodity;
+
+  const CreatePurchaseResultPage({Key? key, this.initialCommodity})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final selectedCommodity = useProvider(
-        createPurchaseResultPageViewModelProvider
-            .select((value) => value.selectedCommodity));
-    final selectedShop = useProvider(createPurchaseResultPageViewModelProvider
-        .select((value) => value.selectedShop));
-    final purchaseDate = useProvider(createPurchaseResultPageViewModelProvider
-        .select((value) => value.purchaseDate));
-    final viewModel =
-        useProvider(createPurchaseResultPageViewModelProvider.notifier);
+    final provider =
+        createPurchaseResultPageViewModelProvider(initialCommodity);
+    final selectedCommodity =
+        useProvider(provider.select((value) => value.selectedCommodity));
+    final selectedShop =
+        useProvider(provider.select((value) => value.selectedShop));
+    final purchaseDate =
+        useProvider(provider.select((value) => value.purchaseDate));
+    final viewModel = useProvider(provider.notifier);
 
     final formKey = useMemoized(() => GlobalKey<FormState>());
-
-    final debouncer = Debouncer();
 
     useEffect(() {
       // 初期処理
@@ -61,19 +64,23 @@ class CreatePurchaseResultPage extends HookWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 8.0),
-                        child: PickerFormField(
-                          labelText: "商品",
-                          text: selectedCommodity?.name ?? "選択して下さい",
-                          onTap: () async {
-                            final selectedCommodity =
-                                await Navigator.of(context)
-                                    .pushNamed<Commodity>(
-                                        RouteName.selectCommodityPage);
-
-                            viewModel
-                                .updateSelectedCommodity(selectedCommodity);
-                          },
-                          validator: viewModel.validateCommodity,
+                        child: AbsorbPointer(
+                          absorbing: initialCommodity != null,
+                          child: PickerFormField(
+                            labelText: "商品",
+                            text: initialCommodity?.name ??
+                                selectedCommodity?.name ??
+                                "",
+                            onTap: () async {
+                              final selectedCommodity =
+                                  await Navigator.of(context)
+                                      .pushNamed<Commodity>(
+                                          RouteName.selectCommodityPage);
+                              viewModel
+                                  .updateSelectedCommodity(selectedCommodity);
+                            },
+                            validator: viewModel.validateCommodity,
+                          ),
                         ),
                       ),
                       Padding(
@@ -81,7 +88,7 @@ class CreatePurchaseResultPage extends HookWidget {
                             vertical: 16.0, horizontal: 8.0),
                         child: PickerFormField(
                           labelText: "店舗",
-                          text: selectedShop?.name ?? "選択して下さい",
+                          text: selectedShop?.name ?? "",
                           onTap: () async {
                             final selectedShop = await Navigator.of(context)
                                 .pushNamed<Shop>(RouteName.selectShopPage);
@@ -94,38 +101,53 @@ class CreatePurchaseResultPage extends HookWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 8.0),
-                        child: TextFormField(
-                          textAlign: TextAlign.end,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 4.0, horizontal: 8),
-                              labelText: "価格"),
-                          validator: (_) {
-                            return viewModel.validatePrice();
-                          },
-                          onChanged: (value) {
-                            debouncer.run(() {
-                              viewModel.updatePrice(value);
-                            });
-                          },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Flexible(
+                              child: TextFormField(
+                                textAlign: TextAlign.end,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                decoration: const InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 8),
+                                    labelText: "価格"),
+                                validator: (_) => viewModel.validatePrice(),
+                                onChanged: (value) =>
+                                    viewModel.updatePrice(value),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Text(
+                                "円",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 8.0),
                         child: PickerFormField(
+                            textAlign: TextAlign.end,
                             labelText: "購入日",
-                            text: DateFormat('yyyy-MM-dd').format(purchaseDate),
+                            text: purchaseDate.toFormattedString(),
                             onTap: () async {
-                              final picked = await showDatePicker(
+                              final pickedDate = await showDatePicker(
                                   context: context,
                                   initialDate: DateTime.now(),
-                                  firstDate: DateTime(2021),
+                                  firstDate: DateTime(1900),
                                   lastDate:
-                                      DateTime.now().add(Duration(days: 360)));
+                                      DateTime.now().add(Duration(days: 3600)));
 
-                              viewModel.updatePurchaseDate(picked);
+                              viewModel.updatePurchaseDate(pickedDate);
                             }),
                       ),
                     ],
