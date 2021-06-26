@@ -10,8 +10,9 @@ abstract class PurchaseResultRepository {
   Future<PurchaseResult?> getEnabledNewestPurchaseResultByCommodityId(
       String commodityId);
 
-  Future<PurchaseResult?> getEnabledMostInexpensivePurchaseResultByCommodityId(
-      String commodityId);
+  Future<PurchaseResult?>
+      getEnabledMostInexpensivePurchaseResultPerUnitByCommodityId(
+          String commodityId);
 
   Future<PurchaseResult?> getEnabledPurchaseResultById(String id);
 

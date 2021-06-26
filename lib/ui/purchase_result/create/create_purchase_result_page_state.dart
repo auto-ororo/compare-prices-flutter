@@ -8,6 +8,7 @@ part 'create_purchase_result_page_state.freezed.dart';
 class CreatePurchaseResultPageState with _$CreatePurchaseResultPageState {
   const factory CreatePurchaseResultPageState({
     @Default(0) int price,
+    @Default(1) int count,
     required DateTime purchaseDate,
     Commodity? selectedCommodity,
     Shop? selectedShop,

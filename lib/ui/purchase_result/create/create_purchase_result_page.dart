@@ -1,6 +1,7 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/main.dart';
+import 'package:compare_prices/ui/common/number_picker_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -24,6 +25,7 @@ class CreatePurchaseResultPage extends HookWidget {
         useProvider(provider.select((value) => value.selectedCommodity));
     final selectedShop =
         useProvider(provider.select((value) => value.selectedShop));
+    final count = useProvider(provider.select((value) => value.count));
     final purchaseDate =
         useProvider(provider.select((value) => value.purchaseDate));
     final viewModel = useProvider(provider.notifier);
@@ -106,6 +108,47 @@ class CreatePurchaseResultPage extends HookWidget {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Flexible(
+                              child: PickerFormField(
+                                textAlign: TextAlign.end,
+                                labelText: "個数",
+                                text: count.toString(),
+                                onTap: () async {
+                                  final value = await showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (_) {
+                                        return NumberPickerDialog(
+                                          title: "個数選択",
+                                          minimum: 1,
+                                          maximum: 100,
+                                          initialNumber: count,
+                                          unitText: "個",
+                                        );
+                                      });
+
+                                  viewModel.updateCount(value);
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Text(
+                                "個",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Flexible(
                               child: TextFormField(
                                 textAlign: TextAlign.end,
                                 keyboardType: TextInputType.number,
@@ -115,7 +158,7 @@ class CreatePurchaseResultPage extends HookWidget {
                                 decoration: const InputDecoration(
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 4.0, horizontal: 8),
-                                    labelText: "価格"),
+                                    labelText: "価格(合計)"),
                                 validator: (_) => viewModel.validatePrice(),
                                 onChanged: (value) =>
                                     viewModel.updatePrice(value),

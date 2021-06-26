@@ -1,7 +1,6 @@
 import 'package:compare_prices/domain/entities/bottom_price.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -44,8 +43,18 @@ class BottomPriceRow extends StatelessWidget {
                               textBaseline: TextBaseline.alphabetic,
                               children: [
                                 Text(
-                                  _bottomPrice.price.currency(),
-                                  style: Theme.of(context).textTheme.subtitle1,
+                                  _bottomPrice.unitPrice.currency(),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 2.0),
+                                  child: Text(
+                                    "/個",
+                                    style: Theme.of(context).textTheme.caption,
+                                  ),
                                 ),
                                 Flexible(
                                   child: Padding(
@@ -54,6 +63,7 @@ class BottomPriceRow extends StatelessWidget {
                                     child: Text(
                                       _bottomPrice.mostInexpensiveShop.name,
                                       softWrap: true,
+                                      style: TextStyle(fontSize: 14),
                                     ),
                                   ),
                                 ),

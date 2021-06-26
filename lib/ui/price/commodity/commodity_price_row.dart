@@ -46,7 +46,7 @@ class CommodityPriceRow extends HookWidget {
             await showConfirmDialog(
                 context: context,
                 message: "店舗:${_commodityPrice.shop.name}"
-                    "\n価格:${_commodityPrice.price.currency()}"
+                    "\n価格/個:${_commodityPrice.unitPrice.currency()}"
                     "\n購入日:${_commodityPrice.purchaseDate.toFormattedString()}"
                     "\nの購買履歴を削除しますか？",
                 onOk: _onDelete);
@@ -76,13 +76,40 @@ class CommodityPriceRow extends HookWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Expanded(
-                              child: Text(_commodityPrice.price.currency(),
-                                  style: TextStyle(fontSize: 16)),
+                            Text(_commodityPrice.totalPrice.currency(),
+                                style: TextStyle(fontSize: 16)),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2.0),
+                              child: Text(
+                                "/${_commodityPrice.count > 1 ? _commodityPrice.count : ""}個",
+                                style: Theme.of(context).textTheme.caption,
+                              ),
                             ),
+                            if (_commodityPrice.count > 1)
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 4),
+                                    child: Text(
+                                        _commodityPrice.unitPrice.currency(),
+                                        style: TextStyle(fontSize: 14)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 2.0),
+                                    child: Text(
+                                      "/個",
+                                      style:
+                                          Theme.of(context).textTheme.caption,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            Spacer(),
                             Text(
                               _commodityPrice.purchaseDate.toFormattedString(),
                               style: Theme.of(context).textTheme.caption,
