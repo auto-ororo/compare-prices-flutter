@@ -10,7 +10,7 @@ class BottomPrice with _$BottomPrice {
     required String id,
     required Commodity commodity,
     required Shop mostInexpensiveShop,
-    required int price,
+    required int unitPrice,
     required DateTime purchaseDate,
   }) = _BottomPrice;
 }

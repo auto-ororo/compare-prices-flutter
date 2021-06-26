@@ -28,7 +28,7 @@ class GetCommodityPricesInAscendingOrderUseCase
       final purchaseResults = await _purchaseResultRepository
           .getEnabledPurchaseResultsByCommodityId(params);
 
-      purchaseResults.sort((c, n) => c.price.compareTo(n.price));
+      purchaseResults.sort((c, n) => c.unitPrice.compareTo(n.unitPrice));
 
       final list = <CommodityPrice>[];
 
@@ -43,7 +43,9 @@ class GetCommodityPricesInAscendingOrderUseCase
             commodityId: params,
             purchaseResultId: element.id,
             rank: rank,
-            price: element.price,
+            count: element.count,
+            totalPrice: element.totalPrice,
+            unitPrice: element.unitPrice,
             shop: shop,
             purchaseDate: element.purchaseDate);
 

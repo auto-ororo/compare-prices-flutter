@@ -19,15 +19,16 @@ class SamplePurchaseResultRepository extends PurchaseResultRepository {
   }
 
   @override
-  Future<PurchaseResult?> getEnabledMostInexpensivePurchaseResultByCommodityId(
-      String commodityId) async {
+  Future<PurchaseResult?>
+      getEnabledMostInexpensivePurchaseResultPerUnitByCommodityId(
+          String commodityId) async {
     final purchaseResults = _sampleData.purchaseResults.where((element) =>
         (element.commodityId == commodityId) && (element.isEnabled));
 
     if (purchaseResults.length == 0) return null;
 
     return purchaseResults.reduce((current, next) {
-      if (current.price >= next.price) {
+      if (current.unitPrice >= next.unitPrice) {
         return next;
       } else {
         return current;
@@ -83,7 +84,8 @@ class _SampleData {
       id: "p1",
       commodityId: 'c1',
       shopId: 's1',
-      price: 150,
+      totalPrice: 150,
+      unitPrice: 150,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -93,7 +95,8 @@ class _SampleData {
       id: "p2",
       commodityId: 'c1',
       shopId: 's2',
-      price: 100,
+      totalPrice: 100,
+      unitPrice: 100,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -103,7 +106,8 @@ class _SampleData {
       id: "p3",
       commodityId: 'c2',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -113,7 +117,8 @@ class _SampleData {
       id: "p4",
       commodityId: 'c3',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -123,7 +128,8 @@ class _SampleData {
       id: "p4",
       commodityId: 'c4',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -133,7 +139,8 @@ class _SampleData {
       id: "p5",
       commodityId: 'c5',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -143,7 +150,8 @@ class _SampleData {
       id: "p7",
       commodityId: 'c7',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -153,7 +161,8 @@ class _SampleData {
       id: "p8",
       commodityId: 'c8',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -163,7 +172,8 @@ class _SampleData {
       id: "p9",
       commodityId: 'c9',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -173,7 +183,8 @@ class _SampleData {
       id: "p10",
       commodityId: 'c10',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),
@@ -183,7 +194,8 @@ class _SampleData {
       id: "p11",
       commodityId: 'c11',
       shopId: 's5',
-      price: 180,
+      totalPrice: 180,
+      unitPrice: 180,
       count: 1,
       purchaseDate: DateTime.now(),
       createdAt: DateTime.now(),

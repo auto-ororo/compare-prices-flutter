@@ -9,7 +9,8 @@ class PurchaseResult with _$PurchaseResult {
     required String id,
     required String commodityId,
     required String shopId,
-    required int price,
+    required int totalPrice,
+    required int unitPrice,
     required int count,
     required DateTime purchaseDate,
     @Default(true) bool isEnabled,
@@ -20,14 +21,16 @@ class PurchaseResult with _$PurchaseResult {
   static PurchaseResult create(
       {required String commodityId,
       required String shopId,
-      required int price,
+      required int totalPrice,
+      required int unitPrice,
       required int count,
       required DateTime purchaseDate}) {
     return PurchaseResult(
         id: Uuid().v4(),
         commodityId: commodityId,
         shopId: shopId,
-        price: price,
+        totalPrice: totalPrice,
+        unitPrice: unitPrice,
         count: count,
         purchaseDate: purchaseDate,
         createdAt: DateTime.now(),

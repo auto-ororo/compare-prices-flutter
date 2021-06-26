@@ -33,7 +33,8 @@ class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
 
       for (final element in commodities) {
         final purchaseResult = await _purchaseResultRepository
-            .getEnabledMostInexpensivePurchaseResultByCommodityId(element.id);
+            .getEnabledMostInexpensivePurchaseResultPerUnitByCommodityId(
+                element.id);
 
         if (purchaseResult == null) continue;
 
@@ -51,7 +52,7 @@ class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
             id: index.toString(),
             commodity: element,
             mostInexpensiveShop: shop,
-            price: purchaseResult.price,
+            unitPrice: purchaseResult.unitPrice,
             purchaseDate: newestPurchaseResult.purchaseDate);
 
         index++;

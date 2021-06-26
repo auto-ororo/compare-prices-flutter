@@ -42,7 +42,6 @@ class BottomPriceListPage extends HookWidget {
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        print("execute filter commodity");
         viewModel.filter();
       });
       return () => {};

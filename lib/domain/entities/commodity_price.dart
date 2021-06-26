@@ -10,7 +10,9 @@ class CommodityPrice with _$CommodityPrice {
     required String commodityId,
     required String purchaseResultId,
     required int rank,
-    required int price,
+    required int count,
+    required int totalPrice,
+    required int unitPrice,
     required Shop shop,
     required DateTime purchaseDate,
   }) = _CommodityPrice;

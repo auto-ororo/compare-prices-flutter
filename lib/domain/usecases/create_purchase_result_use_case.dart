@@ -27,7 +27,8 @@ class CreatePurchaseResultUseCase
       final purchaseResult = PurchaseResult.create(
           commodityId: params.commodityId,
           shopId: params.shopId,
-          price: params.price,
+          totalPrice: params.price,
+          unitPrice: params.price ~/ params.count,
           count: params.count,
           purchaseDate: params.purchaseDate);
 
