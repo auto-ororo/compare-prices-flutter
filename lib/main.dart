@@ -1,9 +1,9 @@
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/commodity/select/select_commodity_page.dart';
-import 'package:compare_prices/ui/create_purchase_result/create_purchase_result_page.dart';
 import 'package:compare_prices/ui/example/example_page.dart';
 import 'package:compare_prices/ui/price/bottom/bottom_price_list_page.dart';
 import 'package:compare_prices/ui/price/commodity/commodity_price_list_page.dart';
+import 'package:compare_prices/ui/purchase_result/create/create_purchase_result_page.dart';
 import 'package:compare_prices/ui/shop/select/select_shop_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
