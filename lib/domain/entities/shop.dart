@@ -14,10 +14,7 @@ class Shop with _$Shop {
   }) = _Shop;
 
   static Shop createByName(String name) {
-    return Shop(
-        id: Uuid().v4(),
-        name: name,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now());
+    final now = DateTime.now();
+    return Shop(id: Uuid().v4(), name: name, createdAt: now, updatedAt: now);
   }
 }

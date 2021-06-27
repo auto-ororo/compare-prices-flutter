@@ -25,6 +25,7 @@ class PurchaseResult with _$PurchaseResult {
       required int unitPrice,
       required int count,
       required DateTime purchaseDate}) {
+    final now = DateTime.now();
     return PurchaseResult(
         id: Uuid().v4(),
         commodityId: commodityId,
@@ -33,7 +34,7 @@ class PurchaseResult with _$PurchaseResult {
         unitPrice: unitPrice,
         count: count,
         purchaseDate: purchaseDate,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now());
+        createdAt: now,
+        updatedAt: now);
   }
 }

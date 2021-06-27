@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
-import 'package:compare_prices/domain/usecases/delete_commodity_use_case.dart';
+import 'package:compare_prices/domain/usecases/disable_commodity_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_commodities_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_commodities_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
@@ -22,8 +22,8 @@ class SelectCommodityPageViewModel
   late final GetEnabledCommoditiesUseCase _getEnabledCommoditiesListUseCase =
       _reader(getEnabledCommoditiesUseCaseProvider);
 
-  late final DeleteCommodityUseCase _deleteCommodityUseCase =
-      _reader(deleteCommodityUseCaseProvider);
+  late final DisableCommodityUseCase _disableCommodityUseCase =
+      _reader(disableCommodityUseCaseProvider);
 
   late final FilterCommoditiesByKeywordUseCase
       _filterCommoditiesByKeywordUseCase =
@@ -65,8 +65,8 @@ class SelectCommodityPageViewModel
     _onCommoditySelected.add(commodity);
   }
 
-  void deleteCommodity(Commodity commodity) {
-    _deleteCommodityUseCase(commodity).then((result) {
+  void disableCommodity(Commodity commodity) {
+    _disableCommodityUseCase(commodity).then((result) {
       result.when(success: (commodities) {
         getList();
       }, failure: (exception) {

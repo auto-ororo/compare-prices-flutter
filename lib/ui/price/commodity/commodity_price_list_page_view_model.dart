@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
-import 'package:compare_prices/domain/usecases/delete_purchase_result_use_case.dart';
+import 'package:compare_prices/domain/usecases/disable_purchase_result_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_commodity_prices_in_ascending_order_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -22,7 +22,7 @@ class CommodityPriceListPageViewModel
       _getCommodityPricesInAscendingOrderUseCase =
       _reader(getCommodityPricesInAscendingOrderUseCaseProvider);
 
-  late final DeletePurchaseResultByIdUseCase _deletePurchaseResultByIdUseCase =
+  late final DeletePurchaseResultByIdUseCase _disablePurchaseResultByIdUseCase =
       _reader(deletePurchaseResultByIdUseCaseProvider);
 
   var _errorMessage = StreamController<String>();
@@ -42,8 +42,8 @@ class CommodityPriceListPageViewModel
     });
   }
 
-  void deletePurchaseResult(String purchaseResultId) async {
-    _deletePurchaseResultByIdUseCase(purchaseResultId).then((result) {
+  void disablePurchaseResult(String purchaseResultId) async {
+    _disablePurchaseResultByIdUseCase(purchaseResultId).then((result) {
       result.when(success: (_) {
         getList();
       }, failure: (exception) {

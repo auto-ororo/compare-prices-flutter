@@ -32,7 +32,8 @@ class UpdateCommodityUseCase extends FutureUseCase<void, Commodity> {
         return;
       }
 
-      _commodityRepository.updateCommodity(params);
+      _commodityRepository
+          .updateCommodity(params.copyWith(updatedAt: DateTime.now()));
     });
   }
 }

@@ -50,7 +50,7 @@ class SelectShopPage extends HookWidget {
           showConfirmDialog(
               context: context,
               message: "${shop.name} を削除しますか？",
-              onOk: () => viewModel.deleteShop(shop));
+              onOk: () => viewModel.disableShop(shop));
         });
       });
 

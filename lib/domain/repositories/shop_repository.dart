@@ -5,8 +5,6 @@ abstract class ShopRepository {
 
   Future<void> updateShop(Shop shop);
 
-  Future<void> deleteShop(Shop shop);
-
   Future<List<Shop>> getEnabledShops();
 
   Future<List<Shop>> getAllShops();

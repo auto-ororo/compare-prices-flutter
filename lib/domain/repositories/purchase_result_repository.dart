@@ -5,8 +5,6 @@ abstract class PurchaseResultRepository {
 
   Future<void> updatePurchaseResult(PurchaseResult purchaseResult);
 
-  Future<void> deletePurchaseResult(PurchaseResult purchaseResult);
-
   Future<PurchaseResult?> getEnabledNewestPurchaseResultByCommodityId(
       String commodityId);
 
