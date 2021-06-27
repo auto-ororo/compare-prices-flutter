@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
-import 'package:compare_prices/domain/usecases/delete_shop_use_case.dart';
+import 'package:compare_prices/domain/usecases/disable_shop_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_shops_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
-import 'package:compare_prices/ui/shop/select/shop_popup_action.dart';
 import 'package:compare_prices/ui/shop/select/select_shop_page_state.dart';
+import 'package:compare_prices/ui/shop/select/shop_popup_action.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -15,18 +15,16 @@ final selectShopPageViewModelProvider = StateNotifierProvider.autoDispose<
     SelectShopPageViewModel,
     SelectShopPageState>((ref) => SelectShopPageViewModel(ref.read));
 
-class SelectShopPageViewModel
-    extends StateNotifier<SelectShopPageState> {
+class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
   final Reader _reader;
 
   late final GetEnabledShopsUseCase _getEnabledShopsListUseCase =
       _reader(getEnabledShopsUseCaseProvider);
 
-  late final DeleteShopUseCase _deleteShopUseCase =
-      _reader(deleteShopUseCaseProvider);
+  late final DisableShopUseCase _disableShopUseCase =
+      _reader(disableShopUseCaseProvider);
 
-  late final FilterShopsByKeywordUseCase
-      _filterShopsByKeywordUseCase =
+  late final FilterShopsByKeywordUseCase _filterShopsByKeywordUseCase =
       _reader(filterShopsByKeywordUseCaseProvider);
 
   var _errorMessage = StreamController<String>();
@@ -36,15 +34,13 @@ class SelectShopPageViewModel
   StreamController<Shop> get onShopSelected => _onShopSelected;
 
   var _onRequestedToEditShop = StreamController<Shop>();
-  StreamController<Shop> get onRequestedToEditShop =>
-      _onRequestedToEditShop;
+  StreamController<Shop> get onRequestedToEditShop => _onRequestedToEditShop;
 
   var _onRequestedToDeleteShop = StreamController<Shop>();
   StreamController<Shop> get onRequestedToDeleteShop =>
       _onRequestedToDeleteShop;
 
-  SelectShopPageViewModel(this._reader)
-      : super(const SelectShopPageState());
+  SelectShopPageViewModel(this._reader) : super(const SelectShopPageState());
 
   void getList() async {
     _getEnabledShopsListUseCase(NoParam()).then((result) {
@@ -65,8 +61,8 @@ class SelectShopPageViewModel
     _onShopSelected.add(shop);
   }
 
-  void deleteShop(Shop shop) {
-    _deleteShopUseCase(shop).then((result) {
+  void disableShop(Shop shop) {
+    _disableShopUseCase(shop).then((result) {
       result.when(success: (shops) {
         getList();
       }, failure: (exception) {
@@ -77,9 +73,8 @@ class SelectShopPageViewModel
   }
 
   void filter() {
-    final list = _filterShopsByKeywordUseCase(
-            FilterShopsByKeywordUseCaseParams(
-                list: state.shops, keyword: state.searchWord))
+    final list = _filterShopsByKeywordUseCase(FilterShopsByKeywordUseCaseParams(
+            list: state.shops, keyword: state.searchWord))
         .dataOrThrow;
 
     state = state.copyWith(filteredShops: list);

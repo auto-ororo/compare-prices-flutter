@@ -11,14 +11,6 @@ class SamplePurchaseResultRepository extends PurchaseResultRepository {
   }
 
   @override
-  Future<void> deletePurchaseResult(PurchaseResult purchaseResult) async {
-    final index = _sampleData.purchaseResults
-        .indexWhere((element) => element.id == purchaseResult.id);
-    final target = _sampleData.purchaseResults[index];
-    _sampleData.purchaseResults[index] = target.copyWith(isEnabled: false);
-  }
-
-  @override
   Future<PurchaseResult?>
       getEnabledMostInexpensivePurchaseResultPerUnitByCommodityId(
           String commodityId) async {

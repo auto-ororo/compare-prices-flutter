@@ -5,8 +5,6 @@ abstract class CommodityRepository {
 
   Future<void> updateCommodity(Commodity commodity);
 
-  Future<void> deleteCommodity(Commodity commodity);
-
   Future<List<Commodity>> getEnabledCommodities();
 
   Future<List<Commodity>> getAllCommodities();

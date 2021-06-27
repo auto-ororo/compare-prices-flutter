@@ -52,7 +52,7 @@ class SelectCommodityPage extends HookWidget {
           showConfirmDialog(
               context: context,
               message: "${commodity.name} を削除しますか？",
-              onOk: () => viewModel.deleteCommodity(commodity));
+              onOk: () => viewModel.disableCommodity(commodity));
         });
       });
 

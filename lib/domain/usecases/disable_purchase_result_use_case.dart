@@ -27,7 +27,8 @@ class DeletePurchaseResultByIdUseCase extends FutureUseCase<void, String> {
         throw DomainException("購買履歴がそんざいしません。");
       }
 
-      await _purchaseResultRepository.deletePurchaseResult(purchaseResult);
+      await _purchaseResultRepository.updatePurchaseResult(
+          purchaseResult.copyWith(isEnabled: false, updatedAt: DateTime.now()));
     });
   }
 }

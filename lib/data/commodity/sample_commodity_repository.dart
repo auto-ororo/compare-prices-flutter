@@ -11,14 +11,6 @@ class SampleCommodityRepository extends CommodityRepository {
   }
 
   @override
-  Future<void> deleteCommodity(Commodity commodity) async {
-    final index = _sampleData.commodities
-        .indexWhere((element) => element.id == commodity.id);
-    final target = _sampleData.commodities[index];
-    _sampleData.commodities[index] = target.copyWith(isEnabled: false);
-  }
-
-  @override
   Future<List<Commodity>> getAllCommodities() async {
     return _sampleData.commodities;
   }

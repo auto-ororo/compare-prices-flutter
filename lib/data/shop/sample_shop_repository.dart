@@ -11,14 +11,6 @@ class SampleShopRepository extends ShopRepository {
   }
 
   @override
-  Future<void> deleteShop(Shop shop) async {
-    final index =
-        _sampleData.shops.indexWhere((element) => element.id == shop.id);
-    final target = _sampleData.shops[index];
-    _sampleData.shops[index] = target.copyWith(isEnabled: false);
-  }
-
-  @override
   Future<List<Shop>> getAllShops() async {
     return _sampleData.shops;
   }

@@ -14,10 +14,8 @@ class Commodity with _$Commodity {
   }) = _Commodity;
 
   static Commodity createByName(String name) {
+    final now = DateTime.now();
     return Commodity(
-        id: Uuid().v4(),
-        name: name,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now());
+        id: Uuid().v4(), name: name, createdAt: now, updatedAt: now);
   }
 }
