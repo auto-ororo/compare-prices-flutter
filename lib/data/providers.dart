@@ -1,7 +1,8 @@
-import 'package:compare_prices/data/commodity/firestore_commodity_repository.dart';
+import 'package:compare_prices/data/commodity/hive_commodity_repository.dart';
 import 'package:compare_prices/data/example/first_example_repository.dart';
-import 'package:compare_prices/data/purchaseresult/firestore_purchase_result_repository.dart';
-import 'package:compare_prices/data/shop/firestore_shop_repository.dart';
+import 'package:compare_prices/data/infrastructure_config/hive_infrastructure_config_repository.dart';
+import 'package:compare_prices/data/purchaseresult/hive_purchase_result_repository.dart';
+import 'package:compare_prices/data/shop/hive_shop_repository.dart';
 import 'package:compare_prices/domain/repositories/commodity_repository.dart';
 import 'package:compare_prices/domain/repositories/example_repository.dart';
 import 'package:compare_prices/domain/repositories/infrastructure_config_repository.dart';
@@ -9,32 +10,38 @@ import 'package:compare_prices/domain/repositories/purchase_result_repository.da
 import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'infrastructure_config/firebase_infrastructure_config_repository.dart';
-
-// Repository
 final exampleRepositoryProvider =
     Provider.autoDispose<ExampleRepository>((ref) => FirstExampleRepository());
 
+// ■■■■■Sample■■■■■
 // final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
 //     (ref) => SampleCommodityRepository());
-
-final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
-    (ref) => FirestoreCommodityRepository());
-
 // final shopRepositoryProvider =
 //     Provider.autoDispose<ShopRepository>((ref) => SampleShopRepository());
-
-final shopRepositoryProvider =
-    Provider.autoDispose<ShopRepository>((ref) => FirestoreShopRepository());
-
 // final purchaseResultRepositoryProvider =
 //     Provider.autoDispose<PurchaseResultRepository>(
 //         (ref) => SamplePurchaseResultRepository());
 
-final purchaseResultRepositoryProvider =
-    Provider.autoDispose<PurchaseResultRepository>(
-        (ref) => FirestorePurchaseResultRepository());
+// ■■■■■Firebase■■■■■
+// final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
+//     (ref) => FirestoreCommodityRepository());
+// final purchaseResultRepositoryProvider =
+//     Provider.autoDispose<PurchaseResultRepository>(
+//         (ref) => FirestorePurchaseResultRepository());
+// final infrastructureConfigRepositoryProvider =
+//     Provider.autoDispose<InfrastructureConfigRepository>(
+//         (ref) => FirebaseInfrastructureConfigRepository());
+// final shopRepositoryProvider =
+//     Provider.autoDispose<ShopRepository>((ref) => FirestoreShopRepository());
 
+// ■■■■■Hive■■■■■
+final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
+    (ref) => HiveCommodityRepository());
 final infrastructureConfigRepositoryProvider =
     Provider.autoDispose<InfrastructureConfigRepository>(
-        (ref) => FirebaseInfrastructureConfigRepository());
+        (ref) => HiveInfrastructureConfigRepository());
+final shopRepositoryProvider =
+    Provider.autoDispose<ShopRepository>((ref) => HiveShopRepository());
+final purchaseResultRepositoryProvider =
+    Provider.autoDispose<PurchaseResultRepository>(
+        (ref) => HivePurchaseResultRepository());
