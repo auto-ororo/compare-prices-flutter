@@ -17,7 +17,7 @@ class CommodityPriceRow extends HookWidget {
 
   const CommodityPriceRow(this._commodityPrice, this._onDelete) : super();
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final Color crownColor;
 
     switch (_commodityPrice.rank) {

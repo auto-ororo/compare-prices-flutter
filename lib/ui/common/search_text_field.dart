@@ -15,7 +15,7 @@ class SearchTextField extends StatelessWidget {
   final String? hintText;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return TextField(
       decoration: InputDecoration(
           border: const OutlineInputBorder(),

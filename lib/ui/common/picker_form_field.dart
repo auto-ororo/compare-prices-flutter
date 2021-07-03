@@ -18,7 +18,7 @@ class PickerFormField extends HookWidget {
   final Function()? validator;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final controller = useTextEditingController(text: text);
 
     useEffect(() {

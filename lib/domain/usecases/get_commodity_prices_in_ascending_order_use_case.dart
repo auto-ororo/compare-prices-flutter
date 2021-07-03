@@ -1,8 +1,6 @@
 import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/commodity_price.dart';
 import 'package:compare_prices/domain/entities/result.dart';
-import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
-import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -15,9 +13,9 @@ class GetCommodityPricesInAscendingOrderUseCase
     extends FutureUseCase<List<CommodityPrice>, String> {
   final Reader _reader;
 
-  late final ShopRepository _shopRepository = _reader(shopRepositoryProvider);
+  late final _shopRepository = _reader(shopRepositoryProvider);
 
-  late final PurchaseResultRepository _purchaseResultRepository =
+  late final _purchaseResultRepository =
       _reader(purchaseResultRepositoryProvider);
 
   GetCommodityPricesInAscendingOrderUseCase(this._reader);

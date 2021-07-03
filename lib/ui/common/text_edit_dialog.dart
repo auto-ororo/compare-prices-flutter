@@ -26,7 +26,7 @@ class TextEditDialog extends HookWidget {
   final Function()? onCanceled;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final TextEditingController textEditingController =
         useTextEditingController(text: initialText);
 

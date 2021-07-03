@@ -12,7 +12,7 @@ class BottomPriceRow extends StatelessWidget {
   final void Function() _onTap;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return InkWell(
       onTap: _onTap,
       child: Padding(

@@ -13,7 +13,7 @@ class UpdateCommodityDialog extends HookWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final provider = updateCommodityDialogViewModelProvider(this.commodity);
     final commodity = useProvider(provider.select((value) => value.commodity));
 

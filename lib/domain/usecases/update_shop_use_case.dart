@@ -2,7 +2,6 @@ import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/result.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/domain_exception.dart';
-import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,7 +11,7 @@ final updateShopUseCaseProvider = Provider.autoDispose<UpdateShopUseCase>(
 class UpdateShopUseCase extends FutureUseCase<void, Shop> {
   final Reader _reader;
 
-  late final ShopRepository _shopRepository = _reader(shopRepositoryProvider);
+  late final _shopRepository = _reader(shopRepositoryProvider);
 
   UpdateShopUseCase(this._reader);
 

@@ -1,6 +1,5 @@
 import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/result.dart';
-import 'package:compare_prices/domain/repositories/infrastructure_config_repository.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,7 +9,7 @@ final initializeAppUseCaseProvider = Provider.autoDispose<InitializeAppUseCase>(
 class InitializeAppUseCase extends FutureUseCase<void, NoParam> {
   final Reader _reader;
 
-  late final InfrastructureConfigRepository _infrastructureConfigRepository =
+  late final _infrastructureConfigRepository =
       _reader(infrastructureConfigRepositoryProvider);
 
   InitializeAppUseCase(this._reader);

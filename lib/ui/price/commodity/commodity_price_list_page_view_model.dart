@@ -18,11 +18,10 @@ final commodityPriceListPageViewModelProvider = StateNotifierProvider.family
 class CommodityPriceListPageViewModel
     extends StateNotifier<CommodityPriceListPageState> {
   final Reader _reader;
-  late final GetCommodityPricesInAscendingOrderUseCase
-      _getCommodityPricesInAscendingOrderUseCase =
+  late final _getCommodityPricesInAscendingOrderUseCase =
       _reader(getCommodityPricesInAscendingOrderUseCaseProvider);
 
-  late final DeletePurchaseResultByIdUseCase _disablePurchaseResultByIdUseCase =
+  late final _disablePurchaseResultByIdUseCase =
       _reader(deletePurchaseResultByIdUseCaseProvider);
 
   var _errorMessage = StreamController<String>();

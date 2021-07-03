@@ -7,17 +7,13 @@ import 'package:compare_prices/ui/shop/update/update_shop_dialog_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final updateShopDialogViewModelProvider = StateNotifierProvider.family
-    .autoDispose<UpdateShopDialogViewModel, UpdateShopDialogState,
-            Shop>(
-        (ref, shop) =>
-            UpdateShopDialogViewModel(ref.read, shop));
+    .autoDispose<UpdateShopDialogViewModel, UpdateShopDialogState, Shop>(
+        (ref, shop) => UpdateShopDialogViewModel(ref.read, shop));
 
-class UpdateShopDialogViewModel
-    extends StateNotifier<UpdateShopDialogState> {
+class UpdateShopDialogViewModel extends StateNotifier<UpdateShopDialogState> {
   final Reader _reader;
 
-  late final UpdateShopUseCase _updateShopUseCase =
-      _reader(updateShopUseCaseProvider);
+  late final _updateShopUseCase = _reader(updateShopUseCaseProvider);
 
   final _errorMessage = StreamController<String>();
   StreamController<String> get errorMessage => _errorMessage;

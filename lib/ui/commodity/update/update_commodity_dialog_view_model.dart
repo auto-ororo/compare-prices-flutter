@@ -16,8 +16,7 @@ class UpdateCommodityDialogViewModel
     extends StateNotifier<UpdateCommodityDialogState> {
   final Reader _reader;
 
-  late final UpdateCommodityUseCase _updateCommodityUseCase =
-      _reader(updateCommodityUseCaseProvider);
+  late final _updateCommodityUseCase = _reader(updateCommodityUseCaseProvider);
 
   final _errorMessage = StreamController<String>();
   StreamController<String> get errorMessage => _errorMessage;

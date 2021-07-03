@@ -14,7 +14,7 @@ class CreateCommodityDialogViewModel
     extends StateNotifier<CreateCommodityDialogState> {
   final Reader _reader;
 
-  late final CreateCommodityByNameUseCase _createCommodityByNameUseCase =
+  late final _createCommodityByNameUseCase =
       _reader(createCommodityByNameUseCaseProvider);
 
   final _errorMessage = StreamController<String>();

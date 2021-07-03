@@ -13,7 +13,7 @@ import '../update/update_commodity_dialog.dart';
 
 class SelectCommodityPage extends HookWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final commodities = useProvider(selectCommodityPageViewModelProvider
         .select((value) => value.commodities));
     final showingCommodities = useProvider(selectCommodityPageViewModelProvider
@@ -132,10 +132,10 @@ class SelectCommodityPage extends HookWidget {
                     title: Text(commodity.name),
                     onTap: () => viewModel.selectCommodity(commodity),
                     trailing: PopupMenuButton<CommodityPopupAction>(
-                      onSelected: (CommodityPopupAction action) {
+                      onSelected: (action) {
                         viewModel.handleCommodityPopupAction(action);
                       },
-                      itemBuilder: (BuildContext context) => [
+                      itemBuilder: (context) => [
                         PopupMenuItem(
                             child: Text("編集"),
                             value: CommodityPopupAction.edit(commodity)),

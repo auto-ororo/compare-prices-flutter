@@ -13,7 +13,7 @@ import '../update/update_shop_dialog.dart';
 
 class SelectShopPage extends HookWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final shops = useProvider(
         selectShopPageViewModelProvider.select((value) => value.shops));
     final showingShops = useProvider(
@@ -131,10 +131,10 @@ class SelectShopPage extends HookWidget {
                     title: Text(shop.name),
                     onTap: () => viewModel.selectShop(shop),
                     trailing: PopupMenuButton<ShopPopupAction>(
-                      onSelected: (ShopPopupAction action) {
+                      onSelected: (action) {
                         viewModel.handleShopPopupAction(action);
                       },
-                      itemBuilder: (BuildContext context) => [
+                      itemBuilder: (context) => [
                         PopupMenuItem(
                             child: Text("編集"),
                             value: ShopPopupAction.edit(shop)),

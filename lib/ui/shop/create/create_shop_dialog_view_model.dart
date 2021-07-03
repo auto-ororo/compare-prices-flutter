@@ -6,15 +6,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'create_shop_dialog_state.dart';
 
-final createShopDialogViewModelProvider = StateNotifierProvider
-    .autoDispose<CreateShopDialogViewModel, CreateShopDialogState>(
-        (ref) => CreateShopDialogViewModel(ref.read));
+final createShopDialogViewModelProvider = StateNotifierProvider.autoDispose<
+    CreateShopDialogViewModel,
+    CreateShopDialogState>((ref) => CreateShopDialogViewModel(ref.read));
 
-class CreateShopDialogViewModel
-    extends StateNotifier<CreateShopDialogState> {
+class CreateShopDialogViewModel extends StateNotifier<CreateShopDialogState> {
   final Reader _reader;
 
-  late final CreateShopByNameUseCase _createShopByNameUseCase =
+  late final _createShopByNameUseCase =
       _reader(createShopByNameUseCaseProvider);
 
   final _errorMessage = StreamController<String>();
