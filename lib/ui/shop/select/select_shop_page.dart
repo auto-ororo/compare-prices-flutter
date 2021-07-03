@@ -1,4 +1,6 @@
+import 'package:compare_prices/domain/entities/shop_sort_type.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
+import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:compare_prices/ui/shop/create/create_shop_dialog.dart';
 import 'package:compare_prices/ui/shop/select/select_shop_page_view_model.dart';
@@ -14,8 +16,10 @@ class SelectShopPage extends HookWidget {
   Widget build(BuildContext context) {
     final shops = useProvider(
         selectShopPageViewModelProvider.select((value) => value.shops));
-    final filteredShops = useProvider(
-        selectShopPageViewModelProvider.select((value) => value.filteredShops));
+    final showingShops = useProvider(
+        selectShopPageViewModelProvider.select((value) => value.showingShops));
+    final sortType = useProvider(
+        selectShopPageViewModelProvider.select((value) => value.sortType));
     final searchWord = useProvider(
         selectShopPageViewModelProvider.select((value) => value.searchWord));
     final viewModel = useProvider(selectShopPageViewModelProvider.notifier);
@@ -59,28 +63,51 @@ class SelectShopPage extends HookWidget {
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        print("execute filter commodity");
-        viewModel.filter();
+        viewModel.filterAndSort();
       });
       return () => {};
-    }, [searchWord, shops]);
+    }, [searchWord, shops, sortType]);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('店舗選択'),
         actions: [
           IconButton(
-              onPressed: () async {
-                await showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (_) {
-                      return CreateShopDialog();
-                    });
+            onPressed: () async {
+              await showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (_) {
+                    return CreateShopDialog();
+                  });
 
-                viewModel.getList();
-              },
-              icon: Icon(Icons.add))
+              viewModel.getList();
+            },
+            icon: Icon(Icons.add),
+          ),
+          PopupMenuButton<ShopSortType>(
+            onSelected: (sortType) {
+              viewModel.updateSortType(sortType);
+            },
+            icon: Icon(Icons.swap_vert),
+            itemBuilder: (_) => [
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "追加日が新しい順",
+                  selectedValue: sortType,
+                  value: ShopSortType.newestCreatedAt()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "追加日が古い順",
+                  selectedValue: sortType,
+                  value: ShopSortType.oldestCreatedAt()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "名前順",
+                  selectedValue: sortType,
+                  value: ShopSortType.name()),
+            ],
+          ),
         ],
       ),
       body: Column(
@@ -97,9 +124,9 @@ class SelectShopPage extends HookWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: filteredShops.length,
+                itemCount: showingShops.length,
                 itemBuilder: (context, index) {
-                  final shop = filteredShops[index];
+                  final shop = showingShops[index];
                   return ListTile(
                     title: Text(shop.name),
                     onTap: () => viewModel.selectShop(shop),

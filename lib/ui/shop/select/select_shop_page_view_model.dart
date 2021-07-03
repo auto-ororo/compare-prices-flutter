@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/domain/entities/shop_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/disable_shop_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_shops_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_shops_use_case.dart';
+import 'package:compare_prices/domain/usecases/sort_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:compare_prices/ui/shop/select/select_shop_page_state.dart';
 import 'package:compare_prices/ui/shop/select/shop_popup_action.dart';
@@ -26,6 +28,9 @@ class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
 
   late final FilterShopsByKeywordUseCase _filterShopsByKeywordUseCase =
       _reader(filterShopsByKeywordUseCaseProvider);
+
+  late final SortShopsUseCase _sortShopsUseCase =
+      _reader(sortShopsUseCaseProvider);
 
   var _errorMessage = StreamController<String>();
   StreamController<String> get errorMessage => _errorMessage;
@@ -72,12 +77,21 @@ class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
     });
   }
 
-  void filter() {
-    final list = _filterShopsByKeywordUseCase(FilterShopsByKeywordUseCaseParams(
-            list: state.shops, keyword: state.searchWord))
+  void updateSortType(ShopSortType sortType) {
+    state = state.copyWith(sortType: sortType);
+  }
+
+  void filterAndSort() {
+    final filteredList = _filterShopsByKeywordUseCase(
+            FilterShopsByKeywordUseCaseParams(
+                list: state.shops, keyword: state.searchWord))
         .dataOrThrow;
 
-    state = state.copyWith(filteredShops: list);
+    final showingShops = _sortShopsUseCase(SortShopsUseCaseParams(
+            shops: filteredList, sortType: state.sortType))
+        .dataOrThrow;
+
+    state = state.copyWith(showingShops: showingShops);
   }
 
   void handleShopPopupAction(ShopPopupAction action) {

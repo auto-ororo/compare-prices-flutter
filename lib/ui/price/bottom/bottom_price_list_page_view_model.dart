@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:compare_prices/domain/entities/bottom_price_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/filter_bottom_prices_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_bottom_prices_use_case.dart';
+import 'package:compare_prices/domain/usecases/sort_bottom_prices_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -22,6 +24,9 @@ class BottomPriceListPageViewModel
   late final FilterBottomPricesByKeywordUseCase
       _filterBottomPricesByKeywordUseCase =
       _reader(filterBottomPricesByKeywordUseCaseProvider);
+
+  late final SortBottomPricesUseCase _sortBottomPricesUseCase =
+      _reader(sortBottomPricesUseCaseProvider);
 
   var _errorMessage = StreamController<String>();
   StreamController<String> get errorMessage => _errorMessage;
@@ -44,13 +49,21 @@ class BottomPriceListPageViewModel
     state = state.copyWith(searchWord: word);
   }
 
-  void filter() {
-    final list = _filterBottomPricesByKeywordUseCase(
+  void updateSortType(BottomPriceSortType sortType) {
+    state = state.copyWith(sortType: sortType);
+  }
+
+  void filterAndSort() {
+    final filteredList = _filterBottomPricesByKeywordUseCase(
             FilterBottomPricesByKeywordUseCaseParams(
                 bottomPrices: state.bottomPrices, keyword: state.searchWord))
         .dataOrThrow;
 
-    state = state.copyWith(filteredBottomPrices: list);
+    final sortedList = _sortBottomPricesUseCase(SortBottomPricesUseCaseParams(
+            bottomPrices: filteredList, sortType: state.sortType))
+        .dataOrThrow;
+
+    state = state.copyWith(showingBottomPrices: sortedList);
   }
 
   @override
