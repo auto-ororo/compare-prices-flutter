@@ -1,7 +1,9 @@
+import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
 import 'package:compare_prices/ui/commodity/create/create_commodity_dialog.dart';
 import 'package:compare_prices/ui/commodity/select/commodity_popup_action.dart';
 import 'package:compare_prices/ui/commodity/select/select_commodity_page_view_model.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
+import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -14,8 +16,10 @@ class SelectCommodityPage extends HookWidget {
   Widget build(BuildContext context) {
     final commodities = useProvider(selectCommodityPageViewModelProvider
         .select((value) => value.commodities));
-    final filteredCommodities = useProvider(selectCommodityPageViewModelProvider
-        .select((value) => value.filteredCommodities));
+    final showingCommodities = useProvider(selectCommodityPageViewModelProvider
+        .select((value) => value.showingCommodities));
+    final sortType = useProvider(
+        selectCommodityPageViewModelProvider.select((value) => value.sortType));
     final searchWord = useProvider(selectCommodityPageViewModelProvider
         .select((value) => value.searchWord));
 
@@ -61,11 +65,10 @@ class SelectCommodityPage extends HookWidget {
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        print("execute filter commodity");
-        viewModel.filter();
+        viewModel.filterAndSort();
       });
       return () => {};
-    }, [searchWord, commodities]);
+    }, [searchWord, commodities, sortType]);
 
     return Scaffold(
       appBar: AppBar(
@@ -82,7 +85,30 @@ class SelectCommodityPage extends HookWidget {
 
                 viewModel.getList();
               },
-              icon: Icon(Icons.add))
+              icon: Icon(Icons.add)),
+          PopupMenuButton<CommoditySortType>(
+            onSelected: (sortType) {
+              viewModel.updateSortType(sortType);
+            },
+            icon: Icon(Icons.swap_vert),
+            itemBuilder: (_) => [
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "追加日が新しい順",
+                  selectedValue: sortType,
+                  value: CommoditySortType.newestCreatedAt()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "追加日が古い順",
+                  selectedValue: sortType,
+                  value: CommoditySortType.oldestCreatedAt()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "名前順",
+                  selectedValue: sortType,
+                  value: CommoditySortType.name()),
+            ],
+          ),
         ],
       ),
       body: Column(
@@ -99,9 +125,9 @@ class SelectCommodityPage extends HookWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: filteredCommodities.length,
+                itemCount: showingCommodities.length,
                 itemBuilder: (context, index) {
-                  final commodity = filteredCommodities[index];
+                  final commodity = showingCommodities[index];
                   return ListTile(
                     title: Text(commodity.name),
                     onTap: () => viewModel.selectCommodity(commodity),

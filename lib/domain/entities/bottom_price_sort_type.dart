@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'bottom_price_list_sort_type.freezed.dart';
+part 'bottom_price_sort_type.freezed.dart';
 
 @freezed
 class BottomPriceSortType<T> with _$BottomPriceSortType<T> {

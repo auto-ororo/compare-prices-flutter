@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/disable_commodity_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_commodities_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_commodities_use_case.dart';
+import 'package:compare_prices/domain/usecases/sort_commodities_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:compare_prices/ui/commodity/select/commodity_popup_action.dart';
 import 'package:compare_prices/ui/commodity/select/select_commodity_page_state.dart';
@@ -19,15 +21,16 @@ class SelectCommodityPageViewModel
     extends StateNotifier<SelectCommodityPageState> {
   final Reader _reader;
 
-  late final GetEnabledCommoditiesUseCase _getEnabledCommoditiesListUseCase =
+  late final _getEnabledCommoditiesListUseCase =
       _reader(getEnabledCommoditiesUseCaseProvider);
 
-  late final DisableCommodityUseCase _disableCommodityUseCase =
+  late final _disableCommodityUseCase =
       _reader(disableCommodityUseCaseProvider);
 
-  late final FilterCommoditiesByKeywordUseCase
-      _filterCommoditiesByKeywordUseCase =
+  late final _filterCommoditiesByKeywordUseCase =
       _reader(filterCommoditiesByKeywordUseCaseProvider);
+
+  late final _sortCommoditiesUseCase = _reader(sortCommoditiesUseCaseProvider);
 
   var _errorMessage = StreamController<String>();
   StreamController<String> get errorMessage => _errorMessage;
@@ -76,13 +79,22 @@ class SelectCommodityPageViewModel
     });
   }
 
-  void filter() {
-    final list = _filterCommoditiesByKeywordUseCase(
+  void updateSortType(CommoditySortType sortType) {
+    state = state.copyWith(sortType: sortType);
+  }
+
+  void filterAndSort() {
+    final filteredList = _filterCommoditiesByKeywordUseCase(
             FilterCommoditiesByKeywordUseCaseParams(
                 list: state.commodities, keyword: state.searchWord))
         .dataOrThrow;
 
-    state = state.copyWith(filteredCommodities: list);
+    final showingCommodities = _sortCommoditiesUseCase(
+            SortCommoditiesUseCaseParams(
+                commodities: filteredList, sortType: state.sortType))
+        .dataOrThrow;
+
+    state = state.copyWith(showingCommodities: showingCommodities);
   }
 
   void handleCommodityPopupAction(CommodityPopupAction action) {
