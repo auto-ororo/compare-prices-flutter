@@ -18,7 +18,7 @@ class CreatePurchaseResultPage extends HookWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final provider =
         createPurchaseResultPageViewModelProvider(initialCommodity);
     final selectedCommodity =

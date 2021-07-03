@@ -18,14 +18,12 @@ final bottomPriceListPageViewModelProvider = StateNotifierProvider.autoDispose<
 class BottomPriceListPageViewModel
     extends StateNotifier<BottomPriceListPageState> {
   final Reader _reader;
-  late final GetBottomPricesUseCase _getBottomPricesUseCase =
-      _reader(getBottomPricesUseCaseProvider);
+  late final _getBottomPricesUseCase = _reader(getBottomPricesUseCaseProvider);
 
-  late final FilterBottomPricesByKeywordUseCase
-      _filterBottomPricesByKeywordUseCase =
+  late final _filterBottomPricesByKeywordUseCase =
       _reader(filterBottomPricesByKeywordUseCaseProvider);
 
-  late final SortBottomPricesUseCase _sortBottomPricesUseCase =
+  late final _sortBottomPricesUseCase =
       _reader(sortBottomPricesUseCaseProvider);
 
   var _errorMessage = StreamController<String>();

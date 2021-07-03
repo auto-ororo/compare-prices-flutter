@@ -19,7 +19,7 @@ class NumberPickerDialog extends HookWidget {
   final String? unitText;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final selectedNumber = useState(initialNumber);
     return AlertDialog(
       title: Text(title),

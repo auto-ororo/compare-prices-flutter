@@ -7,7 +7,7 @@ import 'example_page_view_model.dart';
 
 class ExamplePage extends HookWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final counter = useProvider(
         examplePageViewModelProvider.select((value) => value.counter));
     final fetchedWord = useProvider(

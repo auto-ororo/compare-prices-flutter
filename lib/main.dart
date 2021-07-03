@@ -31,7 +31,7 @@ class ArgumentName {
 class MyApp extends HookWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final useCase = useProvider(initializeAppUseCaseProvider);
 
     final initializeResult = useMemoized(() => useCase(NoParam()));

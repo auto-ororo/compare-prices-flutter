@@ -12,7 +12,7 @@ class UpdateShopDialog extends HookWidget {
   const UpdateShopDialog({Key? key, required this.shop}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final provider = updateShopDialogViewModelProvider(this.shop);
     final shop = useProvider(provider.select((value) => value.shop));
 

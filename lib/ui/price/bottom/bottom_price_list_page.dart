@@ -12,7 +12,7 @@ import 'bottom_price_row.dart';
 
 class BottomPriceListPage extends HookWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final searchWord = useProvider(bottomPriceListPageViewModelProvider
         .select((value) => value.searchWord));
 

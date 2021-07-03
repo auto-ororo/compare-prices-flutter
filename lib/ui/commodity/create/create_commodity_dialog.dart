@@ -9,7 +9,7 @@ class CreateCommodityDialog extends HookWidget {
   const CreateCommodityDialog({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final name = useProvider(
         createCommodityDialogViewModelProvider.select((value) => value.name));
     final viewModel =

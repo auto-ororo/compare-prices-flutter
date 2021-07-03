@@ -1,7 +1,6 @@
 import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/purchase_result.dart';
 import 'package:compare_prices/domain/entities/result.dart';
-import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,7 +15,7 @@ class CreatePurchaseResultUseCase
     extends FutureUseCase<void, CreatePurchaseResultUseCaseParams> {
   final Reader _reader;
 
-  late final PurchaseResultRepository _purchaseResultRepository =
+  late final _purchaseResultRepository =
       _reader(purchaseResultRepositoryProvider);
 
   CreatePurchaseResultUseCase(this._reader);

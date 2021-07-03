@@ -20,17 +20,15 @@ final selectShopPageViewModelProvider = StateNotifierProvider.autoDispose<
 class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
   final Reader _reader;
 
-  late final GetEnabledShopsUseCase _getEnabledShopsListUseCase =
+  late final _getEnabledShopsListUseCase =
       _reader(getEnabledShopsUseCaseProvider);
 
-  late final DisableShopUseCase _disableShopUseCase =
-      _reader(disableShopUseCaseProvider);
+  late final _disableShopUseCase = _reader(disableShopUseCaseProvider);
 
-  late final FilterShopsByKeywordUseCase _filterShopsByKeywordUseCase =
+  late final _filterShopsByKeywordUseCase =
       _reader(filterShopsByKeywordUseCaseProvider);
 
-  late final SortShopsUseCase _sortShopsUseCase =
-      _reader(sortShopsUseCaseProvider);
+  late final _sortShopsUseCase = _reader(sortShopsUseCaseProvider);
 
   var _errorMessage = StreamController<String>();
   StreamController<String> get errorMessage => _errorMessage;

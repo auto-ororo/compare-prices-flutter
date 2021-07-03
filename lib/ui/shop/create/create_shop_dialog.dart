@@ -9,7 +9,7 @@ class CreateShopDialog extends HookWidget {
   const CreateShopDialog({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final name = useProvider(
         createShopDialogViewModelProvider.select((value) => value.name));
     final viewModel = useProvider(createShopDialogViewModelProvider.notifier);

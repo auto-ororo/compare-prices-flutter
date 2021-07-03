@@ -14,7 +14,7 @@ class CommodityPriceListPage extends HookWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final provider = commodityPriceListPageViewModelProvider(commodity);
     final commodityPrices =
         useProvider(provider.select((value) => value.commodityPrices));
