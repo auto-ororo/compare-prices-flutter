@@ -60,7 +60,8 @@ class MyApp extends HookWidget {
               }
               return MaterialPageRoute(
                   builder: (context) => CreatePurchaseResultPage(
-                      initialCommodity: args?[ArgumentName.commodity]));
+                      initialCommodity: args?[ArgumentName.commodity]),
+                  fullscreenDialog: true);
             case RouteName.examplePage:
               return MaterialPageRoute(builder: (context) => ExamplePage());
             case RouteName.selectCommodityPage:

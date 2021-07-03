@@ -1,4 +1,6 @@
+import 'package:compare_prices/domain/entities/bottom_price_sort_type.dart';
 import 'package:compare_prices/main.dart';
+import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:compare_prices/ui/common/utils/debouncer.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +18,10 @@ class BottomPriceListPage extends HookWidget {
 
     final bottomPrices = useProvider(bottomPriceListPageViewModelProvider
         .select((value) => value.bottomPrices));
-    final filteredBottomPrices = useProvider(
-        bottomPriceListPageViewModelProvider
-            .select((value) => value.filteredBottomPrices));
+    final showingBottomPrices = useProvider(bottomPriceListPageViewModelProvider
+        .select((value) => value.showingBottomPrices));
+    final sortType = useProvider(
+        bottomPriceListPageViewModelProvider.select((value) => value.sortType));
     final viewModel =
         useProvider(bottomPriceListPageViewModelProvider.notifier);
 
@@ -42,14 +45,49 @@ class BottomPriceListPage extends HookWidget {
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        viewModel.filter();
+        viewModel.filterAndSort();
       });
       return () => {};
-    }, [searchWord, bottomPrices]);
+    }, [searchWord, bottomPrices, sortType]);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('底値リスト'),
+        actions: [
+          PopupMenuButton<BottomPriceSortType>(
+            onSelected: (sortType) {
+              viewModel.updateSortType(sortType);
+            },
+            icon: Icon(Icons.swap_vert),
+            itemBuilder: (_) => [
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "最終購入日が新しい順",
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.newestPurchaseDate()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "最終購入日が古い順",
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.oldestPurchaseDate()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "商品名順",
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.commodity()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "店舗名順",
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.shop()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: "価格順",
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.price()),
+            ],
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -66,9 +104,9 @@ class BottomPriceListPage extends HookWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: filteredBottomPrices.length,
+                itemCount: showingBottomPrices.length,
                 itemBuilder: (context, index) {
-                  final row = filteredBottomPrices[index];
+                  final row = showingBottomPrices[index];
                   return BottomPriceRow(row, () async {
                     await Navigator.pushNamed(
                         context, RouteName.commodityPriceListPage,
