@@ -2,6 +2,7 @@ import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
 import 'package:compare_prices/ui/commodity/create/create_commodity_dialog.dart';
 import 'package:compare_prices/ui/commodity/select/commodity_popup_action.dart';
 import 'package:compare_prices/ui/commodity/select/select_commodity_page_view_model.dart';
+import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
@@ -32,9 +33,9 @@ class SelectCommodityPage extends HookWidget {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         viewModel.getList();
 
-        viewModel.errorMessage.stream.listen((errorMessage) {
+        viewModel.onExceptionHappened.stream.listen((type) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(errorMessage)),
+            SnackBar(content: Text(type.errorMessage(context))),
           );
         });
 

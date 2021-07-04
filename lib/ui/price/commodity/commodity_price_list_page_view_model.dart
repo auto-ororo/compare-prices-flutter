@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/disable_purchase_result_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_commodity_prices_in_ascending_order_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,8 +25,9 @@ class CommodityPriceListPageViewModel
   late final _disablePurchaseResultByIdUseCase =
       _reader(deletePurchaseResultByIdUseCaseProvider);
 
-  var _errorMessage = StreamController<String>();
-  StreamController<String> get errorMessage => _errorMessage;
+  var _onExceptionHappened = StreamController<ExceptionType>();
+  StreamController<ExceptionType> get onExceptionHappened =>
+      _onExceptionHappened;
 
   CommodityPriceListPageViewModel(this._reader, Commodity commodity)
       : super(CommodityPriceListPageState(commodity: commodity));
@@ -36,7 +38,7 @@ class CommodityPriceListPageViewModel
       result.when(success: (commodityPrices) {
         state = state.copyWith(commodityPrices: commodityPrices);
       }, failure: (exception) {
-        _errorMessage.add(exception.errorMessage());
+        _onExceptionHappened.add(exception.exceptionType());
       });
     });
   }
@@ -46,14 +48,14 @@ class CommodityPriceListPageViewModel
       result.when(success: (_) {
         getList();
       }, failure: (exception) {
-        _errorMessage.add(exception.errorMessage());
+        _onExceptionHappened.add(exception.exceptionType());
       });
     });
   }
 
   @override
   void dispose() {
-    _errorMessage.close();
+    _onExceptionHappened.close();
 
     super.dispose();
   }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/create_purchase_result_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
@@ -22,8 +23,9 @@ class CreatePurchaseResultPageViewModel
   late final _createPurchaseResultUseCase =
       _reader(createPurchaseResultUseCaseProvider);
 
-  var _errorMessage = StreamController<String>();
-  StreamController<String> get errorMessage => _errorMessage;
+  var _onExceptionHappened = StreamController<ExceptionType>();
+  StreamController<ExceptionType> get onExceptionHappened =>
+      _onExceptionHappened;
 
   final _onPurchaseResultCreated = StreamController<void>();
   StreamController<void> get onPurchaseResultCreated =>
@@ -96,14 +98,14 @@ class CreatePurchaseResultPageViewModel
       result.when(success: (_) {
         _onPurchaseResultCreated.add(_);
       }, failure: (exception) {
-        _errorMessage.add(exception.errorMessage());
+        _onExceptionHappened.add(exception.exceptionType());
       });
     });
   }
 
   @override
   void dispose() {
-    _errorMessage.close();
+    _onExceptionHappened.close();
 
     super.dispose();
   }

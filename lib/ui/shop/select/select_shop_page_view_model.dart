@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/entities/shop_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/disable_shop_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_shops_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_shops_use_case.dart';
@@ -30,8 +31,9 @@ class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
 
   late final _sortShopsUseCase = _reader(sortShopsUseCaseProvider);
 
-  var _errorMessage = StreamController<String>();
-  StreamController<String> get errorMessage => _errorMessage;
+  var _onExceptionHappened = StreamController<ExceptionType>();
+  StreamController<ExceptionType> get onExceptionHappened =>
+      _onExceptionHappened;
 
   var _onShopSelected = StreamController<Shop>();
   StreamController<Shop> get onShopSelected => _onShopSelected;
@@ -50,8 +52,7 @@ class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
       result.when(success: (shops) {
         state = state.copyWith(shops: shops);
       }, failure: (exception) {
-        print("getList failed ${exception.toString()}");
-        _errorMessage.add(exception.errorMessage());
+        _onExceptionHappened.add(exception.exceptionType());
       });
     });
   }
@@ -69,8 +70,7 @@ class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
       result.when(success: (shops) {
         getList();
       }, failure: (exception) {
-        print("delete failed ${exception.toString()}");
-        _errorMessage.add(exception.errorMessage());
+        _onExceptionHappened.add(exception.exceptionType());
       });
     });
   }
@@ -102,7 +102,7 @@ class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
 
   @override
   void dispose() {
-    _errorMessage.close();
+    _onExceptionHappened.close();
     _onShopSelected.close();
     _onRequestedToDeleteShop.close();
     _onRequestedToEditShop.close();

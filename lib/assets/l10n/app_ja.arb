@@ -97,5 +97,15 @@
 
   "updateCommodityTitle": "商品編集",
 
-  "errorAlreadyExists": "既に存在しています。"
+  "errorAlreadyExists": "既に存在しています。",
+  "errorNotFound": "データが存在しません。",
+  "errorUnknown": "不明なエラーが発生しました。\n {message}",
+  "@errorUnknown": {
+    "type": "String",
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
 }
