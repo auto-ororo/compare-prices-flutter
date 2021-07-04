@@ -1,6 +1,6 @@
-import 'package:compare_prices/assets/color/custom_colors.dart';
-import 'package:compare_prices/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/domain/entities/commodity_price.dart';
+import 'package:compare_prices/ui/assets/color/custom_colors.dart';
+import 'package:compare_prices/ui/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
