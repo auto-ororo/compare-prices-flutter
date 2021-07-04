@@ -1,6 +1,7 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/ui/common/text_edit_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -37,10 +38,10 @@ class UpdateCommodityDialog extends HookWidget {
     }, const []);
 
     return TextEditDialog(
-      title: "商品編集",
+      title: AppLocalizations.of(context)!.updateCommodityTitle,
       initialText: commodity.name,
-      labelText: "商品名",
-      submitText: "更新",
+      labelText: AppLocalizations.of(context)!.commonCommodityName,
+      submitText: AppLocalizations.of(context)!.commonUpdate,
       onTextChanged: viewModel.updateName,
       onSubmitted: viewModel.updateCommodity,
     );

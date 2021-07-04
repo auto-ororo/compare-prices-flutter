@@ -3,6 +3,7 @@ import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomPriceRow extends StatelessWidget {
   const BottomPriceRow(this._bottomPrice, this._onTap) : super();
@@ -52,7 +53,8 @@ class BottomPriceRow extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 2.0),
                                   child: Text(
-                                    "/個",
+                                    AppLocalizations.of(context)!
+                                        .commonUnitPerPiece,
                                     style: Theme.of(context).textTheme.caption,
                                   ),
                                 ),
@@ -80,7 +82,7 @@ class BottomPriceRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '最終購入日',
+                      AppLocalizations.of(context)!.commonLastPurchaseDate,
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
