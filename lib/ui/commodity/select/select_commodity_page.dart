@@ -2,10 +2,12 @@ import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
 import 'package:compare_prices/ui/commodity/create/create_commodity_dialog.dart';
 import 'package:compare_prices/ui/commodity/select/commodity_popup_action.dart';
 import 'package:compare_prices/ui/commodity/select/select_commodity_page_view_model.dart';
+import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -31,9 +33,9 @@ class SelectCommodityPage extends HookWidget {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         viewModel.getList();
 
-        viewModel.errorMessage.stream.listen((errorMessage) {
+        viewModel.onExceptionHappened.stream.listen((type) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(errorMessage)),
+            SnackBar(content: Text(type.errorMessage(context))),
           );
         });
 
@@ -55,7 +57,8 @@ class SelectCommodityPage extends HookWidget {
         viewModel.onRequestedToDeleteCommodity.stream.listen((commodity) async {
           showConfirmDialog(
               context: context,
-              message: "${commodity.name} を削除しますか？",
+              message: AppLocalizations.of(context)!
+                  .selectCommodityDeleteConfirmation(commodity.name),
               onOk: () => viewModel.disableCommodity(commodity));
         });
       });
@@ -72,7 +75,7 @@ class SelectCommodityPage extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('商品選択'),
+        title: Text(AppLocalizations.of(context)!.selectCommodityTitle),
         actions: [
           IconButton(
               onPressed: () async {
@@ -94,17 +97,19 @@ class SelectCommodityPage extends HookWidget {
             itemBuilder: (_) => [
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "追加日が新しい順",
+                  text: AppLocalizations.of(context)!
+                      .selectCommoditySortByNewestCreatedAt,
                   selectedValue: sortType,
                   value: CommoditySortType.newestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "追加日が古い順",
+                  text: AppLocalizations.of(context)!
+                      .selectCommoditySortByOldestCreatedAt,
                   selectedValue: sortType,
                   value: CommoditySortType.oldestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "名前順",
+                  text: AppLocalizations.of(context)!.selectCommoditySortByName,
                   selectedValue: sortType,
                   value: CommoditySortType.name()),
             ],
@@ -116,8 +121,8 @@ class SelectCommodityPage extends HookWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: SearchTextField(
-              labelText: "商品名",
-              hintText: "商品名を入力してください。",
+              labelText: AppLocalizations.of(context)!.commonCommodityName,
+              hintText: AppLocalizations.of(context)!.selectCommoditySearchHint,
               onChanged: (word) {
                 viewModel.updateSearchWord(word);
               },
@@ -137,11 +142,12 @@ class SelectCommodityPage extends HookWidget {
                       },
                       itemBuilder: (context) => [
                         PopupMenuItem(
-                            child: Text("編集"),
+                            child:
+                                Text(AppLocalizations.of(context)!.commonEdit),
                             value: CommodityPopupAction.edit(commodity)),
                         PopupMenuItem(
                           child: Text(
-                            "削除",
+                            AppLocalizations.of(context)!.commonDelete,
                             style: TextStyle(color: Colors.redAccent),
                           ),
                           value: CommodityPopupAction.delete(commodity),

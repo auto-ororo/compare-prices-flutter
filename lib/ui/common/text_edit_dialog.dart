@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class TextEditDialog extends HookWidget {
@@ -38,7 +39,9 @@ class TextEditDialog extends HookWidget {
       v = validator!;
     } else {
       v = () {
-        return textEditingController.text.isEmpty ? "入力して下さい" : null;
+        return textEditingController.text.isEmpty
+            ? AppLocalizations.of(context)!.commonInputHint
+            : null;
       };
     }
 
@@ -67,14 +70,16 @@ class TextEditDialog extends HookWidget {
                 Navigator.pop(context);
               }
             },
-            child: Text(cancelText ?? "キャンセル")),
+            child:
+                Text(cancelText ?? AppLocalizations.of(context)!.commonCancel)),
         TextButton(
             onPressed: () {
               if (_formKey.currentState?.validate() ?? false) {
                 onSubmitted();
               }
             },
-            child: Text(submitText ?? "更新")),
+            child:
+                Text(submitText ?? AppLocalizations.of(context)!.commonUpdate)),
       ],
     );
   }

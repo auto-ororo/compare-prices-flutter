@@ -8,7 +8,9 @@ import 'package:compare_prices/ui/price/commodity/commodity_price_list_page.dart
 import 'package:compare_prices/ui/purchase_result/create/create_purchase_result_page.dart';
 import 'package:compare_prices/ui/shop/select/select_shop_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'domain/entities/commodity.dart';
@@ -39,6 +41,16 @@ class MyApp extends HookWidget {
 
     if (snapShot.hasData) {
       return MaterialApp(
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('ja', ''),
+          const Locale('en', ''),
+        ],
         theme: ThemeData(primaryColor: Colors.blueAccent),
         initialRoute: RouteName.bottomPriceListPage,
         onGenerateRoute: (RouteSettings settings) {

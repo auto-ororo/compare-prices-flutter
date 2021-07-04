@@ -1,4 +1,5 @@
 import 'package:compare_prices/domain/entities/shop_sort_type.dart';
+import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
@@ -6,6 +7,7 @@ import 'package:compare_prices/ui/shop/create/create_shop_dialog.dart';
 import 'package:compare_prices/ui/shop/select/select_shop_page_view_model.dart';
 import 'package:compare_prices/ui/shop/select/shop_popup_action.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,9 +31,9 @@ class SelectShopPage extends HookWidget {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         viewModel.getList();
 
-        viewModel.errorMessage.stream.listen((errorMessage) {
+        viewModel.onExceptionHappened.stream.listen((type) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(errorMessage)),
+            SnackBar(content: Text(type.errorMessage(context))),
           );
         });
 
@@ -53,7 +55,8 @@ class SelectShopPage extends HookWidget {
         viewModel.onRequestedToDeleteShop.stream.listen((shop) async {
           showConfirmDialog(
               context: context,
-              message: "${shop.name} を削除しますか？",
+              message: AppLocalizations.of(context)!
+                  .selectShopDeleteConfirmation(shop.name),
               onOk: () => viewModel.disableShop(shop));
         });
       });
@@ -70,7 +73,7 @@ class SelectShopPage extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('店舗選択'),
+        title: Text(AppLocalizations.of(context)!.selectShopTitle),
         actions: [
           IconButton(
             onPressed: () async {
@@ -93,17 +96,19 @@ class SelectShopPage extends HookWidget {
             itemBuilder: (_) => [
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "追加日が新しい順",
+                  text: AppLocalizations.of(context)!
+                      .selectShopSortByNewestCreatedAt,
                   selectedValue: sortType,
                   value: ShopSortType.newestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "追加日が古い順",
+                  text: AppLocalizations.of(context)!
+                      .selectShopSortByOldestCreatedAt,
                   selectedValue: sortType,
                   value: ShopSortType.oldestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "名前順",
+                  text: AppLocalizations.of(context)!.selectShopSortByName,
                   selectedValue: sortType,
                   value: ShopSortType.name()),
             ],
@@ -115,8 +120,8 @@ class SelectShopPage extends HookWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: SearchTextField(
-              labelText: "店舗名",
-              hintText: "店舗名を入力してください。",
+              labelText: AppLocalizations.of(context)!.commonShopName,
+              hintText: AppLocalizations.of(context)!.selectShopSearchHint,
               onChanged: (word) {
                 viewModel.updateSearchWord(word);
               },
@@ -136,11 +141,12 @@ class SelectShopPage extends HookWidget {
                       },
                       itemBuilder: (context) => [
                         PopupMenuItem(
-                            child: Text("編集"),
+                            child:
+                                Text(AppLocalizations.of(context)!.commonEdit),
                             value: ShopPopupAction.edit(shop)),
                         PopupMenuItem(
                           child: Text(
-                            "削除",
+                            AppLocalizations.of(context)!.commonDelete,
                             style: TextStyle(color: Colors.redAccent),
                           ),
                           value: ShopPopupAction.delete(shop),

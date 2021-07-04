@@ -1,12 +1,13 @@
-import 'package:compare_prices/assets/color/custom_colors.dart';
-import 'package:compare_prices/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/domain/entities/commodity_price.dart';
+import 'package:compare_prices/ui/assets/color/custom_colors.dart';
+import 'package:compare_prices/ui/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -45,10 +46,11 @@ class CommodityPriceRow extends HookWidget {
           onTap: () async {
             await showConfirmDialog(
                 context: context,
-                message: "店舗:${_commodityPrice.shop.name}"
-                    "\n価格/個:${_commodityPrice.unitPrice.currency()}"
-                    "\n購入日:${_commodityPrice.purchaseDate.toFormattedString()}"
-                    "\nの購買履歴を削除しますか？",
+                message: AppLocalizations.of(context)!
+                    .commodityPriceRowDeleteConfirmation(
+                        _commodityPrice.shop.name,
+                        _commodityPrice.unitPrice.currency(),
+                        _commodityPrice.purchaseDate.toFormattedString()),
                 onOk: _onDelete);
           },
         ),
@@ -84,7 +86,11 @@ class CommodityPriceRow extends HookWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 2.0),
                               child: Text(
-                                "/${_commodityPrice.count > 1 ? _commodityPrice.count : ""}個",
+                                AppLocalizations.of(context)!
+                                    .commonUnitPerCount(
+                                        _commodityPrice.count > 1
+                                            ? _commodityPrice.count.toString()
+                                            : ""),
                                 style: Theme.of(context).textTheme.caption,
                               ),
                             ),
@@ -102,7 +108,8 @@ class CommodityPriceRow extends HookWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 2.0),
                                     child: Text(
-                                      "/個",
+                                      AppLocalizations.of(context)!
+                                          .commonUnitPerPiece,
                                       style:
                                           Theme.of(context).textTheme.caption,
                                     ),

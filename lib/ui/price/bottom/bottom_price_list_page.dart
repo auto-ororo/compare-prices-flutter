@@ -1,9 +1,11 @@
 import 'package:compare_prices/domain/entities/bottom_price_sort_type.dart';
 import 'package:compare_prices/main.dart';
+import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:compare_prices/ui/common/utils/debouncer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,9 +35,9 @@ class BottomPriceListPage extends HookWidget {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         viewModel.getList();
 
-        viewModel.errorMessage.stream.listen((errorMessage) {
+        viewModel.onExceptionHappened.stream.listen((type) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(errorMessage)),
+            SnackBar(content: Text(type.errorMessage(context))),
           );
         });
       });
@@ -52,7 +54,7 @@ class BottomPriceListPage extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('底値リスト'),
+        title: Text(AppLocalizations.of(context)!.bottomPriceListTitle),
         actions: [
           PopupMenuButton<BottomPriceSortType>(
             onSelected: (sortType) {
@@ -62,27 +64,32 @@ class BottomPriceListPage extends HookWidget {
             itemBuilder: (_) => [
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "最終購入日が新しい順",
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByNewestPurchaseDate,
                   selectedValue: sortType,
                   value: BottomPriceSortType.newestPurchaseDate()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "最終購入日が古い順",
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByOldestPurchaseDate,
                   selectedValue: sortType,
                   value: BottomPriceSortType.oldestPurchaseDate()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "商品名順",
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByCommodityName,
                   selectedValue: sortType,
                   value: BottomPriceSortType.commodity()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "店舗名順",
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByShopName,
                   selectedValue: sortType,
                   value: BottomPriceSortType.shop()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: "価格順",
+                  text:
+                      AppLocalizations.of(context)!.bottomPriceListSortByPrice,
                   selectedValue: sortType,
                   value: BottomPriceSortType.price()),
             ],
@@ -95,8 +102,8 @@ class BottomPriceListPage extends HookWidget {
             padding: const EdgeInsets.all(8),
             child: SearchTextField(
               controller: textEditingController,
-              labelText: "検索",
-              hintText: "商品名、店舗名を入力下ください。",
+              labelText: AppLocalizations.of(context)!.commonSearch,
+              hintText: AppLocalizations.of(context)!.bottomPriceListSearchHint,
               onChanged: (word) {
                 debouncer.run(() => viewModel.updateSearchWord(word));
               },

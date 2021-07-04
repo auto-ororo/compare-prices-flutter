@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -42,12 +43,13 @@ class NumberPickerDialog extends HookWidget {
       ),
       actions: [
         TextButton(
-            onPressed: () => Navigator.pop(context), child: Text("キャンセル")),
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context)!.commonCancel)),
         TextButton(
             onPressed: () {
               Navigator.of(context).pop(selectedNumber.value);
             },
-            child: Text("OK")),
+            child: Text(AppLocalizations.of(context)!.commonOk)),
       ],
     );
   }

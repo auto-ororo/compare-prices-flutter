@@ -1,0 +1,114 @@
+{
+  "@@locale": "ja",
+
+  "commonOk": "OK",
+  "commonCancel": "キャンセル",
+  "commonSearch": "検索",
+  "commonInputHint": "入力して下さい。",
+  "commonCommodity": "商品",
+  "commonCommodityName": "商品名",
+  "commonShop": "店舗",
+  "commonShopName": "店舗名",
+  "commonAdd": "追加",
+  "commonEdit": "編集",
+  "commonUpdate": "更新",
+  "commonDelete": "削除",
+  "commonQuantity": "個数",
+  "commonPrice": "価格",
+  "commonCurrency": "円",
+  "commonPurchaseDate": "購入日",
+  "commonRegister": "登録",
+  "commonUnit": "個",
+  "commonUnitPerPiece": "/個",
+  "commonUnitPerCount": "/{count}個",
+  "@commonUnitPerCount": {
+    "type": "String",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "commonLastPurchaseDate": "最終購入日",
+
+  "bottomPriceListTitle": "底値リスト",
+  "bottomPriceListSortByNewestPurchaseDate": "最終購入日が新しい順",
+  "bottomPriceListSortByOldestPurchaseDate": "最終購入日が古い順",
+  "bottomPriceListSortByCommodityName": "商品名順",
+  "bottomPriceListSortByShopName": "店舗名順",
+  "bottomPriceListSortByPrice": "価格順",
+  "bottomPriceListSearchHint": "商品名、店舗名を入力下ください。",
+
+  "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n削除しますか？",
+  "@commodityPriceRowDeleteConfirmation": {
+    "type": "String",
+    "placeholders": {
+      "shopName": {
+        "type": "String"
+      },
+      "unitPrice": {
+        "type": "String"
+      },
+      "purchaseDate": {
+        "type": "String"
+      }
+    }
+  },
+
+  "createPurchaseResultTitle": "追加",
+  "createPurchaseResultSelectQuantity": "個数選択",
+  "createPurchaseResultTotalPrice": "価格(合計)",
+  "createPurchaseResultInvalidShop": "店舗を選択して下さい。",
+  "createPurchaseResultInvalidCommodity": "商品を選択して下さい。",
+  "createPurchaseResultInvalidPrice": "価格を入力して下さい。",
+
+  "createShopTitle": "店舗追加",
+
+  "selectShopTitle": "店舗選択",
+  "selectShopDeleteConfirmation": "{shopName} を削除しますか？",
+  "@selectShopDeleteConfirmation": {
+    "type": "String",
+    "placeholders": {
+      "shopName": {
+        "type": "String"
+      }
+    }
+  },
+  "selectShopSortByNewestCreatedAt": "追加日が新しい順",
+  "selectShopSortByOldestCreatedAt": "追加日が古い順",
+  "selectShopSortByName": "名前順",
+  "selectShopSearchHint": "店舗名を入力してください。",
+
+  "updateShopTitle": "店舗編集",
+
+  "createCommodityTitle": "商品追加",
+
+  "selectCommodityTitle": "商品選択",
+  "selectCommodityDeleteConfirmation": "{commodityName} を削除しますか？",
+  "@selectCommodityDeleteConfirmation": {
+    "type": "String",
+    "placeholders": {
+      "commodityName": {
+        "type": "String"
+      }
+    }
+  },
+  "selectCommoditySortByNewestCreatedAt": "追加日が新しい順",
+  "selectCommoditySortByOldestCreatedAt": "追加日が古い順",
+  "selectCommoditySortByName": "名前順",
+  "selectCommoditySearchHint": "商品名を入力してください。",
+
+  "updateCommodityTitle": "商品編集",
+
+  "errorAlreadyExists": "既に存在しています。",
+  "errorNotFound": "データが存在しません。",
+  "errorUnknown": "不明なエラーが発生しました。\n {message}",
+  "@errorUnknown": {
+    "type": "String",
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
+}

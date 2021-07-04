@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/disable_commodity_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_commodities_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_commodities_use_case.dart';
@@ -32,8 +33,9 @@ class SelectCommodityPageViewModel
 
   late final _sortCommoditiesUseCase = _reader(sortCommoditiesUseCaseProvider);
 
-  var _errorMessage = StreamController<String>();
-  StreamController<String> get errorMessage => _errorMessage;
+  var _onExceptionHappened = StreamController<ExceptionType>();
+  StreamController<ExceptionType> get onExceptionHappened =>
+      _onExceptionHappened;
 
   var _onCommoditySelected = StreamController<Commodity>();
   StreamController<Commodity> get onCommoditySelected => _onCommoditySelected;
@@ -54,8 +56,7 @@ class SelectCommodityPageViewModel
       result.when(success: (commodities) {
         state = state.copyWith(commodities: commodities);
       }, failure: (exception) {
-        print("getList failed ${exception.toString()}");
-        _errorMessage.add(exception.errorMessage());
+        _onExceptionHappened.add(exception.exceptionType());
       });
     });
   }
@@ -73,8 +74,7 @@ class SelectCommodityPageViewModel
       result.when(success: (commodities) {
         getList();
       }, failure: (exception) {
-        print("delete failed ${exception.toString()}");
-        _errorMessage.add(exception.errorMessage());
+        _onExceptionHappened.add(exception.exceptionType());
       });
     });
   }
@@ -107,7 +107,7 @@ class SelectCommodityPageViewModel
 
   @override
   void dispose() {
-    _errorMessage.close();
+    _onExceptionHappened.close();
     _onCommoditySelected.close();
     _onRequestedToDeleteCommodity.close();
     _onRequestedToEditCommodity.close();

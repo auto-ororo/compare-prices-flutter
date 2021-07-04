@@ -1,9 +1,11 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/main.dart';
+import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/number_picker_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,9 +37,9 @@ class CreatePurchaseResultPage extends HookWidget {
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        viewModel.errorMessage.stream.listen((errorMessage) {
+        viewModel.onExceptionHappened.stream.listen((type) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(errorMessage)),
+            SnackBar(content: Text(type.errorMessage(context))),
           );
         });
 
@@ -53,7 +55,7 @@ class CreatePurchaseResultPage extends HookWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('追加'),
+          title: Text(AppLocalizations.of(context)!.createPurchaseResultTitle),
         ),
         body: Form(
           key: formKey,
@@ -69,7 +71,8 @@ class CreatePurchaseResultPage extends HookWidget {
                         child: AbsorbPointer(
                           absorbing: initialCommodity != null,
                           child: PickerFormField(
-                            labelText: "商品",
+                            labelText:
+                                AppLocalizations.of(context)!.commonCommodity,
                             text: initialCommodity?.name ??
                                 selectedCommodity?.name ??
                                 "",
@@ -81,7 +84,8 @@ class CreatePurchaseResultPage extends HookWidget {
                               viewModel
                                   .updateSelectedCommodity(selectedCommodity);
                             },
-                            validator: viewModel.validateCommodity,
+                            validator: () =>
+                                viewModel.validateCommodity(context),
                           ),
                         ),
                       ),
@@ -89,7 +93,7 @@ class CreatePurchaseResultPage extends HookWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 8.0),
                         child: PickerFormField(
-                          labelText: "店舗",
+                          labelText: AppLocalizations.of(context)!.commonShop,
                           text: selectedShop?.name ?? "",
                           onTap: () async {
                             final selectedShop = await Navigator.of(context)
@@ -97,7 +101,7 @@ class CreatePurchaseResultPage extends HookWidget {
 
                             viewModel.updateSelectedShop(selectedShop);
                           },
-                          validator: viewModel.validateShop,
+                          validator: () => viewModel.validateShop(context),
                         ),
                       ),
                       Padding(
@@ -110,7 +114,8 @@ class CreatePurchaseResultPage extends HookWidget {
                             Flexible(
                               child: PickerFormField(
                                 textAlign: TextAlign.end,
-                                labelText: "個数",
+                                labelText: AppLocalizations.of(context)!
+                                    .commonQuantity,
                                 text: count.toString(),
                                 onTap: () async {
                                   final value = await showDialog(
@@ -118,11 +123,14 @@ class CreatePurchaseResultPage extends HookWidget {
                                       barrierDismissible: false,
                                       builder: (_) {
                                         return NumberPickerDialog(
-                                          title: "個数選択",
+                                          title: AppLocalizations.of(context)!
+                                              .createPurchaseResultSelectQuantity,
                                           minimum: 1,
                                           maximum: 100,
                                           initialNumber: count,
-                                          unitText: "個",
+                                          unitText:
+                                              AppLocalizations.of(context)!
+                                                  .commonUnit,
                                         );
                                       });
 
@@ -134,7 +142,7 @@ class CreatePurchaseResultPage extends HookWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 4.0),
                               child: Text(
-                                "個",
+                                AppLocalizations.of(context)!.commonUnit,
                                 style: TextStyle(fontSize: 14),
                               ),
                             )
@@ -155,11 +163,13 @@ class CreatePurchaseResultPage extends HookWidget {
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.symmetric(
                                         vertical: 4.0, horizontal: 8),
-                                    labelText: "価格(合計)"),
-                                validator: (_) => viewModel.validatePrice(),
+                                    labelText: AppLocalizations.of(context)!
+                                        .createPurchaseResultTotalPrice),
+                                validator: (_) =>
+                                    viewModel.validatePrice(context),
                                 onChanged: (value) =>
                                     viewModel.updatePrice(value),
                               ),
@@ -168,7 +178,7 @@ class CreatePurchaseResultPage extends HookWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 4.0),
                               child: Text(
-                                "円",
+                                AppLocalizations.of(context)!.commonCurrency,
                                 style: TextStyle(fontSize: 14),
                               ),
                             )
@@ -180,7 +190,8 @@ class CreatePurchaseResultPage extends HookWidget {
                             vertical: 16.0, horizontal: 8.0),
                         child: PickerFormField(
                             textAlign: TextAlign.end,
-                            labelText: "購入日",
+                            labelText: AppLocalizations.of(context)!
+                                .commonPurchaseDate,
                             text: purchaseDate.toFormattedString(),
                             onTap: () async {
                               final pickedDate = await showDatePicker(
@@ -204,7 +215,8 @@ class CreatePurchaseResultPage extends HookWidget {
                   child: ElevatedButton(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("登録", style: TextStyle(fontSize: 25)),
+                      child: Text(AppLocalizations.of(context)!.commonRegister,
+                          style: TextStyle(fontSize: 25)),
                     ),
                     onPressed: () async {
                       if (formKey.currentState?.validate() ?? false) {
