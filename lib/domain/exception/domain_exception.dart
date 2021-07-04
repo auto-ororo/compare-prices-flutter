@@ -1,12 +1,13 @@
-import 'package:compare_prices/domain/entities/has_message.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
+import 'package:compare_prices/domain/exception/has_exception_type.dart';
 
-class DomainException implements Exception, HasMessage {
-  final String errorMessage;
+class DomainException implements Exception, HasExceptionType {
+  ExceptionType _exceptionType;
 
-  DomainException(this.errorMessage);
+  DomainException(this._exceptionType);
 
   @override
-  String message() {
-    return errorMessage;
+  ExceptionType exceptionType() {
+    return _exceptionType;
   }
 }

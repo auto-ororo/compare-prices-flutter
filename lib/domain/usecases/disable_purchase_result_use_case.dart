@@ -1,6 +1,7 @@
 import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/result.dart';
 import 'package:compare_prices/domain/exception/domain_exception.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,7 +24,7 @@ class DeletePurchaseResultByIdUseCase extends FutureUseCase<void, String> {
           await _purchaseResultRepository.getEnabledPurchaseResultById(params);
 
       if (purchaseResult == null) {
-        throw DomainException("購買履歴がそんざいしません。");
+        throw DomainException(ExceptionType.notFound());
       }
 
       await _purchaseResultRepository.updatePurchaseResult(

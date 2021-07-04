@@ -2,6 +2,7 @@ import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/result.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/domain_exception.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,7 +24,7 @@ class UpdateShopUseCase extends FutureUseCase<void, Shop> {
       // 別商品データに同名の商品名が存在した場合はエラー
       if (shop != null) {
         if (shop.id != params.id) {
-          throw DomainException("すでにそんざいしてます");
+          throw DomainException(ExceptionType.alreadyExists());
         }
         return;
       }

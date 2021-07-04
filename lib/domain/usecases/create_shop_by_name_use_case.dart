@@ -2,6 +2,7 @@ import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/result.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/domain_exception.dart';
+import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,7 +22,7 @@ class CreateShopByNameUseCase extends FutureUseCase<void, String> {
     return Result.guardFuture(() async {
       // 同名の店舗が存在した場合はエラー
       if (await _shopRepository.getEnabledShopByName(params) != null) {
-        throw DomainException("すでにそんざいしてます");
+        throw DomainException(ExceptionType.alreadyExists());
       }
 
       final shop = Shop.createByName(params);
