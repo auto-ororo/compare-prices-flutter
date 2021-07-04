@@ -84,7 +84,8 @@ class CreatePurchaseResultPage extends HookWidget {
                               viewModel
                                   .updateSelectedCommodity(selectedCommodity);
                             },
-                            validator: viewModel.validateCommodity,
+                            validator: () =>
+                                viewModel.validateCommodity(context),
                           ),
                         ),
                       ),
@@ -100,7 +101,7 @@ class CreatePurchaseResultPage extends HookWidget {
 
                             viewModel.updateSelectedShop(selectedShop);
                           },
-                          validator: viewModel.validateShop,
+                          validator: () => viewModel.validateShop(context),
                         ),
                       ),
                       Padding(
@@ -167,7 +168,8 @@ class CreatePurchaseResultPage extends HookWidget {
                                         vertical: 4.0, horizontal: 8),
                                     labelText: AppLocalizations.of(context)!
                                         .createPurchaseResultTotalPrice),
-                                validator: (_) => viewModel.validatePrice(),
+                                validator: (_) =>
+                                    viewModel.validatePrice(context),
                                 onChanged: (value) =>
                                     viewModel.updatePrice(value),
                               ),

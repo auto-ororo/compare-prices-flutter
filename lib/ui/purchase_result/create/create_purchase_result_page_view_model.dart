@@ -5,6 +5,8 @@ import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/create_purchase_result_use_case.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -65,23 +67,23 @@ class CreatePurchaseResultPageViewModel
     }
   }
 
-  String? validateShop() {
+  String? validateShop(BuildContext context) {
     if (state.selectedShop == null) {
-      return "店舗を選択して下さい。";
+      return AppLocalizations.of(context)!.createPurchaseResultInvalidShop;
     }
     return null;
   }
 
-  String? validateCommodity() {
+  String? validateCommodity(BuildContext context) {
     if (state.selectedCommodity == null) {
-      return "商品を選択して下さい。";
+      return AppLocalizations.of(context)!.createPurchaseResultInvalidCommodity;
     }
     return null;
   }
 
-  String? validatePrice() {
+  String? validatePrice(BuildContext context) {
     if (state.price == 0) {
-      return "価格をを入力して下さい。";
+      return AppLocalizations.of(context)!.createPurchaseResultInvalidPrice;
     }
     return null;
   }

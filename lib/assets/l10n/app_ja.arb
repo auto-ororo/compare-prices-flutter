@@ -58,6 +58,9 @@
   "createPurchaseResultTitle": "追加",
   "createPurchaseResultSelectQuantity": "個数選択",
   "createPurchaseResultTotalPrice": "価格(合計)",
+  "createPurchaseResultInvalidShop": "店舗を選択して下さい。",
+  "createPurchaseResultInvalidCommodity": "商品を選択して下さい。",
+  "createPurchaseResultInvalidPrice": "価格を入力して下さい。",
 
   "createShopTitle": "店舗追加",
 
