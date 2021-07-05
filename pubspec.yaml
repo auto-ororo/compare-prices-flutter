@@ -34,10 +34,6 @@ dependencies:
   intl:
   uuid:
   numberpicker:
-  firebase_core:
-  firebase_analytics:
-  firebase_auth:
-  cloud_firestore:
   json_serializable:
   hive:
   hive_flutter:

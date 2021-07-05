@@ -22,18 +22,6 @@ final exampleRepositoryProvider =
 //     Provider.autoDispose<PurchaseResultRepository>(
 //         (ref) => SamplePurchaseResultRepository());
 
-// ■■■■■Firebase■■■■■
-// final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
-//     (ref) => FirestoreCommodityRepository());
-// final purchaseResultRepositoryProvider =
-//     Provider.autoDispose<PurchaseResultRepository>(
-//         (ref) => FirestorePurchaseResultRepository());
-// final infrastructureConfigRepositoryProvider =
-//     Provider.autoDispose<InfrastructureConfigRepository>(
-//         (ref) => FirebaseInfrastructureConfigRepository());
-// final shopRepositoryProvider =
-//     Provider.autoDispose<ShopRepository>((ref) => FirestoreShopRepository());
-
 // ■■■■■Hive■■■■■
 final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
     (ref) => HiveCommodityRepository());
