@@ -15,8 +15,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'domain/entities/commodity.dart';
 
-void main() => runApp(ProviderScope(child: MyApp()));
-
 class RouteName {
   static const examplePage = 'example';
   static const bottomPriceListPage = 'bottom-price-list';
@@ -30,8 +28,15 @@ class ArgumentName {
   static const commodity = 'commodity';
 }
 
-class MyApp extends HookWidget {
+class App extends StatelessWidget {
   // This widget is the root of your application.
+  @override
+  Widget build(context) {
+    return ProviderScope(child: _App());
+  }
+}
+
+class _App extends HookWidget {
   @override
   Widget build(context) {
     final useCase = useProvider(initializeAppUseCaseProvider);
