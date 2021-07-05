@@ -53,6 +53,7 @@ dev_dependencies:
   build_runner:
   freezed:
   mockito:
+  flutter_flavorizr:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -96,3 +97,44 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    ios:
+
+  flavors:
+    dev:
+      app:
+        name: "Compare Prices Dev"
+
+      android:
+        applicationId: "com.ororoauto.compare_prices.dev"
+
+      ios:
+        bundleId: "com.ororoauto.ComparePrices.dev"
+
+    prd:
+      app:
+        name: "Compare Prices"
+
+      android:
+        applicationId: "com.ororoauto.compare_prices"
+
+      ios:
+        bundleId: "com.ororoauto.ComparePrices"
+
+  instructions:
+    - "assets:download"
+    - "assets:extract"
+    - "android:buildGradle"
+    - "android:androidManifest"
+    - "flutter:flavors"
+    - "flutter:targets"
+    - "ios:xcconfig"
+    - "ios:buildTargets"
+    - "ios:schema"
+    - "ios:plist"
+    - "assets:clean"
+    - "ide:config"

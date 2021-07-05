@@ -1,5 +1,5 @@
+import 'package:compare_prices/app.dart';
 import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/main.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/price/commodity/commodity_price_row.dart';
 import 'package:flutter/material.dart';

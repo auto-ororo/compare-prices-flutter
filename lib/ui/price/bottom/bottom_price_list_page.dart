@@ -1,5 +1,5 @@
+import 'package:compare_prices/app.dart';
 import 'package:compare_prices/domain/entities/bottom_price_sort_type.dart';
-import 'package:compare_prices/main.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
