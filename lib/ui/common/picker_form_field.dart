@@ -4,14 +4,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class PickerFormField extends HookWidget {
   const PickerFormField(
       {Key? key,
-      required this.labelText,
       required this.text,
+      this.style = null,
+      required this.labelText,
       required this.onTap,
       this.textAlign,
       this.validator})
       : super(key: key);
 
   final String text;
+  final TextStyle? style;
   final TextAlign? textAlign;
   final String labelText;
   final Function() onTap;
@@ -32,6 +34,7 @@ class PickerFormField extends HookWidget {
         textAlign: textAlign ?? TextAlign.start,
         enableInteractiveSelection: false,
         controller: controller,
+        style: style,
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),

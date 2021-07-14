@@ -1,6 +1,7 @@
 import 'package:compare_prices/app.dart';
 import 'package:compare_prices/domain/entities/bottom_price_sort_type.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
+import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:compare_prices/ui/common/utils/debouncer.dart';
@@ -98,30 +99,37 @@ class BottomPriceListPage extends HookWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: SearchTextField(
-              controller: textEditingController,
-              labelText: AppLocalizations.of(context)!.commonSearch,
-              hintText: AppLocalizations.of(context)!.bottomPriceListSearchHint,
-              onChanged: (word) {
-                debouncer.run(() => viewModel.updateSearchWord(word));
-              },
+          if (bottomPrices.isEmpty)
+            NoDataView(
+              message: AppLocalizations.of(context)!.bottomPriceListNoData,
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: showingBottomPrices.length,
-                itemBuilder: (context, index) {
-                  final row = showingBottomPrices[index];
-                  return BottomPriceRow(row, () async {
-                    await Navigator.pushNamed(
-                        context, RouteName.commodityPriceListPage,
-                        arguments: {ArgumentName.commodity: row.commodity});
-                    viewModel.getList();
-                  });
-                }),
-          ),
+          if (bottomPrices.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: SearchTextField(
+                controller: textEditingController,
+                labelText: AppLocalizations.of(context)!.commonSearch,
+                hintText:
+                    AppLocalizations.of(context)!.bottomPriceListSearchHint,
+                onChanged: (word) {
+                  debouncer.run(() => viewModel.updateSearchWord(word));
+                },
+              ),
+            ),
+          if (bottomPrices.isNotEmpty)
+            Expanded(
+              child: ListView.builder(
+                  itemCount: showingBottomPrices.length,
+                  itemBuilder: (context, index) {
+                    final row = showingBottomPrices[index];
+                    return BottomPriceRow(row, () async {
+                      await Navigator.pushNamed(
+                          context, RouteName.commodityPriceListPage,
+                          arguments: {ArgumentName.commodity: row.commodity});
+                      viewModel.getList();
+                    });
+                  }),
+            ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

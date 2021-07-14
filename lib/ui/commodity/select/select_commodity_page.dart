@@ -4,6 +4,7 @@ import 'package:compare_prices/ui/commodity/select/commodity_popup_action.dart';
 import 'package:compare_prices/ui/commodity/select/select_commodity_page_view_model.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
+import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:flutter/material.dart';
@@ -118,45 +119,52 @@ class SelectCommodityPage extends HookWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: SearchTextField(
-              labelText: AppLocalizations.of(context)!.commonCommodityName,
-              hintText: AppLocalizations.of(context)!.selectCommoditySearchHint,
-              onChanged: (word) {
-                viewModel.updateSearchWord(word);
-              },
+          if (commodities.isEmpty)
+            NoDataView(
+              message: AppLocalizations.of(context)!.selectCommodityNoData,
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: showingCommodities.length,
-                itemBuilder: (context, index) {
-                  final commodity = showingCommodities[index];
-                  return ListTile(
-                    title: Text(commodity.name),
-                    onTap: () => viewModel.selectCommodity(commodity),
-                    trailing: PopupMenuButton<CommodityPopupAction>(
-                      onSelected: (action) {
-                        viewModel.handleCommodityPopupAction(action);
-                      },
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                            child:
-                                Text(AppLocalizations.of(context)!.commonEdit),
-                            value: CommodityPopupAction.edit(commodity)),
-                        PopupMenuItem(
-                          child: Text(
-                            AppLocalizations.of(context)!.commonDelete,
-                            style: TextStyle(color: Colors.redAccent),
-                          ),
-                          value: CommodityPopupAction.delete(commodity),
-                        )
-                      ],
-                    ),
-                  );
-                }),
-          ),
+          if (commodities.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: SearchTextField(
+                labelText: AppLocalizations.of(context)!.commonCommodityName,
+                hintText:
+                    AppLocalizations.of(context)!.selectCommoditySearchHint,
+                onChanged: (word) {
+                  viewModel.updateSearchWord(word);
+                },
+              ),
+            ),
+          if (commodities.isNotEmpty)
+            Expanded(
+              child: ListView.builder(
+                  itemCount: showingCommodities.length,
+                  itemBuilder: (context, index) {
+                    final commodity = showingCommodities[index];
+                    return ListTile(
+                      title: Text(commodity.name),
+                      onTap: () => viewModel.selectCommodity(commodity),
+                      trailing: PopupMenuButton<CommodityPopupAction>(
+                        onSelected: (action) {
+                          viewModel.handleCommodityPopupAction(action);
+                        },
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                              child: Text(
+                                  AppLocalizations.of(context)!.commonEdit),
+                              value: CommodityPopupAction.edit(commodity)),
+                          PopupMenuItem(
+                            child: Text(
+                              AppLocalizations.of(context)!.commonDelete,
+                              style: TextStyle(color: Colors.redAccent),
+                            ),
+                            value: CommodityPopupAction.delete(commodity),
+                          )
+                        ],
+                      ),
+                    );
+                  }),
+            ),
         ],
       ),
     );

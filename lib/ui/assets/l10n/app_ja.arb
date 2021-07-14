@@ -4,7 +4,7 @@
   "commonOk": "OK",
   "commonCancel": "キャンセル",
   "commonSearch": "検索",
-  "commonInputHint": "入力して下さい。",
+  "commonInputHint": "入力してください。",
   "commonCommodity": "商品",
   "commonCommodityName": "商品名",
   "commonShop": "店舗",
@@ -32,12 +32,15 @@
   "commonLastPurchaseDate": "最終購入日",
 
   "bottomPriceListTitle": "底値リスト",
+  "bottomPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
   "bottomPriceListSortByNewestPurchaseDate": "最終購入日が新しい順",
   "bottomPriceListSortByOldestPurchaseDate": "最終購入日が古い順",
   "bottomPriceListSortByCommodityName": "商品名順",
   "bottomPriceListSortByShopName": "店舗名順",
   "bottomPriceListSortByPrice": "価格順",
-  "bottomPriceListSearchHint": "商品名、店舗名を入力下ください。",
+  "bottomPriceListSearchHint": "商品名、店舗名を入力してください。",
+
+  "commodityPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
 
   "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n削除しますか？",
   "@commodityPriceRowDeleteConfirmation": {
@@ -55,16 +58,17 @@
     }
   },
 
-  "createPurchaseResultTitle": "追加",
+  "createPurchaseResultTitle": "価格登録",
   "createPurchaseResultSelectQuantity": "個数選択",
   "createPurchaseResultTotalPrice": "価格(合計)",
-  "createPurchaseResultInvalidShop": "店舗を選択して下さい。",
-  "createPurchaseResultInvalidCommodity": "商品を選択して下さい。",
-  "createPurchaseResultInvalidPrice": "価格を入力して下さい。",
+  "createPurchaseResultInvalidShop": "店舗を選択してください。",
+  "createPurchaseResultInvalidCommodity": "商品を選択してください。",
+  "createPurchaseResultInvalidPrice": "価格を入力してください。",
 
   "createShopTitle": "店舗追加",
 
-  "selectShopTitle": "店舗選択",
+  "selectShopTitle": "店舗を選択",
+  "selectShopNoData": "店舗が登録されていません。\n右上の「＋」から登録しましょう！",
   "selectShopDeleteConfirmation": "{shopName} を削除しますか？",
   "@selectShopDeleteConfirmation": {
     "type": "String",
@@ -83,7 +87,8 @@
 
   "createCommodityTitle": "商品追加",
 
-  "selectCommodityTitle": "商品選択",
+  "selectCommodityTitle": "商品を選択",
+  "selectCommodityNoData": "商品が登録されていません。\n右上の「＋」から登録しましょう！",
   "selectCommodityDeleteConfirmation": "{commodityName} を削除しますか？",
   "@selectCommodityDeleteConfirmation": {
     "type": "String",

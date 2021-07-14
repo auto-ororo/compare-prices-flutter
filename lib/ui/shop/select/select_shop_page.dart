@@ -1,6 +1,7 @@
 import 'package:compare_prices/domain/entities/shop_sort_type.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
+import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
 import 'package:compare_prices/ui/shop/create/create_shop_dialog.dart';
@@ -117,45 +118,51 @@ class SelectShopPage extends HookWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: SearchTextField(
-              labelText: AppLocalizations.of(context)!.commonShopName,
-              hintText: AppLocalizations.of(context)!.selectShopSearchHint,
-              onChanged: (word) {
-                viewModel.updateSearchWord(word);
-              },
+          if (shops.isEmpty)
+            NoDataView(
+              message: AppLocalizations.of(context)!.selectShopNoData,
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: showingShops.length,
-                itemBuilder: (context, index) {
-                  final shop = showingShops[index];
-                  return ListTile(
-                    title: Text(shop.name),
-                    onTap: () => viewModel.selectShop(shop),
-                    trailing: PopupMenuButton<ShopPopupAction>(
-                      onSelected: (action) {
-                        viewModel.handleShopPopupAction(action);
-                      },
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                            child:
-                                Text(AppLocalizations.of(context)!.commonEdit),
-                            value: ShopPopupAction.edit(shop)),
-                        PopupMenuItem(
-                          child: Text(
-                            AppLocalizations.of(context)!.commonDelete,
-                            style: TextStyle(color: Colors.redAccent),
-                          ),
-                          value: ShopPopupAction.delete(shop),
-                        )
-                      ],
-                    ),
-                  );
-                }),
-          ),
+          if (shops.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: SearchTextField(
+                labelText: AppLocalizations.of(context)!.commonShopName,
+                hintText: AppLocalizations.of(context)!.selectShopSearchHint,
+                onChanged: (word) {
+                  viewModel.updateSearchWord(word);
+                },
+              ),
+            ),
+          if (shops.isNotEmpty)
+            Expanded(
+              child: ListView.builder(
+                  itemCount: showingShops.length,
+                  itemBuilder: (context, index) {
+                    final shop = showingShops[index];
+                    return ListTile(
+                      title: Text(shop.name),
+                      onTap: () => viewModel.selectShop(shop),
+                      trailing: PopupMenuButton<ShopPopupAction>(
+                        onSelected: (action) {
+                          viewModel.handleShopPopupAction(action);
+                        },
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                              child: Text(
+                                  AppLocalizations.of(context)!.commonEdit),
+                              value: ShopPopupAction.edit(shop)),
+                          PopupMenuItem(
+                            child: Text(
+                              AppLocalizations.of(context)!.commonDelete,
+                              style: TextStyle(color: Colors.redAccent),
+                            ),
+                            value: ShopPopupAction.delete(shop),
+                          )
+                        ],
+                      ),
+                    );
+                  }),
+            ),
         ],
       ),
     );
