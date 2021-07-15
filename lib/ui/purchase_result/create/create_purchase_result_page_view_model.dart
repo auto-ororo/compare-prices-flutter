@@ -46,7 +46,11 @@ class CreatePurchaseResultPageViewModel
   }
 
   void updatePrice(String priceStr) {
-    state = state.copyWith(price: int.parse(priceStr));
+    var price = 0;
+    if (priceStr.isNotEmpty) {
+      price = int.parse(priceStr);
+    }
+    state = state.copyWith(price: price);
   }
 
   void updateCount(int? count) {

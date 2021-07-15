@@ -34,6 +34,8 @@ class CreatePurchaseResultPage extends HookWidget {
 
     final formKey = useMemoized(() => GlobalKey<FormState>());
 
+    final priceTextEditingController = useTextEditingController();
+
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -160,6 +162,14 @@ class CreatePurchaseResultPage extends HookWidget {
                               child: TextFormField(
                                 textAlign: TextAlign.end,
                                 keyboardType: TextInputType.number,
+                                controller: priceTextEditingController,
+                                onTap: () {
+                                  // カーソルを最後尾に置く
+                                  priceTextEditingController.selection =
+                                      TextSelection.fromPosition(TextPosition(
+                                          offset: priceTextEditingController
+                                              .text.length));
+                                },
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
