@@ -1,5 +1,6 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/ui/home/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ import 'purchase_result/create/create_purchase_result_page.dart';
 import 'shop/select/select_shop_page.dart';
 
 class RouteName {
+  static const homePage = 'home-page';
   static const bottomPriceListPage = 'bottom-price-list';
   static const createPurchaseResultPage = 'create-purchase-result';
   static const selectCommodityPage = 'select-bottom-price';
@@ -23,6 +25,8 @@ class ArgumentName {
 
 RouteFactory route = (RouteSettings settings) {
   switch (settings.name) {
+    case RouteName.homePage:
+      return MaterialPageRoute(builder: (context) => HomePage());
     case RouteName.bottomPriceListPage:
       return MaterialPageRoute(builder: (context) => BottomPriceListPage());
     case RouteName.commodityPriceListPage:
