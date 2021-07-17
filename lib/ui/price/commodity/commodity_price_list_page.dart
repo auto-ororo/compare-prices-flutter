@@ -1,5 +1,5 @@
-import 'package:compare_prices/app.dart';
 import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/price/commodity/commodity_price_row.dart';
@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../route.dart';
 import 'commodity_price_list_page_view_model.dart';
 
 class CommodityPriceListPage extends HookWidget {
@@ -40,10 +41,25 @@ class CommodityPriceListPage extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(commodity.name),
+        title: Text(AppLocalizations.of(context)!.commodityPriceListTitle),
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: AppColors.note,
+                  borderRadius: BorderRadius.all(Radius.circular(25))),
+              height: 180,
+              child: Center(
+                child: Text(
+                  commodity.name,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ),
+            ),
+          ),
           if (commodityPrices.isEmpty)
             NoDataView(
               message: AppLocalizations.of(context)!.commodityPriceListNoData,

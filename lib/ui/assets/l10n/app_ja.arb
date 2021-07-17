@@ -5,6 +5,9 @@
   "commonCancel": "キャンセル",
   "commonSearch": "検索",
   "commonInputHint": "入力してください。",
+  "commonBottomPrice": "底値",
+  "commonHistory": "履歴",
+  "commonOther": "その他",
   "commonCommodity": "商品",
   "commonCommodityName": "商品名",
   "commonShop": "店舗",
@@ -40,6 +43,7 @@
   "bottomPriceListSortByPrice": "価格順",
   "bottomPriceListSearchHint": "商品名、店舗名を入力してください。",
 
+  "commodityPriceListTitle": "詳細",
   "commodityPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
 
   "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n削除しますか？",
