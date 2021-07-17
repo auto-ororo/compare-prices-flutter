@@ -1,4 +1,3 @@
-import 'package:compare_prices/app.dart';
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
@@ -11,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/extensions/datetime_extensions.dart';
 import '../../common/picker_form_field.dart';
+import '../../route.dart';
 import 'create_purchase_result_page_view_model.dart';
 
 class CreatePurchaseResultPage extends HookWidget {
@@ -227,6 +227,11 @@ class CreatePurchaseResultPage extends HookWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(AppLocalizations.of(context)!.commonRegister,
                           style: TextStyle(fontSize: 25)),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
                     ),
                     onPressed: () async {
                       if (formKey.currentState?.validate() ?? false) {
