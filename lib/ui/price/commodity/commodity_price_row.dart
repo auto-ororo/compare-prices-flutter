@@ -1,5 +1,5 @@
 import 'package:compare_prices/domain/entities/commodity_price.dart';
-import 'package:compare_prices/ui/assets/color/custom_colors.dart';
+import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:compare_prices/ui/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
@@ -23,13 +23,13 @@ class CommodityPriceRow extends HookWidget {
 
     switch (_commodityPrice.rank) {
       case 1:
-        crownColor = CustomColors.gold;
+        crownColor = AppColors.gold;
         break;
       case 2:
-        crownColor = CustomColors.silver;
+        crownColor = AppColors.silver;
         break;
       case 3:
-        crownColor = CustomColors.bronze;
+        crownColor = AppColors.bronze;
         break;
       default:
         crownColor = Colors.transparent;
