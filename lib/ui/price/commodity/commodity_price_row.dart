@@ -72,9 +72,7 @@ class CommodityPriceRow extends HookWidget {
                       Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Text(_commodityPrice.shop.name,
-                              softWrap: true,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18))),
+                              softWrap: true, style: TextStyle(fontSize: 18))),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4),
                         child: Row(

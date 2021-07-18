@@ -1,4 +1,4 @@
-import 'package:compare_prices/ui/assets/color/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -20,16 +20,9 @@ class SearchTextField extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
           isDense: true,
-          filled: true,
-          fillColor: AppColors.note,
-          enabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: Colors.transparent)),
-          focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: Colors.transparent)),
-          contentPadding: const EdgeInsets.all(8),
-          // labelText: labelText,
+          border: const OutlineInputBorder(),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           hintText: hintText),
       controller: controller,
       onChanged: onChanged,

@@ -46,18 +46,10 @@ class CommodityPriceListPage extends HookWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(4),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: AppColors.note,
-                  borderRadius: BorderRadius.all(Radius.circular(25))),
-              height: 180,
-              child: Center(
-                child: Text(
-                  commodity.name,
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ),
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              commodity.name,
+              style: TextStyle(fontSize: 30),
             ),
           ),
           if (commodityPrices.isEmpty)
@@ -65,16 +57,31 @@ class CommodityPriceListPage extends HookWidget {
               message: AppLocalizations.of(context)!.commodityPriceListNoData,
             ),
           if (commodityPrices.isNotEmpty)
-            Expanded(
-              child: ListView.builder(
-                  itemCount: commodityPrices.length,
-                  itemBuilder: (context, index) {
-                    final row = commodityPrices[index];
-                    return CommodityPriceRow(row, () {
-                      viewModel.disablePurchaseResult(row.purchaseResultId);
-                    });
-                  }),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.commodityPriceListRanking,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: AppColors.primary),
+                  ),
+                ],
+              ),
             ),
+          Divider(
+            color: AppColors.primary,
+          ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: commodityPrices.length,
+                itemBuilder: (context, index) {
+                  final row = commodityPrices[index];
+                  return CommodityPriceRow(row, () {
+                    viewModel.disablePurchaseResult(row.purchaseResultId);
+                  });
+                }),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
