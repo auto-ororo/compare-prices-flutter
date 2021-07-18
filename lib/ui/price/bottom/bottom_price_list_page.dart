@@ -54,6 +54,49 @@ class BottomPriceListPage extends HookWidget {
     }, [searchWord, bottomPrices, sortType]);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.bottomPriceListTitle),
+        actions: [
+          PopupMenuButton<BottomPriceSortType>(
+            onSelected: (sortType) {
+              viewModel.updateSortType(sortType);
+            },
+            icon: Icon(Icons.swap_vert),
+            itemBuilder: (_) => [
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByNewestPurchaseDate,
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.newestPurchaseDate()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByOldestPurchaseDate,
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.oldestPurchaseDate()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByCommodityName,
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.commodity()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text: AppLocalizations.of(context)!
+                      .bottomPriceListSortByShopName,
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.shop()),
+              RecognizableSelectedStatePopupMenuItem(
+                  context: context,
+                  text:
+                      AppLocalizations.of(context)!.bottomPriceListSortByPrice,
+                  selectedValue: sortType,
+                  value: BottomPriceSortType.price()),
+            ],
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -63,75 +106,31 @@ class BottomPriceListPage extends HookWidget {
               ),
             if (bottomPrices.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: SearchTextField(
-                        controller: textEditingController,
-                        labelText: AppLocalizations.of(context)!.commonSearch,
-                        hintText: AppLocalizations.of(context)!
-                            .bottomPriceListSearchHint,
-                        onChanged: (word) {
-                          debouncer.run(() => viewModel.updateSearchWord(word));
-                        },
-                      ),
-                    ),
-                    PopupMenuButton<BottomPriceSortType>(
-                      onSelected: (sortType) {
-                        viewModel.updateSortType(sortType);
-                      },
-                      icon: Icon(Icons.swap_vert),
-                      itemBuilder: (_) => [
-                        RecognizableSelectedStatePopupMenuItem(
-                            context: context,
-                            text: AppLocalizations.of(context)!
-                                .bottomPriceListSortByNewestPurchaseDate,
-                            selectedValue: sortType,
-                            value: BottomPriceSortType.newestPurchaseDate()),
-                        RecognizableSelectedStatePopupMenuItem(
-                            context: context,
-                            text: AppLocalizations.of(context)!
-                                .bottomPriceListSortByOldestPurchaseDate,
-                            selectedValue: sortType,
-                            value: BottomPriceSortType.oldestPurchaseDate()),
-                        RecognizableSelectedStatePopupMenuItem(
-                            context: context,
-                            text: AppLocalizations.of(context)!
-                                .bottomPriceListSortByCommodityName,
-                            selectedValue: sortType,
-                            value: BottomPriceSortType.commodity()),
-                        RecognizableSelectedStatePopupMenuItem(
-                            context: context,
-                            text: AppLocalizations.of(context)!
-                                .bottomPriceListSortByShopName,
-                            selectedValue: sortType,
-                            value: BottomPriceSortType.shop()),
-                        RecognizableSelectedStatePopupMenuItem(
-                            context: context,
-                            text: AppLocalizations.of(context)!
-                                .bottomPriceListSortByPrice,
-                            selectedValue: sortType,
-                            value: BottomPriceSortType.price()),
-                      ],
-                    ),
-                  ],
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: SearchTextField(
+                  controller: textEditingController,
+                  labelText: AppLocalizations.of(context)!.commonSearch,
+                  hintText:
+                      AppLocalizations.of(context)!.bottomPriceListSearchHint,
+                  onChanged: (word) {
+                    debouncer.run(() => viewModel.updateSearchWord(word));
+                  },
                 ),
               ),
-            if (bottomPrices.isNotEmpty) Divider(),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: showingBottomPrices.length,
-                  itemBuilder: (context, index) {
-                    final row = showingBottomPrices[index];
-                    return BottomPriceRow(row, () async {
-                      await Navigator.pushNamed(
-                          context, RouteName.commodityPriceListPage,
-                          arguments: {ArgumentName.commodity: row.commodity});
-                      viewModel.getList();
-                    });
-                  }),
-            ),
+            if (bottomPrices.isNotEmpty)
+              Expanded(
+                child: ListView.builder(
+                    itemCount: showingBottomPrices.length,
+                    itemBuilder: (context, index) {
+                      final row = showingBottomPrices[index];
+                      return BottomPriceRow(row, () async {
+                        await Navigator.pushNamed(
+                            context, RouteName.commodityPriceListPage,
+                            arguments: {ArgumentName.commodity: row.commodity});
+                        viewModel.getList();
+                      });
+                    }),
+              ),
           ],
         ),
       ),

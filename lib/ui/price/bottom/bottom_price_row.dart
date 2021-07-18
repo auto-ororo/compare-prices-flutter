@@ -31,8 +31,7 @@ class BottomPriceRow extends StatelessWidget {
                         child: Text(
                           _bottomPrice.commodity.name,
                           softWrap: true,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                          style: TextStyle(fontSize: 18),
                         ),
                       ),
                       Row(
