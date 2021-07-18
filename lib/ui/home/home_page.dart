@@ -31,7 +31,8 @@ class HomePage extends HookWidget {
         currentIndex: navigationIndex,
         onTap: (int index) {
           viewModel.updateNavigationIndex(index);
-          pageController.jumpToPage(index);
+          pageController.animateToPage(index,
+              duration: Duration(milliseconds: 300), curve: Curves.easeIn);
         },
         items: [
           BottomNavigationBarItem(

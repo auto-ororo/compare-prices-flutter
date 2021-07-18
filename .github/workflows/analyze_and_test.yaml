@@ -4,8 +4,10 @@ on:
   pull_request:
     paths-ignore:
       - '**.md'
-    branches:
+    branches-ignore:
       - '**'
+#    branches:
+#      - '**'
 
 env:
   JAVA_VERSION: 12.x
