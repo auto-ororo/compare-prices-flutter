@@ -1,7 +1,6 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
-import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/price/commodity/commodity_price_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -52,26 +51,19 @@ class CommodityPriceListPage extends HookWidget {
               style: TextStyle(fontSize: 30),
             ),
           ),
-          if (commodityPrices.isEmpty)
-            NoDataView(
-              message: AppLocalizations.of(context)!.commodityPriceListNoData,
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.commodityPriceListRanking,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: AppColors.primary),
+                ),
+              ],
             ),
-          if (commodityPrices.isNotEmpty)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.commodityPriceListRanking,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: AppColors.primary),
-                  ),
-                ],
-              ),
-            ),
-          Divider(
-            color: AppColors.primary,
           ),
+          Divider(color: AppColors.primary),
           Expanded(
             child: ListView.builder(
                 itemCount: commodityPrices.length,
