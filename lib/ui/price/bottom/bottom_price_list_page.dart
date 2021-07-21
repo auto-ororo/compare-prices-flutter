@@ -123,6 +123,7 @@ class BottomPriceListPage extends HookWidget {
               Expanded(
                 child: ListView.builder(
                     itemCount: showingBottomPrices.length,
+                    padding: EdgeInsets.all(8),
                     itemBuilder: (context, index) {
                       final row = showingBottomPrices[index];
                       return BottomPriceRow(row, () async {
