@@ -12,7 +12,7 @@ import 'package:state_notifier/state_notifier.dart';
 
 import 'bottom_price_list_page_state.dart';
 
-final bottomPriceListPageViewModelProvider = StateNotifierProvider.autoDispose<
+final bottomPriceListPageViewModelProvider = StateNotifierProvider<
     BottomPriceListPageViewModel,
     BottomPriceListPageState>((ref) => BottomPriceListPageViewModel(ref.read));
 
@@ -27,7 +27,7 @@ class BottomPriceListPageViewModel
   late final _sortBottomPricesUseCase =
       _reader(sortBottomPricesUseCaseProvider);
 
-  var _onExceptionHappened = StreamController<ExceptionType>();
+  var _onExceptionHappened = StreamController<ExceptionType>.broadcast();
   StreamController<ExceptionType> get onExceptionHappened =>
       _onExceptionHappened;
 
