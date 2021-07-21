@@ -16,4 +16,6 @@ abstract class PurchaseResultRepository {
 
   Future<List<PurchaseResult>> getEnabledPurchaseResultsByCommodityId(
       String commodityId);
+
+  Future<List<PurchaseResult>> getEnabledPurchaseResults();
 }

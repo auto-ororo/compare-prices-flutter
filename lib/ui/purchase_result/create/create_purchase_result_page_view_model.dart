@@ -94,8 +94,8 @@ class CreatePurchaseResultPageViewModel
 
   void submit() async {
     final params = CreatePurchaseResultUseCaseParams(
-        commodityId: state.selectedCommodity!.id,
-        shopId: state.selectedShop!.id,
+        commodity: state.selectedCommodity!,
+        shop: state.selectedShop!,
         price: state.price,
         count: state.count,
         purchaseDate: state.purchaseDate);

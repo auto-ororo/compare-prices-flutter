@@ -1,4 +1,6 @@
+import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/purchase_result.dart';
+import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:hive/hive.dart';
 
 part 'hive_purchase_result.g.dart';
@@ -48,11 +50,11 @@ class HivePurchaseResult extends HiveObject {
     this.updatedAt,
   );
 
-  PurchaseResult convertToPurchaseResult() {
+  PurchaseResult convertToPurchaseResult(Commodity commodity, Shop shop) {
     return PurchaseResult(
         id: id,
-        commodityId: commodityId,
-        shopId: shopId,
+        commodity: commodity,
+        shop: shop,
         totalPrice: totalPrice,
         unitPrice: unitPrice,
         count: count,
@@ -67,8 +69,8 @@ extension PurchaseResultExtensions on PurchaseResult {
   HivePurchaseResult convertToHivePurchaseResult() {
     return HivePurchaseResult(
       id,
-      commodityId,
-      shopId,
+      commodity.id,
+      shop.id,
       totalPrice,
       unitPrice,
       count,
