@@ -8,15 +8,6 @@ import 'package:compare_prices/domain/repositories/purchase_result_repository.da
 import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// ■■■■■Sample■■■■■
-// final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
-//     (ref) => SampleCommodityRepository());
-// final shopRepositoryProvider =
-//     Provider.autoDispose<ShopRepository>((ref) => SampleShopRepository());
-// final purchaseResultRepositoryProvider =
-//     Provider.autoDispose<PurchaseResultRepository>(
-//         (ref) => SamplePurchaseResultRepository());
-
 // ■■■■■Hive■■■■■
 final commodityRepositoryProvider = Provider.autoDispose<CommodityRepository>(
     (ref) => HiveCommodityRepository());
