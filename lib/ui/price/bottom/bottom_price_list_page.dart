@@ -36,6 +36,8 @@ class BottomPriceListPage extends HookWidget {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         viewModel.getList();
 
+        textEditingController.text = searchWord;
+
         viewModel.onExceptionHappened.stream.listen((type) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(type.errorMessage(context))),

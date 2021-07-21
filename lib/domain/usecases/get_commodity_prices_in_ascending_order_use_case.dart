@@ -13,8 +13,6 @@ class GetCommodityPricesInAscendingOrderUseCase
     extends FutureUseCase<List<CommodityPrice>, String> {
   final Reader _reader;
 
-  late final _shopRepository = _reader(shopRepositoryProvider);
-
   late final _purchaseResultRepository =
       _reader(purchaseResultRepositoryProvider);
 
@@ -32,9 +30,7 @@ class GetCommodityPricesInAscendingOrderUseCase
 
       var rank = 1;
       for (final element in purchaseResults) {
-        final shop = await _shopRepository.getEnabledShopById(element.shopId);
-
-        if (shop == null) continue;
+        if (!element.shop.isEnabled) continue;
 
         final commodityPrice = CommodityPrice(
             id: Uuid().v4(),
@@ -44,7 +40,7 @@ class GetCommodityPricesInAscendingOrderUseCase
             count: element.count,
             totalPrice: element.totalPrice,
             unitPrice: element.unitPrice,
-            shop: shop,
+            shop: element.shop,
             purchaseDate: element.purchaseDate);
 
         list.add(commodityPrice);

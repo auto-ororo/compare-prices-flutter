@@ -1,16 +1,32 @@
+import 'package:compare_prices/data/base/hive/box_key.dart';
+import 'package:compare_prices/data/base/hive/dtos/hive_commodity.dart';
 import 'package:compare_prices/data/base/hive/dtos/hive_purchase_result.dart';
+import 'package:compare_prices/data/base/hive/dtos/hive_shop.dart';
 import 'package:compare_prices/domain/entities/purchase_result.dart';
 import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HivePurchaseResultRepository extends PurchaseResultRepository {
   Future<Box<HivePurchaseResult>> _box =
-      Hive.openBox<HivePurchaseResult>('purchase_result');
+      Hive.openBox<HivePurchaseResult>(BoxKey.purchaseResult);
+
+  Future<Box<HiveCommodity>> _commodityBox =
+      Hive.openBox<HiveCommodity>(BoxKey.commodity);
+
+  Future<Box<HiveShop>> _shopBox = Hive.openBox<HiveShop>(BoxKey.shop);
 
   Future<List<PurchaseResult>> _getAllPurchaseResults() async {
     final box = await _box;
+    final commodities = (await _commodityBox).values;
+    final shops = (await _shopBox).values;
 
-    return box.values.toList().map((e) => e.convertToPurchaseResult()).toList();
+    return box.values.toList().map((e) {
+      final commodity = commodities
+          .firstWhere((c) => e.commodityId == c.id)
+          .convertToCommodity();
+      final shop = shops.firstWhere((s) => e.shopId == s.id).convertToShop();
+      return e.convertToPurchaseResult(commodity, shop);
+    }).toList();
   }
 
   @override
@@ -25,7 +41,7 @@ class HivePurchaseResultRepository extends PurchaseResultRepository {
       getEnabledMostInexpensivePurchaseResultPerUnitByCommodityId(
           String commodityId) async {
     final purchaseResults = (await _getAllPurchaseResults()).where((element) =>
-        (element.commodityId == commodityId) && (element.isEnabled));
+        (element.commodity.id == commodityId) && (element.isEnabled));
 
     if (purchaseResults.length == 0) return null;
 
@@ -42,7 +58,7 @@ class HivePurchaseResultRepository extends PurchaseResultRepository {
   Future<PurchaseResult?> getEnabledNewestPurchaseResultByCommodityId(
       String commodityId) async {
     final purchaseResults = (await _getAllPurchaseResults()).where((element) =>
-        (element.commodityId == commodityId) && (element.isEnabled));
+        (element.commodity.id == commodityId) && (element.isEnabled));
 
     if (purchaseResults.length == 0) return null;
 
@@ -58,7 +74,23 @@ class HivePurchaseResultRepository extends PurchaseResultRepository {
   @override
   Future<PurchaseResult?> getEnabledPurchaseResultById(String id) async {
     final box = await _box;
-    return box.get(id)?.convertToPurchaseResult();
+    final hivePurchaseResult = box.get(id);
+
+    if (hivePurchaseResult == null || !hivePurchaseResult.isEnabled)
+      return null;
+
+    final commodities = (await _commodityBox).values;
+    final shops = (await _shopBox).values;
+
+    final commodity = commodities
+        .firstWhere((c) => hivePurchaseResult.commodityId == c.id)
+        .convertToCommodity();
+
+    final shop = shops
+        .firstWhere((s) => hivePurchaseResult.shopId == s.id)
+        .convertToShop();
+
+    return hivePurchaseResult.convertToPurchaseResult(commodity, shop);
   }
 
   @override
@@ -66,7 +98,7 @@ class HivePurchaseResultRepository extends PurchaseResultRepository {
       String commodityId) async {
     return (await _getAllPurchaseResults())
         .where((element) =>
-            (element.commodityId == commodityId) && element.isEnabled)
+            (element.commodity.id == commodityId) && element.isEnabled)
         .toList();
   }
 
@@ -75,5 +107,12 @@ class HivePurchaseResultRepository extends PurchaseResultRepository {
     final box = await _box;
     await box.put(
         purchaseResult.id, purchaseResult.convertToHivePurchaseResult());
+  }
+
+  @override
+  Future<List<PurchaseResult>> getEnabledPurchaseResults() async {
+    return (await _getAllPurchaseResults())
+        .where((element) => element.isEnabled)
+        .toList();
   }
 }

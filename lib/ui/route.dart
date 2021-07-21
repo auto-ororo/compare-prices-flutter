@@ -1,6 +1,7 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/home/home_page.dart';
+import 'package:compare_prices/ui/purchase_result/list/purchase_result_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class RouteName {
   static const homePage = 'home-page';
   static const bottomPriceListPage = 'bottom-price-list';
   static const createPurchaseResultPage = 'create-purchase-result';
+  static const purchaseResultListPage = 'purchase-result-list';
   static const selectCommodityPage = 'select-bottom-price';
   static const selectShopPage = 'select-shop';
   static const commodityPriceListPage = 'commodity-price-list';
@@ -45,6 +47,8 @@ RouteFactory route = (RouteSettings settings) {
           builder: (context) => CreatePurchaseResultPage(
               initialCommodity: args?[ArgumentName.commodity]),
           fullscreenDialog: true);
+    case RouteName.purchaseResultListPage:
+      return MaterialPageRoute(builder: (context) => PurchaseResultListPage());
     case RouteName.selectCommodityPage:
       return MaterialPageRoute<Commodity>(
           builder: (context) => SelectCommodityPage(), fullscreenDialog: true);
@@ -52,6 +56,6 @@ RouteFactory route = (RouteSettings settings) {
       return MaterialPageRoute<Shop>(
           builder: (context) => SelectShopPage(), fullscreenDialog: true);
     default:
-      return MaterialPageRoute(builder: (context) => BottomPriceListPage());
+      return MaterialPageRoute(builder: (context) => HomePage());
   }
 };

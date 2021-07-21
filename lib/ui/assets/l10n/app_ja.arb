@@ -47,10 +47,35 @@
   "commodityPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
   "commodityPriceListRanking": "ランキング",
 
-  "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n削除しますか？",
+  "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n\n上記を削除しますか？",
   "@commodityPriceRowDeleteConfirmation": {
     "type": "String",
     "placeholders": {
+      "shopName": {
+        "type": "String"
+      },
+      "unitPrice": {
+        "type": "String"
+      },
+      "purchaseDate": {
+        "type": "String"
+      }
+    }
+  },
+
+  "purchaseResultListTitle": "登録履歴",
+  "purchaseResultListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
+  "purchaseResultListSortByNewestPurchaseDate": "購入日が新しい順",
+  "purchaseResultListSortByOldestPurchaseDate": "購入日が古い順",
+  "purchaseResultListSortByNewestCreatedAt": "登録順",
+
+  "purchaseResultRowDeleteConfirmation": "商品:{commodityName}\n店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n\n上記を削除しますか？",
+  "@purchaseResultRowDeleteConfirmation": {
+    "type": "String",
+    "placeholders": {
+      "commodityName": {
+        "type": "String"
+      },
       "shopName": {
         "type": "String"
       },

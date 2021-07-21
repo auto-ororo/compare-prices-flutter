@@ -1,6 +1,8 @@
 import 'package:compare_prices/data/providers.dart';
+import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/purchase_result.dart';
 import 'package:compare_prices/domain/entities/result.dart';
+import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,8 +26,8 @@ class CreatePurchaseResultUseCase
   Future<Result<void>> call(CreatePurchaseResultUseCaseParams params) {
     return Result.guardFuture(() async {
       final purchaseResult = PurchaseResult.create(
-          commodityId: params.commodityId,
-          shopId: params.shopId,
+          commodity: params.commodity,
+          shop: params.shop,
           totalPrice: params.price,
           unitPrice: params.price ~/ params.count,
           count: params.count,
@@ -40,10 +42,10 @@ class CreatePurchaseResultUseCase
 class CreatePurchaseResultUseCaseParams
     with _$CreatePurchaseResultUseCaseParams {
   const factory CreatePurchaseResultUseCaseParams({
-    required String commodityId,
-    required String shopId,
+    required Commodity commodity,
+    required Shop shop,
     required int price,
     required int count,
     required DateTime purchaseDate,
-  }) = _FilterShopsByKeywordUseCaseParams;
+  }) = _CreatePurchaseResultUseCaseParams;
 }

@@ -12,7 +12,6 @@ class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
   final Reader _reader;
 
   late final _commodityRepository = _reader(commodityRepositoryProvider);
-  late final _shopRepository = _reader(shopRepositoryProvider);
   late final _purchaseResultRepository =
       _reader(purchaseResultRepositoryProvider);
 
@@ -34,10 +33,7 @@ class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
 
         if (purchaseResult == null) continue;
 
-        final shop =
-            await _shopRepository.getEnabledShopById(purchaseResult.shopId);
-
-        if (shop == null) continue;
+        if (!purchaseResult.shop.isEnabled) continue;
 
         final newestPurchaseResult = await _purchaseResultRepository
             .getEnabledNewestPurchaseResultByCommodityId(element.id);
@@ -47,7 +43,7 @@ class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
         final row = BottomPrice(
             id: index.toString(),
             commodity: element,
-            mostInexpensiveShop: shop,
+            mostInexpensiveShop: purchaseResult.shop,
             unitPrice: purchaseResult.unitPrice,
             purchaseDate: newestPurchaseResult.purchaseDate);
 

@@ -58,7 +58,7 @@ class CommodityPriceListPage extends HookWidget {
             ),
           if (commodityPrices.isNotEmpty)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 children: [
                   Text(

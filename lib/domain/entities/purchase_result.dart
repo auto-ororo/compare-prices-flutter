@@ -1,3 +1,5 @@
+import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -7,8 +9,8 @@ part 'purchase_result.freezed.dart';
 class PurchaseResult with _$PurchaseResult {
   const factory PurchaseResult({
     required String id,
-    required String commodityId,
-    required String shopId,
+    required Commodity commodity,
+    required Shop shop,
     required int totalPrice,
     required int unitPrice,
     required int count,
@@ -19,8 +21,8 @@ class PurchaseResult with _$PurchaseResult {
   }) = _PurchaseResult;
 
   static PurchaseResult create(
-      {required String commodityId,
-      required String shopId,
+      {required Commodity commodity,
+      required Shop shop,
       required int totalPrice,
       required int unitPrice,
       required int count,
@@ -28,8 +30,8 @@ class PurchaseResult with _$PurchaseResult {
     final now = DateTime.now();
     return PurchaseResult(
         id: Uuid().v4(),
-        commodityId: commodityId,
-        shopId: shopId,
+        commodity: commodity,
+        shop: shop,
         totalPrice: totalPrice,
         unitPrice: unitPrice,
         count: count,

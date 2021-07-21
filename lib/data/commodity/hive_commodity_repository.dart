@@ -1,11 +1,13 @@
 import 'package:collection/collection.dart';
+import 'package:compare_prices/data/base/hive/box_key.dart';
 import 'package:compare_prices/data/base/hive/dtos/hive_commodity.dart';
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/repositories/commodity_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveCommodityRepository extends CommodityRepository {
-  Future<Box<HiveCommodity>> _box = Hive.openBox<HiveCommodity>('commodity');
+  Future<Box<HiveCommodity>> _box =
+      Hive.openBox<HiveCommodity>(BoxKey.commodity);
 
   @override
   Future<void> createCommodity(Commodity commodity) async {
