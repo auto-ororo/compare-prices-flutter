@@ -98,7 +98,7 @@ class PurchaseResultListPage extends HookWidget {
           if (purchaseResults.isNotEmpty)
             Expanded(
               child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   itemCount: showingPurchaseResults.length,
                   itemBuilder: (context, index) {
                     final row = showingPurchaseResults[index];

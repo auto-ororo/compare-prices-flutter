@@ -67,6 +67,7 @@ class CommodityPriceListPage extends HookWidget {
           Expanded(
             child: ListView.builder(
                 itemCount: commodityPrices.length,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemBuilder: (context, index) {
                   final row = commodityPrices[index];
                   return CommodityPriceRow(row, () {
