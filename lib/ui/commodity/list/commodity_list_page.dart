@@ -7,6 +7,8 @@ import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart'
 import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
+import 'package:compare_prices/ui/drawer/app_drawer.dart';
+import 'package:compare_prices/ui/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -83,6 +85,9 @@ class CommodityListPage extends HookWidget {
     }, [searchWord, commodities, sortType]);
 
     return Scaffold(
+      drawer: AppDrawer(
+        currentRoute: RouteName.commodityListPage,
+      ),
       appBar: AppBar(
         title: Text(title),
         actions: [

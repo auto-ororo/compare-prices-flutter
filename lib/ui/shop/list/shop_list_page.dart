@@ -4,6 +4,8 @@ import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart'
 import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
+import 'package:compare_prices/ui/drawer/app_drawer.dart';
+import 'package:compare_prices/ui/route.dart';
 import 'package:compare_prices/ui/shop/create/create_shop_dialog.dart';
 import 'package:compare_prices/ui/shop/list/shop_list_page_view_model.dart';
 import 'package:compare_prices/ui/shop/list/shop_popup_action.dart';
@@ -82,6 +84,9 @@ class ShopListPage extends HookWidget {
     }, [searchWord, shops, sortType]);
 
     return Scaffold(
+      drawer: AppDrawer(
+        currentRoute: RouteName.shopListPage,
+      ),
       appBar: AppBar(
         title: Text(title),
         actions: [
