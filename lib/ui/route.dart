@@ -1,6 +1,7 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/home/home_page.dart';
+import 'package:compare_prices/ui/other/other_page.dart';
 import 'package:compare_prices/ui/purchase_result/list/purchase_result_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,13 +20,18 @@ class RouteName {
   static const selectCommodityPage = 'select-bottom-price';
   static const selectShopPage = 'select-shop';
   static const commodityPriceListPage = 'commodity-price-list';
+  static const otherPage = 'other';
 }
 
 class ArgumentName {
   static const commodity = 'commodity';
+  static const isSelectable = 'isSelectable';
+  static const isFullscreenDialog = 'isFullscreenDialog';
+  static const title = 'title';
 }
 
 RouteFactory route = (RouteSettings settings) {
+  final args = _getArguments(settings.arguments);
   switch (settings.name) {
     case RouteName.homePage:
       return MaterialPageRoute(builder: (context) => HomePage());
@@ -37,12 +43,6 @@ RouteFactory route = (RouteSettings settings) {
           builder: (context) =>
               CommodityPriceListPage(commodity: args[ArgumentName.commodity]));
     case RouteName.createPurchaseResultPage:
-      final Map? args;
-      if (settings.arguments != null) {
-        args = settings.arguments as Map;
-      } else {
-        args = null;
-      }
       return MaterialPageRoute(
           builder: (context) => CreatePurchaseResultPage(
               initialCommodity: args?[ArgumentName.commodity]),
@@ -51,11 +51,29 @@ RouteFactory route = (RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => PurchaseResultListPage());
     case RouteName.selectCommodityPage:
       return MaterialPageRoute<Commodity>(
-          builder: (context) => SelectCommodityPage(), fullscreenDialog: true);
+          builder: (context) => SelectCommodityPage(
+              title: args![ArgumentName.title],
+              isSelectable: args[ArgumentName.isSelectable]),
+          fullscreenDialog: args![ArgumentName.isFullscreenDialog] ?? false);
     case RouteName.selectShopPage:
       return MaterialPageRoute<Shop>(
-          builder: (context) => SelectShopPage(), fullscreenDialog: true);
+          builder: (context) => SelectShopPage(
+              title: args![ArgumentName.title],
+              isSelectable: args[ArgumentName.isSelectable]),
+          fullscreenDialog: args![ArgumentName.isFullscreenDialog] ?? false);
+    case RouteName.otherPage:
+      return MaterialPageRoute(builder: (context) => OtherPage());
     default:
       return MaterialPageRoute(builder: (context) => HomePage());
   }
 };
+
+Map? _getArguments(Object? arguments) {
+  final Map? args;
+  if (arguments != null) {
+    args = arguments as Map;
+  } else {
+    args = null;
+  }
+  return args;
+}

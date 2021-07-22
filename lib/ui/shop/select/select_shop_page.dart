@@ -15,6 +15,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../update/update_shop_dialog.dart';
 
 class SelectShopPage extends HookWidget {
+  const SelectShopPage(
+      {Key? key, required this.title, required this.isSelectable})
+      : super(key: key);
+
+  final bool isSelectable;
+  final String title;
+
   @override
   Widget build(context) {
     final shops = useProvider(
@@ -38,9 +45,11 @@ class SelectShopPage extends HookWidget {
           );
         });
 
-        viewModel.onShopSelected.stream.listen((selectedShop) {
-          Navigator.pop(context, selectedShop);
-        });
+        if (isSelectable) {
+          viewModel.onShopSelected.stream.listen((selectedShop) {
+            Navigator.pop(context, selectedShop);
+          });
+        }
 
         viewModel.onRequestedToEditShop.stream.listen((shop) async {
           await showDialog(
@@ -74,7 +83,7 @@ class SelectShopPage extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.selectShopTitle),
+        title: Text(title),
         actions: [
           IconButton(
             onPressed: () async {

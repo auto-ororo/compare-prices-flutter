@@ -15,6 +15,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../update/update_commodity_dialog.dart';
 
 class SelectCommodityPage extends HookWidget {
+  const SelectCommodityPage(
+      {Key? key, required this.title, required this.isSelectable})
+      : super(key: key);
+
+  final bool isSelectable;
+  final String title;
+
   @override
   Widget build(context) {
     final commodities = useProvider(selectCommodityPageViewModelProvider
@@ -40,9 +47,11 @@ class SelectCommodityPage extends HookWidget {
           );
         });
 
-        viewModel.onCommoditySelected.stream.listen((selectedCommodity) {
-          Navigator.pop(context, selectedCommodity);
-        });
+        if (isSelectable) {
+          viewModel.onCommoditySelected.stream.listen((selectedCommodity) {
+            Navigator.pop(context, selectedCommodity);
+          });
+        }
 
         viewModel.onRequestedToEditCommodity.stream.listen((commodity) async {
           await showDialog(
@@ -76,7 +85,7 @@ class SelectCommodityPage extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.selectCommodityTitle),
+        title: Text(title),
         actions: [
           IconButton(
               onPressed: () async {

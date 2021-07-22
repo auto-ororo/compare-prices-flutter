@@ -1,6 +1,8 @@
 {
   "@@locale": "ja",
 
+  "appName": "Compare Prices",
+
   "commonOk": "OK",
   "commonCancel": "キャンセル",
   "commonSearch": "検索",
@@ -9,8 +11,10 @@
   "commonHistory": "履歴",
   "commonOther": "その他",
   "commonCommodity": "商品",
+  "commonCommodityList": "商品リスト",
   "commonCommodityName": "商品名",
   "commonShop": "店舗",
+  "commonShopList": "店舗リスト",
   "commonShopName": "店舗名",
   "commonAdd": "追加",
   "commonEdit": "編集",
@@ -33,6 +37,8 @@
     }
   },
   "commonLastPurchaseDate": "最終購入日",
+  "commonLicense": "ライセンス",
+  "commonVersion": "バージョン情報",
 
   "bottomPriceListTitle": "底値リスト",
   "bottomPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
@@ -134,6 +140,9 @@
   "selectCommoditySearchHint": "商品名で絞り込み",
 
   "updateCommodityTitle": "商品編集",
+
+  "otherDataList": "登録リスト",
+  "otherAboutApp": "このアプリについて",
 
   "errorAlreadyExists": "既に存在しています。",
   "errorNotFound": "データが存在しません。",
