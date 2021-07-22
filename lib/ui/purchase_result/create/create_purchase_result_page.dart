@@ -82,7 +82,7 @@ class CreatePurchaseResultPage extends HookWidget {
                               final selectedCommodity =
                                   await Navigator.of(context)
                                       .pushNamed<Commodity>(
-                                          RouteName.selectCommodityPage,
+                                          RouteName.commodityListPage,
                                           arguments: {
                                     ArgumentName.title:
                                         AppLocalizations.of(context)!
@@ -106,7 +106,7 @@ class CreatePurchaseResultPage extends HookWidget {
                           text: selectedShop?.name ?? "",
                           onTap: () async {
                             final selectedShop = await Navigator.of(context)
-                                .pushNamed<Shop>(RouteName.selectShopPage,
+                                .pushNamed<Shop>(RouteName.shopListPage,
                                     arguments: {
                                   ArgumentName.title:
                                       AppLocalizations.of(context)!

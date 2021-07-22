@@ -9,17 +9,16 @@ import 'package:compare_prices/domain/usecases/filter_commodities_by_keyword_use
 import 'package:compare_prices/domain/usecases/get_enabled_commodities_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_commodities_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
-import 'package:compare_prices/ui/commodity/select/commodity_popup_action.dart';
-import 'package:compare_prices/ui/commodity/select/select_commodity_page_state.dart';
+import 'package:compare_prices/ui/commodity/list/commodity_list_page_state.dart';
+import 'package:compare_prices/ui/commodity/list/commodity_popup_action.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final selectCommodityPageViewModelProvider = StateNotifierProvider.autoDispose<
-    SelectCommodityPageViewModel,
-    SelectCommodityPageState>((ref) => SelectCommodityPageViewModel(ref.read));
+final commodityListPageViewModelProvider = StateNotifierProvider.autoDispose<
+    CommodityListPageViewModel,
+    CommodityListPageState>((ref) => CommodityListPageViewModel(ref.read));
 
-class SelectCommodityPageViewModel
-    extends StateNotifier<SelectCommodityPageState> {
+class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
   final Reader _reader;
 
   late final _getEnabledCommoditiesListUseCase =
@@ -48,8 +47,8 @@ class SelectCommodityPageViewModel
   StreamController<Commodity> get onRequestedToDeleteCommodity =>
       _onRequestedToDeleteCommodity;
 
-  SelectCommodityPageViewModel(this._reader)
-      : super(const SelectCommodityPageState());
+  CommodityListPageViewModel(this._reader)
+      : super(const CommodityListPageState());
 
   void getList() async {
     _getEnabledCommoditiesListUseCase(NoParam()).then((result) {

@@ -9,16 +9,16 @@ import 'package:compare_prices/domain/usecases/filter_shops_by_keyword_use_case.
 import 'package:compare_prices/domain/usecases/get_enabled_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
-import 'package:compare_prices/ui/shop/select/select_shop_page_state.dart';
-import 'package:compare_prices/ui/shop/select/shop_popup_action.dart';
+import 'package:compare_prices/ui/shop/list/shop_list_page_state.dart';
+import 'package:compare_prices/ui/shop/list/shop_popup_action.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-final selectShopPageViewModelProvider = StateNotifierProvider.autoDispose<
-    SelectShopPageViewModel,
-    SelectShopPageState>((ref) => SelectShopPageViewModel(ref.read));
+final shopListPageViewModelProvider =
+    StateNotifierProvider.autoDispose<ShopListPageViewModel, ShopListPageState>(
+        (ref) => ShopListPageViewModel(ref.read));
 
-class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
+class ShopListPageViewModel extends StateNotifier<ShopListPageState> {
   final Reader _reader;
 
   late final _getEnabledShopsListUseCase =
@@ -45,7 +45,7 @@ class SelectShopPageViewModel extends StateNotifier<SelectShopPageState> {
   StreamController<Shop> get onRequestedToDeleteShop =>
       _onRequestedToDeleteShop;
 
-  SelectShopPageViewModel(this._reader) : super(const SelectShopPageState());
+  ShopListPageViewModel(this._reader) : super(const ShopListPageState());
 
   void getList() async {
     _getEnabledShopsListUseCase(NoParam()).then((result) {

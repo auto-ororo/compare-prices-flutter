@@ -1,21 +1,21 @@
-import 'package:compare_prices/domain/entities/shop_sort_type.dart';
+import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
+import 'package:compare_prices/ui/commodity/create/create_commodity_dialog.dart';
+import 'package:compare_prices/ui/commodity/list/commodity_list_page_view_model.dart';
+import 'package:compare_prices/ui/commodity/list/commodity_popup_action.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
 import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
 import 'package:compare_prices/ui/common/search_text_field.dart';
-import 'package:compare_prices/ui/shop/create/create_shop_dialog.dart';
-import 'package:compare_prices/ui/shop/select/select_shop_page_view_model.dart';
-import 'package:compare_prices/ui/shop/select/shop_popup_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../update/update_shop_dialog.dart';
+import '../update/update_commodity_dialog.dart';
 
-class SelectShopPage extends HookWidget {
-  const SelectShopPage(
+class CommodityListPage extends HookWidget {
+  const CommodityListPage(
       {Key? key, required this.title, required this.isSelectable})
       : super(key: key);
 
@@ -24,15 +24,16 @@ class SelectShopPage extends HookWidget {
 
   @override
   Widget build(context) {
-    final shops = useProvider(
-        selectShopPageViewModelProvider.select((value) => value.shops));
-    final showingShops = useProvider(
-        selectShopPageViewModelProvider.select((value) => value.showingShops));
+    final commodities = useProvider(commodityListPageViewModelProvider
+        .select((value) => value.commodities));
+    final showingCommodities = useProvider(commodityListPageViewModelProvider
+        .select((value) => value.showingCommodities));
     final sortType = useProvider(
-        selectShopPageViewModelProvider.select((value) => value.sortType));
+        commodityListPageViewModelProvider.select((value) => value.sortType));
     final searchWord = useProvider(
-        selectShopPageViewModelProvider.select((value) => value.searchWord));
-    final viewModel = useProvider(selectShopPageViewModelProvider.notifier);
+        commodityListPageViewModelProvider.select((value) => value.searchWord));
+
+    final viewModel = useProvider(commodityListPageViewModelProvider.notifier);
 
     useEffect(() {
       // 初期処理
@@ -46,28 +47,28 @@ class SelectShopPage extends HookWidget {
         });
 
         if (isSelectable) {
-          viewModel.onShopSelected.stream.listen((selectedShop) {
-            Navigator.pop(context, selectedShop);
+          viewModel.onCommoditySelected.stream.listen((selectedCommodity) {
+            Navigator.pop(context, selectedCommodity);
           });
         }
 
-        viewModel.onRequestedToEditShop.stream.listen((shop) async {
+        viewModel.onRequestedToEditCommodity.stream.listen((commodity) async {
           await showDialog(
               context: context,
               barrierDismissible: false,
               builder: (_) {
-                return UpdateShopDialog(shop: shop);
+                return UpdateCommodityDialog(commodity: commodity);
               });
 
           viewModel.getList();
         });
 
-        viewModel.onRequestedToDeleteShop.stream.listen((shop) async {
+        viewModel.onRequestedToDeleteCommodity.stream.listen((commodity) async {
           showConfirmDialog(
               context: context,
               message: AppLocalizations.of(context)!
-                  .selectShopDeleteConfirmation(shop.name),
-              onOk: () => viewModel.disableShop(shop));
+                  .selectCommodityDeleteConfirmation(commodity.name),
+              onOk: () => viewModel.disableCommodity(commodity));
         });
       });
 
@@ -79,26 +80,25 @@ class SelectShopPage extends HookWidget {
         viewModel.filterAndSort();
       });
       return () => {};
-    }, [searchWord, shops, sortType]);
+    }, [searchWord, commodities, sortType]);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
         actions: [
           IconButton(
-            onPressed: () async {
-              await showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (_) {
-                    return CreateShopDialog();
-                  });
+              onPressed: () async {
+                await showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (_) {
+                      return CreateCommodityDialog();
+                    });
 
-              viewModel.getList();
-            },
-            icon: Icon(Icons.add),
-          ),
-          PopupMenuButton<ShopSortType>(
+                viewModel.getList();
+              },
+              icon: Icon(Icons.add)),
+          PopupMenuButton<CommoditySortType>(
             onSelected: (sortType) {
               viewModel.updateSortType(sortType);
             },
@@ -107,65 +107,66 @@ class SelectShopPage extends HookWidget {
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
                   text: AppLocalizations.of(context)!
-                      .selectShopSortByNewestCreatedAt,
+                      .selectCommoditySortByNewestCreatedAt,
                   selectedValue: sortType,
-                  value: ShopSortType.newestCreatedAt()),
+                  value: CommoditySortType.newestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
                   text: AppLocalizations.of(context)!
-                      .selectShopSortByOldestCreatedAt,
+                      .selectCommoditySortByOldestCreatedAt,
                   selectedValue: sortType,
-                  value: ShopSortType.oldestCreatedAt()),
+                  value: CommoditySortType.oldestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: AppLocalizations.of(context)!.selectShopSortByName,
+                  text: AppLocalizations.of(context)!.selectCommoditySortByName,
                   selectedValue: sortType,
-                  value: ShopSortType.name()),
+                  value: CommoditySortType.name()),
             ],
           ),
         ],
       ),
       body: Column(
         children: [
-          if (shops.isEmpty)
+          if (commodities.isEmpty)
             NoDataView(
-              message: AppLocalizations.of(context)!.selectShopNoData,
+              message: AppLocalizations.of(context)!.selectCommodityNoData,
             ),
-          if (shops.isNotEmpty)
+          if (commodities.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(8),
               child: SearchTextField(
-                labelText: AppLocalizations.of(context)!.commonShopName,
-                hintText: AppLocalizations.of(context)!.selectShopSearchHint,
+                labelText: AppLocalizations.of(context)!.commonCommodityName,
+                hintText:
+                    AppLocalizations.of(context)!.selectCommoditySearchHint,
                 onChanged: (word) {
                   viewModel.updateSearchWord(word);
                 },
               ),
             ),
-          if (shops.isNotEmpty)
+          if (commodities.isNotEmpty)
             Expanded(
               child: ListView.builder(
-                  itemCount: showingShops.length,
+                  itemCount: showingCommodities.length,
                   itemBuilder: (context, index) {
-                    final shop = showingShops[index];
+                    final commodity = showingCommodities[index];
                     return ListTile(
-                      title: Text(shop.name),
-                      onTap: () => viewModel.selectShop(shop),
-                      trailing: PopupMenuButton<ShopPopupAction>(
+                      title: Text(commodity.name),
+                      onTap: () => viewModel.selectCommodity(commodity),
+                      trailing: PopupMenuButton<CommodityPopupAction>(
                         onSelected: (action) {
-                          viewModel.handleShopPopupAction(action);
+                          viewModel.handleCommodityPopupAction(action);
                         },
                         itemBuilder: (context) => [
                           PopupMenuItem(
                               child: Text(
                                   AppLocalizations.of(context)!.commonEdit),
-                              value: ShopPopupAction.edit(shop)),
+                              value: CommodityPopupAction.edit(commodity)),
                           PopupMenuItem(
                             child: Text(
                               AppLocalizations.of(context)!.commonDelete,
                               style: TextStyle(color: Colors.redAccent),
                             ),
-                            value: ShopPopupAction.delete(shop),
+                            value: CommodityPopupAction.delete(commodity),
                           )
                         ],
                       ),

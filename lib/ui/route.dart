@@ -1,24 +1,24 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/ui/commodity/list/commodity_list_page.dart';
 import 'package:compare_prices/ui/home/home_page.dart';
 import 'package:compare_prices/ui/other/other_page.dart';
 import 'package:compare_prices/ui/purchase_result/list/purchase_result_list_page.dart';
+import 'package:compare_prices/ui/shop/list/shop_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'commodity/select/select_commodity_page.dart';
 import 'price/bottom/bottom_price_list_page.dart';
 import 'price/commodity/commodity_price_list_page.dart';
 import 'purchase_result/create/create_purchase_result_page.dart';
-import 'shop/select/select_shop_page.dart';
 
 class RouteName {
   static const homePage = 'home-page';
   static const bottomPriceListPage = 'bottom-price-list';
   static const createPurchaseResultPage = 'create-purchase-result';
   static const purchaseResultListPage = 'purchase-result-list';
-  static const selectCommodityPage = 'select-bottom-price';
-  static const selectShopPage = 'select-shop';
+  static const commodityListPage = 'commodity-list';
+  static const shopListPage = 'shop-list';
   static const commodityPriceListPage = 'commodity-price-list';
   static const otherPage = 'other';
 }
@@ -49,15 +49,15 @@ RouteFactory route = (RouteSettings settings) {
           fullscreenDialog: true);
     case RouteName.purchaseResultListPage:
       return MaterialPageRoute(builder: (context) => PurchaseResultListPage());
-    case RouteName.selectCommodityPage:
+    case RouteName.commodityListPage:
       return MaterialPageRoute<Commodity>(
-          builder: (context) => SelectCommodityPage(
+          builder: (context) => CommodityListPage(
               title: args![ArgumentName.title],
               isSelectable: args[ArgumentName.isSelectable]),
           fullscreenDialog: args![ArgumentName.isFullscreenDialog] ?? false);
-    case RouteName.selectShopPage:
+    case RouteName.shopListPage:
       return MaterialPageRoute<Shop>(
-          builder: (context) => SelectShopPage(
+          builder: (context) => ShopListPage(
               title: args![ArgumentName.title],
               isSelectable: args[ArgumentName.isSelectable]),
           fullscreenDialog: args![ArgumentName.isFullscreenDialog] ?? false);

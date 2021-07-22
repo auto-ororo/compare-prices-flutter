@@ -21,7 +21,7 @@ class OtherPage extends HookWidget {
             _listItem(
               AppLocalizations.of(context)!.commonCommodityList,
               () => Navigator.of(context)
-                  .pushNamed(RouteName.selectCommodityPage, arguments: {
+                  .pushNamed(RouteName.commodityListPage, arguments: {
                 ArgumentName.title:
                     AppLocalizations.of(context)!.commonCommodityList,
                 ArgumentName.isSelectable: false,
@@ -31,7 +31,7 @@ class OtherPage extends HookWidget {
             _listItem(
               AppLocalizations.of(context)!.commonShopList,
               () => Navigator.of(context)
-                  .pushNamed(RouteName.selectShopPage, arguments: {
+                  .pushNamed(RouteName.shopListPage, arguments: {
                 ArgumentName.title:
                     AppLocalizations.of(context)!.commonShopList,
                 ArgumentName.isSelectable: false,
