@@ -16,26 +16,26 @@ class AppDrawer extends HookWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
-            child: Text(AppLocalizations.of(context)!.appName),
-            decoration: BoxDecoration(
-              color: AppColors.primary,
+          Container(
+            height: 80,
+            child: DrawerHeader(
+              child: Text(AppLocalizations.of(context)!.appName),
             ),
           ),
           _DrawerListTile(
-            title: AppLocalizations.of(context)!.bottomPriceListTitle,
+            title: AppLocalizations.of(context)!.commonBottomPrice,
             iconData: Icons.attach_money,
             currentRouteName: currentRoute,
             pushRouteName: RouteName.bottomPriceListPage,
           ),
           _DrawerListTile(
-            title: AppLocalizations.of(context)!.purchaseResultListTitle,
+            title: AppLocalizations.of(context)!.commonHistory,
             iconData: Icons.history,
             currentRouteName: currentRoute,
             pushRouteName: RouteName.purchaseResultListPage,
           ),
           _DrawerListTile(
-              title: AppLocalizations.of(context)!.commonCommodityList,
+              title: AppLocalizations.of(context)!.commonCommodity,
               iconData: Icons.shopping_basket_outlined,
               currentRouteName: currentRoute,
               pushRouteName: RouteName.commodityListPage,
@@ -46,7 +46,7 @@ class AppDrawer extends HookWidget {
                 ArgumentName.isFullscreenDialog: false
               }),
           _DrawerListTile(
-              title: AppLocalizations.of(context)!.commonShopList,
+              title: AppLocalizations.of(context)!.commonShop,
               iconData: Icons.storefront,
               currentRouteName: currentRoute,
               pushRouteName: RouteName.shopListPage,
