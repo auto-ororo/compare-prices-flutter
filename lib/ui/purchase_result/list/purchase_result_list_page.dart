@@ -2,6 +2,7 @@ import 'package:compare_prices/domain/entities/purchase_result_sort_type.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/no_data_view.dart';
 import 'package:compare_prices/ui/common/recognizable_selected_state_popup_menu_item.dart';
+import 'package:compare_prices/ui/drawer/app_drawer.dart';
 import 'package:compare_prices/ui/purchase_result/list/purchase_result_list_page_view_model.dart';
 import 'package:compare_prices/ui/purchase_result/list/purchase_result_row.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,9 @@ class PurchaseResultListPage extends HookWidget {
     }, [purchaseResults, sortType]);
 
     return Scaffold(
+      drawer: AppDrawer(
+        currentRoute: RouteName.purchaseResultListPage,
+      ),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.purchaseResultListTitle),
         actions: [

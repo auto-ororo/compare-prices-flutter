@@ -2,6 +2,7 @@
   "@@locale": "ja",
 
   "appName": "Compare Prices",
+  "appAuthor": "Ryo Narisawa",
 
   "commonOk": "OK",
   "commonCancel": "キャンセル",

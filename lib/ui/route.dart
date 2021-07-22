@@ -21,6 +21,7 @@ class RouteName {
   static const shopListPage = 'shop-list';
   static const commodityPriceListPage = 'commodity-price-list';
   static const otherPage = 'other';
+  static const licensePage = 'license';
 }
 
 class ArgumentName {

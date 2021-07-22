@@ -38,7 +38,7 @@ class _App extends HookWidget {
           const Locale('en', ''),
         ],
         theme: AppTheme.light(),
-        initialRoute: RouteName.homePage,
+        initialRoute: RouteName.bottomPriceListPage,
         onGenerateRoute: route,
       );
     } else {
