@@ -84,9 +84,11 @@ class ShopListPage extends HookWidget {
     }, [searchWord, shops, sortType]);
 
     return Scaffold(
-      drawer: AppDrawer(
-        currentRoute: RouteName.shopListPage,
-      ),
+      drawer: isSelectable
+          ? null
+          : AppDrawer(
+              currentRoute: RouteName.shopListPage,
+            ),
       appBar: AppBar(
         title: Text(title),
         actions: [

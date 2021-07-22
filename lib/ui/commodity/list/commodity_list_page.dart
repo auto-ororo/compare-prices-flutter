@@ -85,9 +85,11 @@ class CommodityListPage extends HookWidget {
     }, [searchWord, commodities, sortType]);
 
     return Scaffold(
-      drawer: AppDrawer(
-        currentRoute: RouteName.commodityListPage,
-      ),
+      drawer: isSelectable
+          ? null
+          : AppDrawer(
+              currentRoute: RouteName.commodityListPage,
+            ),
       appBar: AppBar(
         title: Text(title),
         actions: [
