@@ -2,6 +2,7 @@ import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:package_info/package_info.dart';
 
 import '../route.dart';
 
@@ -101,7 +102,12 @@ class _DrawerListTile extends StatelessWidget {
         Icons.keyboard_arrow_right_outlined,
         color: isCurrentRoute ? AppColors.primary : null,
       ),
-      onTap: () {
+      onTap: () async {
+        if (pushRouteName == RouteName.licensePage) {
+          _showLicense(context);
+          return;
+        }
+
         if (isCurrentRoute) {
           Navigator.of(context).pop();
         } else {
@@ -112,5 +118,16 @@ class _DrawerListTile extends StatelessWidget {
         }
       },
     );
+  }
+
+  void _showLicense(BuildContext context) async {
+    final info = await PackageInfo.fromPlatform();
+
+    showLicensePage(
+        context: context,
+        applicationIcon: Icon(Icons.info_outlined),
+        applicationName: AppLocalizations.of(context)!.appName,
+        applicationVersion: info.version,
+        applicationLegalese: AppLocalizations.of(context)!.appAuthor);
   }
 }
