@@ -38,6 +38,7 @@ class _App extends HookWidget {
           const Locale('en', ''),
         ],
         theme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
         initialRoute: RouteName.bottomPriceListPage,
         onGenerateRoute: route,
       );
