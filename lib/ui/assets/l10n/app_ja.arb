@@ -12,10 +12,10 @@
   "commonHistory": "履歴",
   "commonOther": "その他",
   "commonCommodity": "商品",
-  "commonCommodityList": "商品リスト",
+  "commonCommodityList": "商品一覧",
   "commonCommodityName": "商品名",
   "commonShop": "店舗",
-  "commonShopList": "店舗リスト",
+  "commonShopList": "店舗一覧",
   "commonShopName": "店舗名",
   "commonAdd": "追加",
   "commonEdit": "編集",
@@ -41,7 +41,7 @@
   "commonLicense": "ライセンス",
   "commonVersion": "バージョン情報",
 
-  "bottomPriceListTitle": "底値リスト",
+  "bottomPriceListTitle": "底値一覧",
   "bottomPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
   "bottomPriceListSortByNewestPurchaseDate": "最終購入日が新しい順",
   "bottomPriceListSortByOldestPurchaseDate": "最終購入日が古い順",
@@ -95,7 +95,7 @@
     }
   },
 
-  "createPurchaseResultTitle": "価格登録",
+  "createPurchaseResultTitle": "価格を登録",
   "createPurchaseResultSelectQuantity": "個数選択",
   "createPurchaseResultTotalPrice": "価格(合計)",
   "createPurchaseResultInvalidShop": "店舗を選択してください。",
