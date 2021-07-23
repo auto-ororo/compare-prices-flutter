@@ -14,63 +14,74 @@ class BottomPriceRow extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return InkWell(
-      onTap: _onTap,
-      child: Column(
-        children: [
-          Row(
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      elevation: 2,
+      child: InkWell(
+        onTap: _onTap,
+        child: Container(
+          padding: EdgeInsets.only(top: 8, bottom: 8, left: 8, right: 0),
+          child: Column(
             children: [
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _bottomPrice.commodity.name,
-                      softWrap: true,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                    Text(
-                      _bottomPrice.mostInexpensiveShop.name,
-                      softWrap: true,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.ideographic,
+              Row(
+                children: [
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _bottomPrice.unitPrice.currency(),
+                          _bottomPrice.commodity.name,
+                          softWrap: true,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
-                        Text(
-                          AppLocalizations.of(context)!.commonUnitPerPiece,
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                        Spacer(),
                         Padding(
-                          padding: const EdgeInsets.only(right: 4),
+                          padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Text(
-                            AppLocalizations.of(context)!
-                                .commonLastPurchaseDate,
-                            style: Theme.of(context).textTheme.caption,
+                            _bottomPrice.mostInexpensiveShop.name,
+                            style: Theme.of(context).textTheme.subtitle2,
+                            softWrap: true,
                           ),
                         ),
-                        Text(
-                          _bottomPrice.purchaseDate.toFormattedString(),
-                          style: Theme.of(context).textTheme.caption,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.ideographic,
+                          children: [
+                            Text(
+                              _bottomPrice.unitPrice.currency(),
+                              style: Theme.of(context).textTheme.subtitle2,
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.commonUnitPerPiece,
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .commonLastPurchaseDate,
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                            ),
+                            Text(
+                              _bottomPrice.purchaseDate.toFormattedString(),
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_right_outlined,
+                  )
+                ],
               ),
-              Icon(
-                Icons.keyboard_arrow_right_outlined,
-                size: 16,
-              )
             ],
           ),
-          Divider()
-        ],
+        ),
       ),
     );
   }

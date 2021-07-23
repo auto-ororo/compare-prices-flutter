@@ -15,74 +15,87 @@ class PurchaseResultRow extends HookWidget {
   final Function() _onDelete;
 
   const PurchaseResultRow(this._purchaseResult, this._onDelete) : super();
+
   @override
   Widget build(context) {
-    return Slidable(
-      actionPane: const SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
-      secondaryActions: [
-        IconSlideAction(
-          color: Colors.redAccent,
-          icon: Icons.delete,
-          onTap: () async {
-            await showConfirmDialog(
-                context: context,
-                message: AppLocalizations.of(context)!
-                    .purchaseResultRowDeleteConfirmation(
-                        _purchaseResult.commodity.name,
-                        _purchaseResult.shop.name,
-                        _purchaseResult.unitPrice.currency(),
-                        _purchaseResult.purchaseDate.toFormattedString()),
-                onOk: _onDelete);
-          },
-        ),
-      ],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            _purchaseResult.commodity.name,
-            style: Theme.of(context).textTheme.subtitle1,
-            softWrap: true,
-          ),
-          Text(
-            _purchaseResult.shop.name,
-            softWrap: true,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      elevation: 2,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Slidable(
+          actionPane: const SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          secondaryActions: [
+            IconSlideAction(
+              color: Colors.redAccent,
+              icon: Icons.remove_circle_outline,
+              onTap: () async {
+                await showConfirmDialog(
+                    context: context,
+                    message: AppLocalizations.of(context)!
+                        .purchaseResultRowDeleteConfirmation(
+                            _purchaseResult.commodity.name,
+                            _purchaseResult.shop.name,
+                            _purchaseResult.unitPrice.currency(),
+                            _purchaseResult.purchaseDate.toFormattedString()),
+                    onOk: _onDelete);
+              },
+            ),
+          ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                _purchaseResult.totalPrice.currency(),
+                _purchaseResult.commodity.name,
                 style: Theme.of(context).textTheme.subtitle1,
+                softWrap: true,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Text(
-                  AppLocalizations.of(context)!.commonUnitPerCount(
-                      _purchaseResult.count > 1
-                          ? _purchaseResult.count.toString()
-                          : ""),
-                  style: Theme.of(context).textTheme.caption,
+                  _purchaseResult.shop.name,
+                  softWrap: true,
                 ),
               ),
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: Text(
-                  AppLocalizations.of(context)!.commonPurchaseDate,
-                  style: Theme.of(context).textTheme.caption,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    _purchaseResult.totalPrice.currency(),
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.commonUnitPerCount(
+                          _purchaseResult.count > 1
+                              ? _purchaseResult.count.toString()
+                              : ""),
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: Text(
+                      AppLocalizations.of(context)!.commonPurchaseDate,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ),
+                  Text(
+                    _purchaseResult.purchaseDate.toFormattedString(),
+                    style: Theme.of(context).textTheme.caption,
+                  )
+                ],
               ),
-              Text(
-                _purchaseResult.purchaseDate.toFormattedString(),
-                style: Theme.of(context).textTheme.caption,
-              )
+              // Divider(),
             ],
           ),
-          Divider(),
-        ],
+        ),
       ),
     );
   }
