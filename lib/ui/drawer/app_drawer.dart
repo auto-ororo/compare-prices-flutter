@@ -1,4 +1,3 @@
-import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -91,16 +90,18 @@ class _DrawerListTile extends StatelessWidget {
     return ListTile(
       leading: Icon(
         iconData,
-        color: isCurrentRoute ? AppColors.primary : null,
+        color: isCurrentRoute ? Theme.of(context).primaryColor : null,
       ),
       title: Text(
         title,
-        style: isCurrentRoute ? TextStyle(color: AppColors.primary) : null,
+        style: isCurrentRoute
+            ? TextStyle(color: Theme.of(context).primaryColor)
+            : null,
       ),
       minLeadingWidth: 10,
       trailing: Icon(
         Icons.keyboard_arrow_right_outlined,
-        color: isCurrentRoute ? AppColors.primary : null,
+        color: isCurrentRoute ? Theme.of(context).primaryColor : null,
       ),
       onTap: () async {
         if (pushRouteName == RouteName.licensePage) {

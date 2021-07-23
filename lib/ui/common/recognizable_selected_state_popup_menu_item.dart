@@ -14,7 +14,7 @@ class RecognizableSelectedStatePopupMenuItem<T> extends PopupMenuItem<T> {
               style: TextStyle(
                   color: selectedValue == value
                       ? Theme.of(context).primaryColor
-                      : Colors.black),
+                      : Theme.of(context).colorScheme.onBackground),
             ),
             value: value);
 }
