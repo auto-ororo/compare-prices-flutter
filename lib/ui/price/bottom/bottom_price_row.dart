@@ -15,10 +15,7 @@ class BottomPriceRow extends StatelessWidget {
   @override
   Widget build(context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      elevation: 2,
+      elevation: 0,
       child: InkWell(
         onTap: _onTap,
         child: Container(

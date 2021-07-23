@@ -18,33 +18,30 @@ class PurchaseResultRow extends HookWidget {
 
   @override
   Widget build(context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      elevation: 2,
-      child: Container(
-        padding: EdgeInsets.all(8),
-        child: Slidable(
-          actionPane: const SlidableDrawerActionPane(),
-          actionExtentRatio: 0.25,
-          secondaryActions: [
-            IconSlideAction(
-              color: Colors.redAccent,
-              icon: Icons.remove_circle_outline,
-              onTap: () async {
-                await showConfirmDialog(
-                    context: context,
-                    message: AppLocalizations.of(context)!
-                        .purchaseResultRowDeleteConfirmation(
-                            _purchaseResult.commodity.name,
-                            _purchaseResult.shop.name,
-                            _purchaseResult.unitPrice.currency(),
-                            _purchaseResult.purchaseDate.toFormattedString()),
-                    onOk: _onDelete);
-              },
-            ),
-          ],
+    return Slidable(
+      actionPane: const SlidableDrawerActionPane(),
+      actionExtentRatio: 0.2,
+      secondaryActions: [
+        IconSlideAction(
+          color: Colors.redAccent,
+          icon: Icons.delete,
+          onTap: () async {
+            await showConfirmDialog(
+                context: context,
+                message: AppLocalizations.of(context)!
+                    .purchaseResultRowDeleteConfirmation(
+                        _purchaseResult.commodity.name,
+                        _purchaseResult.shop.name,
+                        _purchaseResult.unitPrice.currency(),
+                        _purchaseResult.purchaseDate.toFormattedString()),
+                onOk: _onDelete);
+          },
+        ),
+      ],
+      child: Card(
+        elevation: 0,
+        child: Container(
+          padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

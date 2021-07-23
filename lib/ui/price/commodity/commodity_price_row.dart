@@ -55,60 +55,68 @@ class CommodityPriceRow extends HookWidget {
           },
         ),
       ],
-      child: Column(
-        children: [
-          Row(
+      child: Card(
+        elevation: 0,
+        child: Container(
+          padding: EdgeInsets.all(8),
+          child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Icon(CustomIcons.crown, size: 16, color: crownColor),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _commodityPrice.shop.name,
-                      softWrap: true,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Icon(CustomIcons.crown, size: 16, color: crownColor),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _commodityPrice.totalPrice.currency(),
+                          _commodityPrice.shop.name,
+                          softWrap: true,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 2),
-                          child: Text(
-                            AppLocalizations.of(context)!.commonUnitPerCount(
-                                _commodityPrice.count > 1
-                                    ? _commodityPrice.count.toString()
-                                    : ""),
-                            style: Theme.of(context).textTheme.caption,
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              _commodityPrice.totalPrice.currency(),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .commonUnitPerCount(
+                                        _commodityPrice.count > 1
+                                            ? _commodityPrice.count.toString()
+                                            : ""),
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .commonPurchaseDate,
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                            ),
+                            Text(
+                              _commodityPrice.purchaseDate.toFormattedString(),
+                              style: Theme.of(context).textTheme.caption,
+                            )
+                          ],
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 4),
-                          child: Text(
-                            AppLocalizations.of(context)!.commonPurchaseDate,
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                        ),
-                        Text(
-                          _commodityPrice.purchaseDate.toFormattedString(),
-                          style: Theme.of(context).textTheme.caption,
-                        )
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
-          Divider()
-        ],
+        ),
       ),
     );
   }
