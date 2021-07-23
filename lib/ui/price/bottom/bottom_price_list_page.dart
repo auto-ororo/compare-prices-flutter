@@ -110,7 +110,7 @@ class BottomPriceListPage extends HookWidget {
               ),
             if (bottomPrices.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                padding: const EdgeInsets.all(8),
                 child: SearchTextField(
                   controller: textEditingController,
                   labelText: AppLocalizations.of(context)!.commonSearch,
@@ -125,7 +125,7 @@ class BottomPriceListPage extends HookWidget {
               Expanded(
                 child: ListView.builder(
                     itemCount: showingBottomPrices.length,
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                     itemBuilder: (context, index) {
                       final row = showingBottomPrices[index];
                       return BottomPriceRow(row, () async {

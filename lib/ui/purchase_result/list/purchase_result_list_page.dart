@@ -97,14 +97,17 @@ class PurchaseResultListPage extends HookWidget {
             ),
           if (purchaseResults.isNotEmpty)
             Expanded(
-              child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  itemCount: showingPurchaseResults.length,
-                  itemBuilder: (context, index) {
-                    final row = showingPurchaseResults[index];
-                    return PurchaseResultRow(
-                        row, () => viewModel.disablePurchaseResult(row.id));
-                  }),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    itemCount: showingPurchaseResults.length,
+                    itemBuilder: (context, index) {
+                      final row = showingPurchaseResults[index];
+                      return PurchaseResultRow(
+                          row, () => viewModel.disablePurchaseResult(row.id));
+                    }),
+              ),
             ),
         ],
       ),

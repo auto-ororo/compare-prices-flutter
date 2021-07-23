@@ -3,15 +3,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class TextEditDialog extends HookWidget {
-  const TextEditDialog({
+  TextEditDialog({
     Key? key,
     required this.title,
     this.initialText,
     this.labelText,
+    this.errorText,
     this.submitText,
     this.cancelText,
     required this.onTextChanged,
-    this.validator,
     required this.onSubmitted,
     this.onCanceled,
   }) : super(key: key);
@@ -19,10 +19,10 @@ class TextEditDialog extends HookWidget {
   final String title;
   final String? initialText;
   final String? labelText;
+  final String? errorText;
   final String? submitText;
   final String? cancelText;
   final Function(String) onTextChanged;
-  final String? Function()? validator;
   final Function() onSubmitted;
   final Function()? onCanceled;
 
@@ -31,19 +31,19 @@ class TextEditDialog extends HookWidget {
     final TextEditingController textEditingController =
         useTextEditingController(text: initialText);
 
+    final validationErrorText = useState<String?>(null);
+
     final String? Function() v;
 
     final _formKey = useMemoized(() => GlobalKey<FormState>());
 
-    if (validator != null) {
-      v = validator!;
-    } else {
-      v = () {
-        return textEditingController.text.isEmpty
-            ? AppLocalizations.of(context)!.commonInputHint
-            : null;
-      };
-    }
+    v = () {
+      validationErrorText.value = textEditingController.text.isEmpty
+          ? AppLocalizations.of(context)!.commonInputHint
+          : null;
+
+      return validationErrorText.value;
+    };
 
     return AlertDialog(
       title: Text(title),
@@ -51,6 +51,7 @@ class TextEditDialog extends HookWidget {
         key: _formKey,
         child: TextFormField(
           decoration: InputDecoration(
+              errorText: validationErrorText.value ?? errorText,
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
               labelText: labelText),

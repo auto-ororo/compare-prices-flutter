@@ -14,18 +14,15 @@ class CreateCommodityDialog extends HookWidget {
   Widget build(context) {
     final name = useProvider(
         createCommodityDialogViewModelProvider.select((value) => value.name));
+    final happenedExceptionType = useProvider(
+        createCommodityDialogViewModelProvider
+            .select((value) => value.happenedExceptionType));
     final viewModel =
         useProvider(createCommodityDialogViewModelProvider.notifier);
 
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        viewModel.onExceptionHappened.stream.listen((type) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(type.errorMessage(context))),
-          );
-        });
-
         viewModel.onCommodityCreated.stream.listen((_) {
           Navigator.pop(context);
         });
@@ -38,6 +35,7 @@ class CreateCommodityDialog extends HookWidget {
       title: AppLocalizations.of(context)!.createCommodityTitle,
       labelText: AppLocalizations.of(context)!.commonCommodityName,
       initialText: name,
+      errorText: happenedExceptionType?.errorMessage(context),
       submitText: AppLocalizations.of(context)!.commonAdd,
       onTextChanged: viewModel.updateName,
       onSubmitted: viewModel.createCommodity,

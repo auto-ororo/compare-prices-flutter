@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
-import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/update_commodity_use_case.dart';
 import 'package:compare_prices/ui/commodity/update/update_commodity_dialog_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,10 +18,6 @@ class UpdateCommodityDialogViewModel
 
   late final _updateCommodityUseCase = _reader(updateCommodityUseCaseProvider);
 
-  final _onExceptionHappened = StreamController<ExceptionType>();
-  StreamController<ExceptionType> get onExceptionHappened =>
-      _onExceptionHappened;
-
   final _onCommodityUpdated = StreamController<Commodity>();
   StreamController<Commodity> get onCommodityUpdated => _onCommodityUpdated;
 
@@ -34,7 +29,8 @@ class UpdateCommodityDialogViewModel
       result.when(success: (_) {
         _onCommodityUpdated.add(state.commodity);
       }, failure: (exception) {
-        _onExceptionHappened.add(exception.exceptionType());
+        state =
+            state.copyWith(happenedExceptionType: exception.exceptionType());
       });
     });
   }
@@ -45,7 +41,6 @@ class UpdateCommodityDialogViewModel
 
   @override
   void dispose() {
-    _onExceptionHappened.close();
     _onCommodityUpdated.close();
 
     super.dispose();

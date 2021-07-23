@@ -20,7 +20,7 @@ class SearchTextField extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
           isDense: true,
-          border: const OutlineInputBorder(),
+          border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           hintText: hintText),
