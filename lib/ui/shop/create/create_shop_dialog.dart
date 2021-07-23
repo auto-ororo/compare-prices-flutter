@@ -14,17 +14,14 @@ class CreateShopDialog extends HookWidget {
   Widget build(context) {
     final name = useProvider(
         createShopDialogViewModelProvider.select((value) => value.name));
+    final happenedExceptionType = useProvider(createShopDialogViewModelProvider
+        .select((value) => value.happenedExceptionType));
+
     final viewModel = useProvider(createShopDialogViewModelProvider.notifier);
 
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        viewModel.onExceptionHappened.stream.listen((type) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(type.errorMessage(context))),
-          );
-        });
-
         viewModel.onShopCreated.stream.listen((_) {
           Navigator.pop(context);
         });
@@ -36,6 +33,7 @@ class CreateShopDialog extends HookWidget {
     return TextEditDialog(
       title: AppLocalizations.of(context)!.createShopTitle,
       labelText: AppLocalizations.of(context)!.commonShopName,
+      errorText: happenedExceptionType?.errorMessage(context),
       submitText: AppLocalizations.of(context)!.commonAdd,
       initialText: name,
       onTextChanged: viewModel.updateName,

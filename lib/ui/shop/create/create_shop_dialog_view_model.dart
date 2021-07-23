@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
-import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/create_shop_by_name_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,10 +16,6 @@ class CreateShopDialogViewModel extends StateNotifier<CreateShopDialogState> {
   late final _createShopByNameUseCase =
       _reader(createShopByNameUseCaseProvider);
 
-  final _onExceptionHappened = StreamController<ExceptionType>();
-  StreamController<ExceptionType> get onExceptionHappened =>
-      _onExceptionHappened;
-
   final _onShopCreated = StreamController<void>();
   StreamController<void> get onShopCreated => _onShopCreated;
 
@@ -32,7 +27,8 @@ class CreateShopDialogViewModel extends StateNotifier<CreateShopDialogState> {
       result.when(success: (_) {
         _onShopCreated.add(_);
       }, failure: (exception) {
-        _onExceptionHappened.add(exception.exceptionType());
+        state =
+            state.copyWith(happenedExceptionType: exception.exceptionType());
       });
     });
   }
@@ -43,7 +39,6 @@ class CreateShopDialogViewModel extends StateNotifier<CreateShopDialogState> {
 
   @override
   void dispose() {
-    _onExceptionHappened.close();
     _onShopCreated.close();
 
     super.dispose();

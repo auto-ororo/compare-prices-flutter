@@ -18,18 +18,14 @@ class UpdateCommodityDialog extends HookWidget {
   Widget build(context) {
     final provider = updateCommodityDialogViewModelProvider(this.commodity);
     final commodity = useProvider(provider.select((value) => value.commodity));
+    final happenedExceptionType =
+        useProvider(provider.select((value) => value.happenedExceptionType));
 
     final viewModel = useProvider(provider.notifier);
 
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        viewModel.onExceptionHappened.stream.listen((type) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(type.errorMessage(context))),
-          );
-        });
-
         viewModel.onCommodityUpdated.stream.listen((commodity) {
           Navigator.pop(context, commodity);
         });
@@ -42,6 +38,7 @@ class UpdateCommodityDialog extends HookWidget {
       title: AppLocalizations.of(context)!.updateCommodityTitle,
       initialText: commodity.name,
       labelText: AppLocalizations.of(context)!.commonCommodityName,
+      errorText: happenedExceptionType?.errorMessage(context),
       submitText: AppLocalizations.of(context)!.commonUpdate,
       onTextChanged: viewModel.updateName,
       onSubmitted: viewModel.updateCommodity,
