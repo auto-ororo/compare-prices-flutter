@@ -101,6 +101,7 @@
   "createPurchaseResultInvalidShop": "店舗を選択してください。",
   "createPurchaseResultInvalidCommodity": "商品を選択してください。",
   "createPurchaseResultInvalidPrice": "価格を入力してください。",
+  "createPurchaseResultInvalidAmount": "数量/容量を入力してください。",
 
   "createShopTitle": "店舗追加",
 

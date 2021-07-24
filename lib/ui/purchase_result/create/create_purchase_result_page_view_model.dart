@@ -45,12 +45,10 @@ class CreatePurchaseResultPageViewModel
     }
   }
 
-  void updatePrice(String priceStr) {
-    var price = 0;
-    if (priceStr.isNotEmpty) {
-      price = int.parse(priceStr);
+  void updatePrice(int? price) {
+    if (price != null) {
+      state = state.copyWith(price: price);
     }
-    state = state.copyWith(price: price);
   }
 
   void updateCount(int? count) {
@@ -88,6 +86,13 @@ class CreatePurchaseResultPageViewModel
   String? validatePrice(BuildContext context) {
     if (state.price == 0) {
       return AppLocalizations.of(context)!.createPurchaseResultInvalidPrice;
+    }
+    return null;
+  }
+
+  String? validateCount(BuildContext context) {
+    if (state.count == 0) {
+      return AppLocalizations.of(context)!.createPurchaseResultInvalidAmount;
     }
     return null;
   }
