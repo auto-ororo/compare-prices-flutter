@@ -1,14 +1,15 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/domain/entities/number_type.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
-import 'package:compare_prices/ui/common/number_picker_dialog.dart';
+import 'package:compare_prices/ui/common/input_number_dialog/input_number_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/extensions/datetime_extensions.dart';
+import '../../common/extensions/int_extensions.dart';
 import '../../common/picker_form_field.dart';
 import '../../route.dart';
 import 'create_purchase_result_page_view_model.dart';
@@ -28,13 +29,12 @@ class CreatePurchaseResultPage extends HookWidget {
     final selectedShop =
         useProvider(provider.select((value) => value.selectedShop));
     final count = useProvider(provider.select((value) => value.count));
+    final price = useProvider(provider.select((value) => value.price));
     final purchaseDate =
         useProvider(provider.select((value) => value.purchaseDate));
     final viewModel = useProvider(provider.notifier);
 
     final formKey = useMemoized(() => GlobalKey<FormState>());
-
-    final priceTextEditingController = useTextEditingController();
 
     useEffect(() {
       // 初期処理
@@ -138,20 +138,20 @@ class CreatePurchaseResultPage extends HookWidget {
                                       context: context,
                                       barrierDismissible: false,
                                       builder: (_) {
-                                        return NumberPickerDialog(
+                                        return InputNumberDialog(
                                           title: AppLocalizations.of(context)!
                                               .createPurchaseResultSelectQuantity,
-                                          minimum: 1,
-                                          maximum: 100,
                                           initialNumber: count,
-                                          unitText:
-                                              AppLocalizations.of(context)!
-                                                  .commonUnit,
+                                          suffix: AppLocalizations.of(context)!
+                                              .commonUnit,
+                                          numberType: NumberType.count(),
                                         );
                                       });
 
                                   viewModel.updateCount(value);
                                 },
+                                validator: () =>
+                                    viewModel.validateCount(context),
                               ),
                             ),
                             Padding(
@@ -173,29 +173,27 @@ class CreatePurchaseResultPage extends HookWidget {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Flexible(
-                              child: TextFormField(
+                              child: PickerFormField(
                                 textAlign: TextAlign.end,
-                                keyboardType: TextInputType.number,
-                                controller: priceTextEditingController,
-                                onTap: () {
-                                  // カーソルを最後尾に置く
-                                  priceTextEditingController.selection =
-                                      TextSelection.fromPosition(TextPosition(
-                                          offset: priceTextEditingController
-                                              .text.length));
+                                labelText:
+                                    AppLocalizations.of(context)!.commonPrice,
+                                text: price.currency(showSymbol: false),
+                                onTap: () async {
+                                  final value = await showDialog<int>(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (_) {
+                                        return InputNumberDialog(
+                                          title: AppLocalizations.of(context)!
+                                              .createPurchaseResultTotalPrice,
+                                          initialNumber: price,
+                                          numberType: NumberType.currency(),
+                                        );
+                                      });
+                                  viewModel.updatePrice(value);
                                 },
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 4.0, horizontal: 8),
-                                    labelText: AppLocalizations.of(context)!
-                                        .createPurchaseResultTotalPrice),
-                                validator: (_) =>
+                                validator: () =>
                                     viewModel.validatePrice(context),
-                                onChanged: (value) =>
-                                    viewModel.updatePrice(value),
                               ),
                             ),
                             Padding(
