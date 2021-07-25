@@ -1,5 +1,5 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -41,6 +41,7 @@ class PurchaseResult with _$PurchaseResult {
 
 extension PurchaseResultExtensions on PurchaseResult {
   int unitPrice() {
-    return (this.price ~/ (this.quantity ~/ this.commodity.quantity.unit()));
+    return (this.price ~/
+        (this.quantity ~/ this.commodity.quantityType.unit()));
   }
 }

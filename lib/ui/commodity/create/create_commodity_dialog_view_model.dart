@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/create_commodity_use_case.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +30,7 @@ class CreateCommodityDialogViewModel
     _createCommodityByNameUseCase(
       CreateCommodityUseCaseParams(
         name: state.name,
-        quantity: state.quantity,
+        quantityType: state.quantityType,
       ),
     ).then((result) {
       result.when(success: (_) {
@@ -50,9 +50,9 @@ class CreateCommodityDialogViewModel
     }
   }
 
-  void updateQuantity(Quantity? quantity) {
-    if (quantity != null) {
-      state = state.copyWith(quantity: quantity);
+  void updateQuantity(QuantityType? quantityType) {
+    if (quantityType != null) {
+      state = state.copyWith(quantityType: quantityType);
     }
   }
 

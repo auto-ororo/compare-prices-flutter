@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'quantity.freezed.dart';
+part 'quantity_type.freezed.dart';
 
 const _countId = "1";
 const _gramId = "2";
@@ -13,30 +13,34 @@ const _gramUnit = 100;
 const _milliliterUnit = 100;
 
 @freezed
-class Quantity<T> with _$Quantity<T> {
-  const factory Quantity.count() = _count;
-  const factory Quantity.gram() = _gram;
-  const factory Quantity.milliliter() = _milliliter;
+class QuantityType<T> with _$QuantityType<T> {
+  const factory QuantityType.count() = _count;
+  const factory QuantityType.gram() = _gram;
+  const factory QuantityType.milliliter() = _milliliter;
 
-  static Quantity getTypeById(String id) {
+  static QuantityType getTypeById(String id) {
     switch (id) {
       case _countId:
-        return Quantity.count();
+        return QuantityType.count();
       case _gramId:
-        return Quantity.gram();
+        return QuantityType.gram();
       case _milliliterId:
-        return Quantity.milliliter();
+        return QuantityType.milliliter();
       default:
         throw Error();
     }
   }
 
-  static List<Quantity> values() {
-    return [Quantity.count(), Quantity.gram(), Quantity.milliliter()];
+  static List<QuantityType> values() {
+    return [
+      QuantityType.count(),
+      QuantityType.gram(),
+      QuantityType.milliliter()
+    ];
   }
 }
 
-extension QuantityExtention on Quantity {
+extension QuantityExtention on QuantityType {
   String id() {
     return this.when(count: () {
       return _countId;

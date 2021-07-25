@@ -1,5 +1,5 @@
 import 'package:compare_prices/domain/entities/commodity_price.dart';
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:compare_prices/ui/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
@@ -52,7 +52,7 @@ class CommodityPriceRow extends HookWidget {
                         _commodityPrice.shop.name,
                         _commodityPrice.totalPrice.currency(),
                         _commodityPrice.quantity.toString(),
-                        _commodityPrice.commodity.quantity.suffix(context),
+                        _commodityPrice.commodity.quantityType.suffix(context),
                         _commodityPrice.purchaseDate.toFormattedString()),
                 onOk: _onDelete);
           },
@@ -94,12 +94,12 @@ class CommodityPriceRow extends HookWidget {
                                   AppLocalizations.of(context)!
                                       .commonQuantityWithSuffix(
                                           _commodityPrice.quantity.toString(),
-                                          _commodityPrice.commodity.quantity
+                                          _commodityPrice.commodity.quantityType
                                               .suffix(context)),
                                   style: Theme.of(context).textTheme.caption,
                                 ),
                               ),
-                              if (!_commodityPrice.commodity.quantity
+                              if (!_commodityPrice.commodity.quantityType
                                   .isEqualToUnit(_commodityPrice.quantity))
                                 Row(
                                   children: [
@@ -115,10 +115,10 @@ class CommodityPriceRow extends HookWidget {
                                       child: Text(
                                         AppLocalizations.of(context)!
                                             .commonUnitWithSuffix(
-                                          _commodityPrice.commodity.quantity
+                                          _commodityPrice.commodity.quantityType
                                               .unit()
                                               .toString(),
-                                          _commodityPrice.commodity.quantity
+                                          _commodityPrice.commodity.quantityType
                                               .suffix(context),
                                         ),
                                         style:

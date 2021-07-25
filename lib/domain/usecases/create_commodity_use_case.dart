@@ -1,6 +1,6 @@
 import 'package:compare_prices/data/providers.dart';
 import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/domain/entities/result.dart';
 import 'package:compare_prices/domain/exception/domain_exception.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
@@ -31,7 +31,7 @@ class CreateCommodityUseCase
         throw DomainException(ExceptionType.alreadyExists());
       }
 
-      final commodity = Commodity.create(params.name, params.quantity);
+      final commodity = Commodity.create(params.name, params.quantityType);
 
       _commodityRepository.createCommodity(commodity);
     });
@@ -42,6 +42,6 @@ class CreateCommodityUseCase
 class CreateCommodityUseCaseParams with _$CreateCommodityUseCaseParams {
   const factory CreateCommodityUseCaseParams({
     required String name,
-    required Quantity quantity,
+    required QuantityType quantityType,
   }) = _CreateCommodityUseCaseParams;
 }

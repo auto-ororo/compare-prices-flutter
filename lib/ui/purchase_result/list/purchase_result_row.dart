@@ -1,5 +1,5 @@
 import 'package:compare_prices/domain/entities/purchase_result.dart';
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
@@ -35,7 +35,7 @@ class PurchaseResultRow extends HookWidget {
                         _purchaseResult.shop.name,
                         _purchaseResult.price.currency(),
                         _purchaseResult.quantity.toString(),
-                        _purchaseResult.commodity.quantity.suffix(context),
+                        _purchaseResult.commodity.quantityType.suffix(context),
                         _purchaseResult.purchaseDate.toFormattedString()),
                 onOk: _onDelete);
           },
@@ -73,7 +73,8 @@ class PurchaseResultRow extends HookWidget {
                     child: Text(
                       AppLocalizations.of(context)!.commonQuantityWithSuffix(
                           _purchaseResult.quantity.toString(),
-                          _purchaseResult.commodity.quantity.suffix(context)),
+                          _purchaseResult.commodity.quantityType
+                              .suffix(context)),
                       style: Theme.of(context).textTheme.caption,
                     ),
                   ),

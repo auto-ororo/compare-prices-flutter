@@ -1,6 +1,6 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/number_type.dart';
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/input_number_dialog/input_number_dialog.dart';
@@ -37,7 +37,8 @@ class CreatePurchaseResultPage extends HookWidget {
 
     final formKey = useMemoized(() => GlobalKey<FormState>());
 
-    final quantityType = selectedCommodity?.quantity ?? Quantity.count();
+    final quantityType =
+        selectedCommodity?.quantityType ?? QuantityType.count();
 
     useEffect(() {
       // 初期処理
@@ -49,7 +50,7 @@ class CreatePurchaseResultPage extends HookWidget {
         });
 
         if (initialCommodity != null) {
-          viewModel.updateQuantity(initialCommodity!.quantity.unit());
+          viewModel.updateQuantity(initialCommodity!.quantityType.unit());
         }
 
         viewModel.onPurchaseResultCreated.stream.listen((_) {

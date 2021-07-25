@@ -1,5 +1,5 @@
 import 'package:compare_prices/domain/entities/bottom_price.dart';
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,8 @@ class BottomPriceRow extends StatelessWidget {
                               AppLocalizations.of(context)!
                                   .commonQuantityWithSuffix(
                                 _bottomPrice.quantity.toString(),
-                                _bottomPrice.commodity.quantity.suffix(context),
+                                _bottomPrice.commodity.quantityType
+                                    .suffix(context),
                               ),
                               style: Theme.of(context).textTheme.caption,
                             ),

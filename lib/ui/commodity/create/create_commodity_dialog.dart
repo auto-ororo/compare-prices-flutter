@@ -1,4 +1,4 @@
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,7 +13,7 @@ class CreateCommodityDialog extends HookWidget {
   @override
   Widget build(context) {
     final quantity = useProvider(createCommodityDialogViewModelProvider
-        .select((value) => value.quantity));
+        .select((value) => value.quantityType));
     final happenedExceptionType = useProvider(
         createCommodityDialogViewModelProvider
             .select((value) => value.happenedExceptionType));
@@ -51,7 +51,7 @@ class CreateCommodityDialog extends HookWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: DropdownButtonFormField<Quantity>(
+              child: DropdownButtonFormField<QuantityType>(
                   isExpanded: true,
                   value: quantity,
                   onChanged: (q) => viewModel.updateQuantity(q),
@@ -60,7 +60,7 @@ class CreateCommodityDialog extends HookWidget {
                           vertical: 4.0, horizontal: 8),
                       labelText:
                           AppLocalizations.of(context)!.commonQuantityUnit),
-                  items: Quantity.values()
+                  items: QuantityType.values()
                       .map((e) => DropdownMenuItem(
                           value: e,
                           child: Container(

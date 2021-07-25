@@ -1,5 +1,5 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/quantity.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:hive/hive.dart';
 
 part 'hive_commodity.g.dart';
@@ -13,7 +13,7 @@ class HiveCommodity extends HiveObject {
   String name;
 
   @HiveField(2)
-  String quantityId;
+  String quantityTypeId;
 
   @HiveField(3)
   DateTime createdAt;
@@ -27,7 +27,7 @@ class HiveCommodity extends HiveObject {
   HiveCommodity(
     this.id,
     this.name,
-    this.quantityId,
+    this.quantityTypeId,
     this.createdAt,
     this.updatedAt,
     this.isEnabled,
@@ -37,7 +37,7 @@ class HiveCommodity extends HiveObject {
     return Commodity(
       id: id,
       name: name,
-      quantity: Quantity.getTypeById(quantityId),
+      quantityType: QuantityType.getTypeById(quantityTypeId),
       createdAt: createdAt,
       updatedAt: updatedAt,
       isEnabled: isEnabled,
@@ -48,6 +48,6 @@ class HiveCommodity extends HiveObject {
 extension CommodityExtensions on Commodity {
   HiveCommodity convertToHiveCommodity() {
     return HiveCommodity(
-        id, name, quantity.id(), createdAt, updatedAt, isEnabled);
+        id, name, quantityType.id(), createdAt, updatedAt, isEnabled);
   }
 }
