@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/create_shop_by_name_use_case.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'create_shop_dialog_state.dart';
@@ -35,6 +37,14 @@ class CreateShopDialogViewModel extends StateNotifier<CreateShopDialogState> {
 
   void updateName(String name) {
     state = state.copyWith(name: name);
+  }
+
+  String? validateName(BuildContext context) {
+    if (state.name.isEmpty) {
+      return AppLocalizations.of(context)!.commonInputHint;
+    } else {
+      return null;
+    }
   }
 
   @override

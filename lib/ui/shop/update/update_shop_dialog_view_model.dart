@@ -4,6 +4,8 @@ import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/update_shop_use_case.dart';
 import 'package:compare_prices/ui/shop/update/update_shop_dialog_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final updateShopDialogViewModelProvider = StateNotifierProvider.family
@@ -34,6 +36,14 @@ class UpdateShopDialogViewModel extends StateNotifier<UpdateShopDialogState> {
 
   void updateName(String name) {
     state = state.copyWith(shop: state.shop.copyWith(name: name));
+  }
+
+  String? validateName(BuildContext context) {
+    if (state.shop.name.isEmpty) {
+      return AppLocalizations.of(context)!.commonInputHint;
+    } else {
+      return null;
+    }
   }
 
   @override
