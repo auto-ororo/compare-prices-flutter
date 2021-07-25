@@ -116,7 +116,6 @@ class InputNumberDialog extends HookWidget {
   }
 
   double _getKeySize(BuildContext context) {
-    // 1マスの
     final deviceSize = MediaQuery.of(context).size;
     final double contentSize;
     if (deviceSize.width < deviceSize.height) {
@@ -146,8 +145,10 @@ class _KeyContainer extends StatelessWidget {
       width: keySize,
       height: keySize,
       child: Card(
+        elevation: 0,
         child: InkWell(
           onTap: onTap,
+          borderRadius: BorderRadius.circular(50),
           child: Container(
             padding: EdgeInsets.all(8),
             child: FittedBox(
