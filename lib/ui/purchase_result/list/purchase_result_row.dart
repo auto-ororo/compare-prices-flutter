@@ -1,4 +1,5 @@
 import 'package:compare_prices/domain/entities/purchase_result.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
@@ -32,7 +33,9 @@ class PurchaseResultRow extends HookWidget {
                     .purchaseResultRowDeleteConfirmation(
                         _purchaseResult.commodity.name,
                         _purchaseResult.shop.name,
-                        _purchaseResult.unitPrice.currency(),
+                        _purchaseResult.price.currency(),
+                        _purchaseResult.quantity.toString(),
+                        _purchaseResult.commodity.quantityType.suffix(context),
                         _purchaseResult.purchaseDate.toFormattedString()),
                 onOk: _onDelete);
           },
@@ -62,16 +65,16 @@ class PurchaseResultRow extends HookWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    _purchaseResult.totalPrice.currency(),
+                    _purchaseResult.price.currency(),
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: Text(
-                      AppLocalizations.of(context)!.commonUnitPerCount(
-                          _purchaseResult.count > 1
-                              ? _purchaseResult.count.toString()
-                              : ""),
+                      AppLocalizations.of(context)!.commonQuantityWithSuffix(
+                          _purchaseResult.quantity.toString(),
+                          _purchaseResult.commodity.quantityType
+                              .suffix(context)),
                       style: Theme.of(context).textTheme.caption,
                     ),
                   ),

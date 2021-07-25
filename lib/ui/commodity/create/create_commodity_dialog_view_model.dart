@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
-import 'package:compare_prices/domain/usecases/create_commodity_by_name_use_case.dart';
+import 'package:compare_prices/domain/usecases/create_commodity_use_case.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'create_commodity_dialog_state.dart';
@@ -15,7 +18,7 @@ class CreateCommodityDialogViewModel
   final Reader _reader;
 
   late final _createCommodityByNameUseCase =
-      _reader(createCommodityByNameUseCaseProvider);
+      _reader(createCommodityUseCaseProvider);
 
   final _onCommodityCreated = StreamController<void>();
   StreamController<void> get onCommodityCreated => _onCommodityCreated;
@@ -24,7 +27,12 @@ class CreateCommodityDialogViewModel
       : super(const CreateCommodityDialogState());
 
   void createCommodity() {
-    _createCommodityByNameUseCase(state.name).then((result) {
+    _createCommodityByNameUseCase(
+      CreateCommodityUseCaseParams(
+        name: state.name,
+        quantityType: state.quantityType,
+      ),
+    ).then((result) {
       result.when(success: (_) {
         _onCommodityCreated.add(_);
       }, failure: (exception) {
@@ -32,6 +40,20 @@ class CreateCommodityDialogViewModel
             state.copyWith(happenedExceptionType: exception.exceptionType());
       });
     });
+  }
+
+  String? validateName(BuildContext context) {
+    if (state.name.isEmpty) {
+      return AppLocalizations.of(context)!.commonInputHint;
+    } else {
+      return null;
+    }
+  }
+
+  void updateQuantity(QuantityType? quantityType) {
+    if (quantityType != null) {
+      state = state.copyWith(quantityType: quantityType);
+    }
   }
 
   void updateName(String name) {

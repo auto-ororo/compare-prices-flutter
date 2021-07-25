@@ -33,8 +33,7 @@ class CommodityPriceListPageViewModel
       : super(CommodityPriceListPageState(commodity: commodity));
 
   void getList() async {
-    _getCommodityPricesInAscendingOrderUseCase(state.commodity.id)
-        .then((result) {
+    _getCommodityPricesInAscendingOrderUseCase(state.commodity).then((result) {
       result.when(success: (commodityPrices) {
         state = state.copyWith(commodityPrices: commodityPrices);
       }, failure: (exception) {

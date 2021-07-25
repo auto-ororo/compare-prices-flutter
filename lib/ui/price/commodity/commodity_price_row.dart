@@ -1,4 +1,5 @@
 import 'package:compare_prices/domain/entities/commodity_price.dart';
+import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:compare_prices/ui/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
@@ -49,7 +50,9 @@ class CommodityPriceRow extends HookWidget {
                 message: AppLocalizations.of(context)!
                     .commodityPriceRowDeleteConfirmation(
                         _commodityPrice.shop.name,
-                        _commodityPrice.unitPrice.currency(),
+                        _commodityPrice.totalPrice.currency(),
+                        _commodityPrice.quantity.toString(),
+                        _commodityPrice.commodity.quantityType.suffix(context),
                         _commodityPrice.purchaseDate.toFormattedString()),
                 onOk: _onDelete);
           },
@@ -64,7 +67,7 @@ class CommodityPriceRow extends HookWidget {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 16),
+                    padding: const EdgeInsets.only(right: 12),
                     child: Icon(CustomIcons.crown, size: 16, color: crownColor),
                   ),
                   Expanded(
@@ -76,25 +79,59 @@ class CommodityPriceRow extends HookWidget {
                           softWrap: true,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              _commodityPrice.totalPrice.currency(),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 2),
-                              child: Text(
-                                AppLocalizations.of(context)!
-                                    .commonUnitPerCount(
-                                        _commodityPrice.count > 1
-                                            ? _commodityPrice.count.toString()
-                                            : ""),
-                                style: Theme.of(context).textTheme.caption,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                _commodityPrice.totalPrice.currency(),
                               ),
-                            ),
-                            Spacer(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 2),
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .commonQuantityWithSuffix(
+                                          _commodityPrice.quantity.toString(),
+                                          _commodityPrice.commodity.quantityType
+                                              .suffix(context)),
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ),
+                              if (!_commodityPrice.commodity.quantityType
+                                  .isEqualToUnit(_commodityPrice.quantity))
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        _commodityPrice.unitPrice.currency(),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .commonUnitWithSuffix(
+                                          _commodityPrice.commodity.quantityType
+                                              .unit()
+                                              .toString(),
+                                          _commodityPrice.commodity.quantityType
+                                              .suffix(context),
+                                        ),
+                                        style:
+                                            Theme.of(context).textTheme.caption,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 4),
                               child: Text(
@@ -108,7 +145,7 @@ class CommodityPriceRow extends HookWidget {
                               style: Theme.of(context).textTheme.caption,
                             )
                           ],
-                        ),
+                        )
                       ],
                     ),
                   ),

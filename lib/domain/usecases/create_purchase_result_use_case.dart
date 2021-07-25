@@ -28,9 +28,8 @@ class CreatePurchaseResultUseCase
       final purchaseResult = PurchaseResult.create(
           commodity: params.commodity,
           shop: params.shop,
-          totalPrice: params.price,
-          unitPrice: params.price ~/ params.count,
-          count: params.count,
+          price: params.price,
+          quantity: params.count,
           purchaseDate: params.purchaseDate);
 
       await _purchaseResultRepository.createPurchaseResult(purchaseResult);

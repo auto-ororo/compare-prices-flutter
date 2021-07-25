@@ -1,5 +1,4 @@
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
-import 'package:compare_prices/ui/common/text_edit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -12,8 +11,6 @@ class CreateShopDialog extends HookWidget {
 
   @override
   Widget build(context) {
-    final name = useProvider(
-        createShopDialogViewModelProvider.select((value) => value.name));
     final happenedExceptionType = useProvider(createShopDialogViewModelProvider
         .select((value) => value.happenedExceptionType));
 
@@ -30,14 +27,34 @@ class CreateShopDialog extends HookWidget {
       return () => {};
     }, const []);
 
-    return TextEditDialog(
-      title: AppLocalizations.of(context)!.createShopTitle,
-      labelText: AppLocalizations.of(context)!.commonShopName,
-      errorText: happenedExceptionType?.errorMessage(context),
-      submitText: AppLocalizations.of(context)!.commonAdd,
-      initialText: name,
-      onTextChanged: viewModel.updateName,
-      onSubmitted: viewModel.createShop,
+    final _formKey = useMemoized(() => GlobalKey<FormState>());
+
+    return AlertDialog(
+      title: Text(AppLocalizations.of(context)!.createShopTitle),
+      content: Form(
+        key: _formKey,
+        child: TextFormField(
+          decoration: InputDecoration(
+              errorText: happenedExceptionType?.errorMessage(context),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
+              labelText: AppLocalizations.of(context)!.commonShopName),
+          onChanged: viewModel.updateName,
+          validator: (_) => viewModel.validateName(context),
+        ),
+      ),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context)!.commonCancel)),
+        TextButton(
+            onPressed: () {
+              if (_formKey.currentState?.validate() ?? false) {
+                viewModel.createShop();
+              }
+            },
+            child: Text(AppLocalizations.of(context)!.commonAdd)),
+      ],
     );
   }
 }
