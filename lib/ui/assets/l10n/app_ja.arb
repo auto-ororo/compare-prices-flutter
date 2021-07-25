@@ -22,6 +22,7 @@
   "commonUpdate": "更新",
   "commonDelete": "削除",
   "commonQuantity": "個数",
+  "commonQuantityUnit": "単位",
   "commonPrice": "価格",
   "commonCurrency": "円",
   "commonPurchaseDate": "購入日",
@@ -40,6 +41,13 @@
   "commonLastPurchaseDate": "最終購入日",
   "commonLicense": "ライセンス",
   "commonVersion": "バージョン情報",
+
+  "quantityCountSuffix": "個",
+  "quantityMilliliterSuffix": "ml",
+  "quantityGramSuffix": "g",
+  "quantityCountLabel": "数量(個)",
+  "quantityMilliliterLabel": "容量(ml)",
+  "quantityGramLabel": "重量(g)",
 
   "bottomPriceListTitle": "底値一覧",
   "bottomPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
@@ -103,7 +111,7 @@
   "createPurchaseResultInvalidPrice": "価格を入力してください。",
   "createPurchaseResultInvalidAmount": "数量/容量を入力してください。",
 
-  "createShopTitle": "店舗追加",
+  "createShopTitle": "店舗を追加",
 
   "selectShopTitle": "店舗を選択",
   "selectShopNoData": "店舗が登録されていません。\n右上の「＋」から登録しましょう！",
@@ -121,9 +129,9 @@
   "selectShopSortByName": "名前順",
   "selectShopSearchHint": "店舗名で絞り込み",
 
-  "updateShopTitle": "店舗編集",
+  "updateShopTitle": "店舗を編集",
 
-  "createCommodityTitle": "商品追加",
+  "createCommodityTitle": "商品を追加",
 
   "selectCommodityTitle": "商品を選択",
   "selectCommodityNoData": "商品が登録されていません。\n右上の「＋」から登録しましょう！",
@@ -141,7 +149,7 @@
   "selectCommoditySortByName": "名前順",
   "selectCommoditySearchHint": "商品名で絞り込み",
 
-  "updateCommodityTitle": "商品編集",
+  "updateCommodityTitle": "商品を編集",
 
   "otherDataList": "登録リスト",
   "otherAboutApp": "このアプリについて",

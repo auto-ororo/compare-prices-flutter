@@ -4,6 +4,8 @@ import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/update_commodity_use_case.dart';
 import 'package:compare_prices/ui/commodity/update/update_commodity_dialog_state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final updateCommodityDialogViewModelProvider = StateNotifierProvider.family
@@ -37,6 +39,14 @@ class UpdateCommodityDialogViewModel
 
   void updateName(String name) {
     state = state.copyWith(commodity: state.commodity.copyWith(name: name));
+  }
+
+  String? validateName(BuildContext context) {
+    if (state.commodity.name.isEmpty) {
+      return AppLocalizations.of(context)!.commonInputHint;
+    } else {
+      return null;
+    }
   }
 
   @override
