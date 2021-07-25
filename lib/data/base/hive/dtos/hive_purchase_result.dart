@@ -17,33 +17,29 @@ class HivePurchaseResult extends HiveObject {
   String shopId;
 
   @HiveField(3)
-  int totalPrice;
+  int price;
 
   @HiveField(4)
-  int unitPrice;
+  int quantity;
 
   @HiveField(5)
-  int count;
-
-  @HiveField(6)
   DateTime purchaseDate;
 
-  @HiveField(7)
+  @HiveField(6)
   bool isEnabled;
 
-  @HiveField(8)
+  @HiveField(7)
   DateTime createdAt;
 
-  @HiveField(9)
+  @HiveField(8)
   DateTime updatedAt;
 
   HivePurchaseResult(
     this.id,
     this.commodityId,
     this.shopId,
-    this.totalPrice,
-    this.unitPrice,
-    this.count,
+    this.price,
+    this.quantity,
     this.purchaseDate,
     this.isEnabled,
     this.createdAt,
@@ -55,9 +51,8 @@ class HivePurchaseResult extends HiveObject {
         id: id,
         commodity: commodity,
         shop: shop,
-        totalPrice: totalPrice,
-        unitPrice: unitPrice,
-        count: count,
+        price: price,
+        quantity: quantity,
         isEnabled: isEnabled,
         purchaseDate: purchaseDate,
         createdAt: createdAt,
@@ -71,9 +66,8 @@ extension PurchaseResultExtensions on PurchaseResult {
       id,
       commodity.id,
       shop.id,
-      totalPrice,
-      unitPrice,
-      count,
+      price,
+      quantity,
       purchaseDate,
       isEnabled,
       createdAt,

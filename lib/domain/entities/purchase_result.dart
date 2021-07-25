@@ -1,4 +1,5 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/domain/entities/quantity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -11,9 +12,8 @@ class PurchaseResult with _$PurchaseResult {
     required String id,
     required Commodity commodity,
     required Shop shop,
-    required int totalPrice,
-    required int unitPrice,
-    required int count,
+    required int price,
+    required int quantity,
     required DateTime purchaseDate,
     @Default(true) bool isEnabled,
     required DateTime createdAt,
@@ -23,20 +23,24 @@ class PurchaseResult with _$PurchaseResult {
   static PurchaseResult create(
       {required Commodity commodity,
       required Shop shop,
-      required int totalPrice,
-      required int unitPrice,
-      required int count,
+      required int price,
+      required int quantity,
       required DateTime purchaseDate}) {
     final now = DateTime.now();
     return PurchaseResult(
         id: Uuid().v4(),
         commodity: commodity,
         shop: shop,
-        totalPrice: totalPrice,
-        unitPrice: unitPrice,
-        count: count,
+        price: price,
+        quantity: quantity,
         purchaseDate: purchaseDate,
         createdAt: now,
         updatedAt: now);
+  }
+}
+
+extension PurchaseResultExtensions on PurchaseResult {
+  int unitPrice() {
+    return (this.price ~/ (this.quantity ~/ this.commodity.quantity.unit()));
   }
 }

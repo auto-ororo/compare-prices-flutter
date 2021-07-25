@@ -1,5 +1,6 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/number_type.dart';
+import 'package:compare_prices/domain/entities/quantity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/input_number_dialog/input_number_dialog.dart';
@@ -36,6 +37,8 @@ class CreatePurchaseResultPage extends HookWidget {
 
     final formKey = useMemoized(() => GlobalKey<FormState>());
 
+    final quantityType = selectedCommodity?.quantity ?? Quantity.count();
+
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -44,6 +47,10 @@ class CreatePurchaseResultPage extends HookWidget {
             SnackBar(content: Text(type.errorMessage(context))),
           );
         });
+
+        if (initialCommodity != null) {
+          viewModel.updateQuantity(initialCommodity!.quantity.unit());
+        }
 
         viewModel.onPurchaseResultCreated.stream.listen((_) {
           Navigator.of(context).pop();
@@ -90,8 +97,8 @@ class CreatePurchaseResultPage extends HookWidget {
                                     ArgumentName.isSelectable: true,
                                     ArgumentName.isFullscreenDialog: true
                                   });
-                              viewModel
-                                  .updateSelectedCommodity(selectedCommodity);
+                              viewModel.updateSelectedCommodityAndQuantity(
+                                  selectedCommodity);
                             },
                             validator: () =>
                                 viewModel.validateCommodity(context),
@@ -130,8 +137,7 @@ class CreatePurchaseResultPage extends HookWidget {
                             Flexible(
                               child: PickerFormField(
                                 textAlign: TextAlign.end,
-                                labelText: AppLocalizations.of(context)!
-                                    .commonQuantity,
+                                labelText: quantityType.label(context),
                                 text: count.toString(),
                                 onTap: () async {
                                   final value = await showDialog(
@@ -139,16 +145,14 @@ class CreatePurchaseResultPage extends HookWidget {
                                       barrierDismissible: false,
                                       builder: (_) {
                                         return InputNumberDialog(
-                                          title: AppLocalizations.of(context)!
-                                              .createPurchaseResultSelectQuantity,
+                                          title: quantityType.label(context),
                                           initialNumber: count,
-                                          suffix: AppLocalizations.of(context)!
-                                              .commonUnit,
+                                          suffix: quantityType.suffix(context),
                                           numberType: NumberType.count(),
                                         );
                                       });
 
-                                  viewModel.updateCount(value);
+                                  viewModel.updateQuantity(value);
                                 },
                                 validator: () =>
                                     viewModel.validateCount(context),
@@ -158,7 +162,7 @@ class CreatePurchaseResultPage extends HookWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 4.0),
                               child: Text(
-                                AppLocalizations.of(context)!.commonUnit,
+                                quantityType.suffix(context),
                                 style: TextStyle(fontSize: 14),
                               ),
                             )

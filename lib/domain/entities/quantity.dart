@@ -76,4 +76,14 @@ extension QuantityExtention on Quantity {
       return AppLocalizations.of(context)!.quantityMilliliterLabel;
     });
   }
+
+  bool isEqualToUnit(int quantity) {
+    return this.when(count: () {
+      return quantity == _countUnit;
+    }, gram: () {
+      return quantity == _gramUnit;
+    }, milliliter: () {
+      return quantity == _milliliterUnit;
+    });
+  }
 }

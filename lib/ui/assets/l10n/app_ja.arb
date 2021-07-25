@@ -21,19 +21,31 @@
   "commonEdit": "編集",
   "commonUpdate": "更新",
   "commonDelete": "削除",
-  "commonQuantity": "個数",
   "commonQuantityUnit": "単位",
   "commonPrice": "価格",
   "commonCurrency": "円",
   "commonPurchaseDate": "購入日",
   "commonRegister": "登録",
-  "commonUnit": "個",
-  "commonUnitPerPiece": "/個",
-  "commonUnitPerCount": "/{count}個",
-  "@commonUnitPerCount": {
+  "commonQuantityWithSuffix": "({quantity}{suffix})",
+  "@commonQuantityWithSuffix": {
     "type": "String",
     "placeholders": {
-      "count": {
+      "quantity": {
+        "type": "String"
+      },
+      "suffix": {
+        "type": "String"
+      }
+    }
+  },
+  "commonUnitWithSuffix": "/{unit}{suffix}",
+  "@commonUnitWithSuffix": {
+    "type": "String",
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      },
+      "suffix": {
         "type": "String"
       }
     }
@@ -62,14 +74,20 @@
   "commodityPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
   "commodityPriceListRanking": "ランキング",
 
-  "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n\n上記を削除しますか？",
+  "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格:{price}\n{quantity}{suffix}\n購入日:{purchaseDate}\n\n上記を削除しますか？",
   "@commodityPriceRowDeleteConfirmation": {
     "type": "String",
     "placeholders": {
       "shopName": {
         "type": "String"
       },
-      "unitPrice": {
+      "price": {
+        "type": "String"
+      },
+      "quantity": {
+        "type": "String"
+      },
+      "suffix": {
         "type": "String"
       },
       "purchaseDate": {
@@ -84,7 +102,7 @@
   "purchaseResultListSortByOldestPurchaseDate": "購入日が古い順",
   "purchaseResultListSortByNewestCreatedAt": "登録順",
 
-  "purchaseResultRowDeleteConfirmation": "商品:{commodityName}\n店舗:{shopName}\n価格/個:{unitPrice}\n購入日:{purchaseDate}\n\n上記を削除しますか？",
+  "purchaseResultRowDeleteConfirmation": "商品:{commodityName}\n店舗:{shopName}\n価格:{price}\n{quantity}{suffix}\n購入日:{purchaseDate}\n\n上記を削除しますか？",
   "@purchaseResultRowDeleteConfirmation": {
     "type": "String",
     "placeholders": {
@@ -94,7 +112,13 @@
       "shopName": {
         "type": "String"
       },
-      "unitPrice": {
+      "price": {
+        "type": "String"
+      },
+      "quantity": {
+        "type": "String"
+      },
+      "suffix": {
         "type": "String"
       },
       "purchaseDate": {
@@ -104,7 +128,6 @@
   },
 
   "createPurchaseResultTitle": "価格を登録",
-  "createPurchaseResultSelectQuantity": "個数選択",
   "createPurchaseResultTotalPrice": "価格(合計)",
   "createPurchaseResultInvalidShop": "店舗を選択してください。",
   "createPurchaseResultInvalidCommodity": "商品を選択してください。",

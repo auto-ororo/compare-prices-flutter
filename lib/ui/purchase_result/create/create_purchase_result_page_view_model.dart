@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/domain/entities/quantity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
@@ -51,15 +52,17 @@ class CreatePurchaseResultPageViewModel
     }
   }
 
-  void updateCount(int? count) {
-    if (count != null) {
-      state = state.copyWith(count: count);
+  void updateQuantity(int? quantity) {
+    if (quantity != null) {
+      state = state.copyWith(count: quantity);
     }
   }
 
-  void updateSelectedCommodity(Commodity? selectedCommodity) {
+  void updateSelectedCommodityAndQuantity(Commodity? selectedCommodity) {
     if (selectedCommodity != null) {
-      state = state.copyWith(selectedCommodity: selectedCommodity);
+      state = state.copyWith(
+          selectedCommodity: selectedCommodity,
+          count: selectedCommodity.quantity.unit());
     }
   }
 

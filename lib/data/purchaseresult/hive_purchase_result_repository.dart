@@ -46,7 +46,7 @@ class HivePurchaseResultRepository extends PurchaseResultRepository {
     if (purchaseResults.length == 0) return null;
 
     return purchaseResults.reduce((current, next) {
-      if (current.unitPrice >= next.unitPrice) {
+      if ((current.unitPrice()) >= (next.unitPrice())) {
         return next;
       } else {
         return current;
