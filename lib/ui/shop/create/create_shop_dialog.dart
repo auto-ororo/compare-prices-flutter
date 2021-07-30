@@ -19,8 +19,8 @@ class CreateShopDialog extends HookWidget {
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        viewModel.onShopCreated.stream.listen((_) {
-          Navigator.pop(context);
+        viewModel.onShopCreated.stream.listen((shop) {
+          Navigator.pop(context, shop);
         });
       });
 

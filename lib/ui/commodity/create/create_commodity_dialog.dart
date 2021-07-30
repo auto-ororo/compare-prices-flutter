@@ -23,8 +23,8 @@ class CreateCommodityDialog extends HookWidget {
     useEffect(() {
       // 初期処理
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        viewModel.onCommodityCreated.stream.listen((_) {
-          Navigator.pop(context);
+        viewModel.onCommodityCreated.stream.listen((commodity) {
+          Navigator.pop(context, commodity);
         });
       });
 

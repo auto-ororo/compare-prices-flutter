@@ -15,7 +15,7 @@ final createCommodityUseCaseProvider =
         (ref) => CreateCommodityUseCase(ref.read));
 
 class CreateCommodityUseCase
-    extends FutureUseCase<void, CreateCommodityUseCaseParams> {
+    extends FutureUseCase<Commodity, CreateCommodityUseCaseParams> {
   final Reader _reader;
 
   late final _commodityRepository = _reader(commodityRepositoryProvider);
@@ -23,7 +23,7 @@ class CreateCommodityUseCase
   CreateCommodityUseCase(this._reader);
 
   @override
-  Future<Result<void>> call(CreateCommodityUseCaseParams params) {
+  Future<Result<Commodity>> call(CreateCommodityUseCaseParams params) {
     return Result.guardFuture(() async {
       // 同名の商品名が存在した場合はエラー
       if (await _commodityRepository.getEnabledCommodityByName(params.name) !=
@@ -34,6 +34,8 @@ class CreateCommodityUseCase
       final commodity = Commodity.create(params.name, params.quantityType);
 
       _commodityRepository.createCommodity(commodity);
+
+      return commodity;
     });
   }
 }

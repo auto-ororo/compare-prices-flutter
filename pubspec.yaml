@@ -135,7 +135,6 @@ flavorizr:
     - "ios:xcconfig"
     - "ios:buildTargets"
     - "ios:schema"
-    - "ios:plist"
     - "assets:clean"
     - "ide:config"
 

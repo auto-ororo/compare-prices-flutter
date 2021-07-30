@@ -10,7 +10,7 @@ final createShopByNameUseCaseProvider =
     Provider.autoDispose<CreateShopByNameUseCase>(
         (ref) => CreateShopByNameUseCase(ref.read));
 
-class CreateShopByNameUseCase extends FutureUseCase<void, String> {
+class CreateShopByNameUseCase extends FutureUseCase<Shop, String> {
   final Reader _reader;
 
   late final _shopRepository = _reader(shopRepositoryProvider);
@@ -18,7 +18,7 @@ class CreateShopByNameUseCase extends FutureUseCase<void, String> {
   CreateShopByNameUseCase(this._reader);
 
   @override
-  Future<Result<void>> call(String params) {
+  Future<Result<Shop>> call(String params) {
     return Result.guardFuture(() async {
       // 同名の店舗が存在した場合はエラー
       if (await _shopRepository.getEnabledShopByName(params) != null) {
@@ -28,6 +28,8 @@ class CreateShopByNameUseCase extends FutureUseCase<void, String> {
       final shop = Shop.createByName(params);
 
       _shopRepository.createShop(shop);
+
+      return shop;
     });
   }
 }
