@@ -107,7 +107,7 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "Compare Prices Dev"
+        name: "Dev Compey"
 
       android:
         applicationId: "com.ororoauto.compare_prices.dev"
@@ -117,7 +117,7 @@ flavorizr:
 
     prd:
       app:
-        name: "Compare Prices"
+        name: "Compey"
 
       android:
         applicationId: "com.ororoauto.compare_prices"

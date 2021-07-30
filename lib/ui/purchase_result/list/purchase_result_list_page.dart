@@ -93,7 +93,7 @@ class PurchaseResultListPage extends HookWidget {
         children: [
           if (purchaseResults.isEmpty)
             NoDataView(
-              message: AppLocalizations.of(context)!.commodityPriceListNoData,
+              message: AppLocalizations.of(context)!.purchaseResultListNoData,
             ),
           if (purchaseResults.isNotEmpty)
             Expanded(
@@ -111,14 +111,6 @@ class PurchaseResultListPage extends HookWidget {
             ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-          heroTag: floatingActionButtonHeroTag,
-          child: const Icon(Icons.add),
-          onPressed: () async {
-            await Navigator.of(context)
-                .pushNamed(RouteName.createPurchaseResultPage);
-            viewModel.getList();
-          }),
     );
   }
 }
