@@ -1,6 +1,7 @@
 import 'package:compare_prices/domain/usecases/initialize_app_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:compare_prices/ui/app_theme.dart';
+import 'package:compare_prices/ui/assets/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -35,7 +36,6 @@ class _App extends HookWidget {
         ],
         supportedLocales: [
           const Locale('ja', ''),
-          const Locale('en', ''),
         ],
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
@@ -43,7 +43,9 @@ class _App extends HookWidget {
         onGenerateRoute: route,
       );
     } else {
-      return Container();
+      return Container(
+        decoration: BoxDecoration(color: AppColors.primary),
+      );
     }
   }
 }
