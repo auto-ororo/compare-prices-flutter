@@ -59,7 +59,7 @@ class InputNumberDialog extends HookWidget {
                     borderSide:
                         BorderSide(color: Theme.of(context).primaryColor),
                   ),
-                  suffixStyle: Theme.of(context).textTheme.headline4,
+                  suffixStyle: Theme.of(context).textTheme.headline5,
                   suffixText: suffix),
               controller: controller,
               style: Theme.of(context).textTheme.headline3,
@@ -203,7 +203,7 @@ class _NumberKey extends StatelessWidget {
       keySize: keySize,
       child: Text(
         label,
-        style: Theme.of(context).textTheme.headline3,
+        style: Theme.of(context).textTheme.headline4,
       ),
       onTap: onTap,
     );

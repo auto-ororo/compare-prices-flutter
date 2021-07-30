@@ -66,7 +66,7 @@ class PurchaseResultRow extends HookWidget {
                 children: [
                   Text(
                     _purchaseResult.price.currency(),
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
