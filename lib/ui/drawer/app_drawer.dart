@@ -16,9 +16,12 @@ class AppDrawer extends HookWidget {
       child: ListView(
         children: [
           Container(
-            height: 80,
+            height: 100,
             child: DrawerHeader(
-              child: Text(AppLocalizations.of(context)!.appName),
+              child: Text(
+                AppLocalizations.of(context)!.appName,
+                style: Theme.of(context).textTheme.headline5,
+              ),
             ),
           ),
           _DrawerListTile(

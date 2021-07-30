@@ -86,6 +86,7 @@ class CommodityPriceRow extends HookWidget {
                             children: [
                               Text(
                                 _commodityPrice.totalPrice.currency(),
+                                style: Theme.of(context).textTheme.subtitle1,
                               ),
                               Padding(
                                 padding:
@@ -107,6 +108,9 @@ class CommodityPriceRow extends HookWidget {
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text(
                                         _commodityPrice.unitPrice.currency(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1,
                                       ),
                                     ),
                                     Padding(
@@ -131,6 +135,8 @@ class CommodityPriceRow extends HookWidget {
                           ),
                         ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.ideographic,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 4),
