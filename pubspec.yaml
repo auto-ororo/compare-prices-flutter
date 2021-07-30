@@ -52,6 +52,8 @@ dev_dependencies:
   freezed:
   mockito:
   flutter_flavorizr:
+  flutter_launcher_icons:
+  flutter_native_splash:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -136,3 +138,16 @@ flavorizr:
     - "ios:plist"
     - "assets:clean"
     - "ide:config"
+
+flutter_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "lib/ui/assets/launcher/launcher_icon.png"
+  adaptive_icon_background: "lib/ui/assets/launcher/launcher_icon_background.png"
+  adaptive_icon_foreground: "lib/ui/assets/launcher/launcher_icon_foreground.png"
+
+flutter_native_splash:
+  color: "#FE9F0A"
+  image: "lib/ui/assets/launcher/launcher_icon_splash.png"
+  fullscreen: true
