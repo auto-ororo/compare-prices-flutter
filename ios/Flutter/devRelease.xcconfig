@@ -3,4 +3,4 @@
 FLUTTER_TARGET=lib/main-dev.dart
 
 ASSET_PREFIX=dev
-BUNDLE_NAME=Compare Prices Dev
+BUNDLE_NAME=Dev Compey
