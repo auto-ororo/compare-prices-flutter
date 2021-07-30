@@ -94,14 +94,18 @@ class ShopListPage extends HookWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              await showDialog(
+              final shop = await showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (_) {
                     return CreateShopDialog();
                   });
 
-              viewModel.getList();
+              if (isSelectable) {
+                viewModel.selectShop(shop);
+              } else {
+                viewModel.getList();
+              }
             },
             icon: Icon(Icons.add),
           ),

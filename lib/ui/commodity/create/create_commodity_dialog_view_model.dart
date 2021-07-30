@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/create_commodity_use_case.dart';
@@ -20,8 +21,8 @@ class CreateCommodityDialogViewModel
   late final _createCommodityByNameUseCase =
       _reader(createCommodityUseCaseProvider);
 
-  final _onCommodityCreated = StreamController<void>();
-  StreamController<void> get onCommodityCreated => _onCommodityCreated;
+  final _onCommodityCreated = StreamController<Commodity>();
+  StreamController<Commodity> get onCommodityCreated => _onCommodityCreated;
 
   CreateCommodityDialogViewModel(this._reader)
       : super(const CreateCommodityDialogState());
@@ -33,8 +34,8 @@ class CreateCommodityDialogViewModel
         quantityType: state.quantityType,
       ),
     ).then((result) {
-      result.when(success: (_) {
-        _onCommodityCreated.add(_);
+      result.when(success: (commodity) {
+        _onCommodityCreated.add(commodity);
       }, failure: (exception) {
         state =
             state.copyWith(happenedExceptionType: exception.exceptionType());

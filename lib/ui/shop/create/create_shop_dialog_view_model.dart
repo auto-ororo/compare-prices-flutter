@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/usecases/create_shop_by_name_use_case.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,16 +19,16 @@ class CreateShopDialogViewModel extends StateNotifier<CreateShopDialogState> {
   late final _createShopByNameUseCase =
       _reader(createShopByNameUseCaseProvider);
 
-  final _onShopCreated = StreamController<void>();
-  StreamController<void> get onShopCreated => _onShopCreated;
+  final _onShopCreated = StreamController<Shop>();
+  StreamController<Shop> get onShopCreated => _onShopCreated;
 
   CreateShopDialogViewModel(this._reader)
       : super(const CreateShopDialogState());
 
   void createShop() {
     _createShopByNameUseCase(state.name).then((result) {
-      result.when(success: (_) {
-        _onShopCreated.add(_);
+      result.when(success: (shop) {
+        _onShopCreated.add(shop);
       }, failure: (exception) {
         state =
             state.copyWith(happenedExceptionType: exception.exceptionType());

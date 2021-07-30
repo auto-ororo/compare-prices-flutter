@@ -95,14 +95,18 @@ class CommodityListPage extends HookWidget {
         actions: [
           IconButton(
               onPressed: () async {
-                await showDialog(
+                final commodity = await showDialog(
                     context: context,
                     barrierDismissible: false,
                     builder: (_) {
                       return CreateCommodityDialog();
                     });
 
-                viewModel.getList();
+                if (isSelectable) {
+                  viewModel.selectCommodity(commodity);
+                } else {
+                  viewModel.getList();
+                }
               },
               icon: Icon(Icons.add)),
           PopupMenuButton<CommoditySortType>(

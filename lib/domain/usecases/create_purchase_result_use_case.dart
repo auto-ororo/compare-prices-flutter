@@ -14,7 +14,7 @@ final createPurchaseResultUseCaseProvider =
         (ref) => CreatePurchaseResultUseCase(ref.read));
 
 class CreatePurchaseResultUseCase
-    extends FutureUseCase<void, CreatePurchaseResultUseCaseParams> {
+    extends FutureUseCase<PurchaseResult, CreatePurchaseResultUseCaseParams> {
   final Reader _reader;
 
   late final _purchaseResultRepository =
@@ -23,7 +23,8 @@ class CreatePurchaseResultUseCase
   CreatePurchaseResultUseCase(this._reader);
 
   @override
-  Future<Result<void>> call(CreatePurchaseResultUseCaseParams params) {
+  Future<Result<PurchaseResult>> call(
+      CreatePurchaseResultUseCaseParams params) {
     return Result.guardFuture(() async {
       final purchaseResult = PurchaseResult.create(
           commodity: params.commodity,
@@ -33,6 +34,8 @@ class CreatePurchaseResultUseCase
           purchaseDate: params.purchaseDate);
 
       await _purchaseResultRepository.createPurchaseResult(purchaseResult);
+
+      return purchaseResult;
     });
   }
 }
