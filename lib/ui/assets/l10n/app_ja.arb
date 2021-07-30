@@ -97,7 +97,7 @@
   },
 
   "purchaseResultListTitle": "登録履歴",
-  "purchaseResultListNoData": "登録履歴がありません。\n「＋」ボタンから登録しましょう！",
+  "purchaseResultListNoData": "登録履歴がありません。",
   "purchaseResultListSortByNewestPurchaseDate": "購入日が新しい順",
   "purchaseResultListSortByOldestPurchaseDate": "購入日が古い順",
   "purchaseResultListSortByNewestCreatedAt": "登録順",
