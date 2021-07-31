@@ -5,6 +5,7 @@ import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/usecases/disable_purchase_result_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_commodity_prices_in_ascending_order_use_case.dart';
+import 'package:compare_prices/domain/usecases/group_commodity_prices_by_shop_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -24,6 +25,9 @@ class CommodityPriceListPageViewModel
 
   late final _disablePurchaseResultByIdUseCase =
       _reader(deletePurchaseResultByIdUseCaseProvider);
+
+  late final _groupCommodityPricesByShopUseCase =
+      _reader(groupCommodityPricesByShopUseCaseProvider);
 
   var _onExceptionHappened = StreamController<ExceptionType>();
   StreamController<ExceptionType> get onExceptionHappened =>
@@ -50,6 +54,20 @@ class CommodityPriceListPageViewModel
         _onExceptionHappened.add(exception.exceptionType());
       });
     });
+  }
+
+  void updateShouldGroupByShop(bool shouldGroupByShop) {
+    state = state.copyWith(shouldGroupByShop: shouldGroupByShop);
+  }
+
+  void filterCommodityPrices() {
+    if (state.shouldGroupByShop) {
+      final showingCommodityPrices =
+          _groupCommodityPricesByShopUseCase(state.commodityPrices).dataOrThrow;
+      state = state.copyWith(showingCommodityPrices: showingCommodityPrices);
+    } else {
+      state = state.copyWith(showingCommodityPrices: state.commodityPrices);
+    }
   }
 
   @override
