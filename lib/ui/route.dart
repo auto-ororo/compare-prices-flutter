@@ -1,7 +1,6 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/commodity/list/commodity_list_page.dart';
-import 'package:compare_prices/ui/home/home_page.dart';
 import 'package:compare_prices/ui/other/other_page.dart';
 import 'package:compare_prices/ui/purchase_result/list/purchase_result_list_page.dart';
 import 'package:compare_prices/ui/shop/list/shop_list_page.dart';
@@ -13,7 +12,6 @@ import 'price/commodity/commodity_price_list_page.dart';
 import 'purchase_result/create/create_purchase_result_page.dart';
 
 class RouteName {
-  static const homePage = 'home-page';
   static const bottomPriceListPage = 'bottom-price-list';
   static const createPurchaseResultPage = 'create-purchase-result';
   static const purchaseResultListPage = 'purchase-result-list';
@@ -34,8 +32,6 @@ class ArgumentName {
 RouteFactory route = (RouteSettings settings) {
   final args = _getArguments(settings.arguments);
   switch (settings.name) {
-    case RouteName.homePage:
-      return MaterialPageRoute(builder: (context) => HomePage());
     case RouteName.bottomPriceListPage:
       return MaterialPageRoute(builder: (context) => BottomPriceListPage());
     case RouteName.commodityPriceListPage:
@@ -65,7 +61,7 @@ RouteFactory route = (RouteSettings settings) {
     case RouteName.otherPage:
       return MaterialPageRoute(builder: (context) => OtherPage());
     default:
-      return MaterialPageRoute(builder: (context) => HomePage());
+      return MaterialPageRoute(builder: (context) => BottomPriceListPage());
   }
 };
 
