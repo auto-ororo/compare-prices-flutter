@@ -141,7 +141,7 @@
 
   "selectShopTitle": "店舗を選択",
   "selectShopNoData": "店舗が登録されていません。\n右上の「＋」から登録しましょう！",
-  "selectShopDeleteConfirmation": "{shopName} を削除しますか？",
+  "selectShopDeleteConfirmation": "{shopName}\nを削除しますか？\n※この店舗で購入した商品の価格情報/登録履歴も見ることができなくなります。",
   "@selectShopDeleteConfirmation": {
     "type": "String",
     "placeholders": {
@@ -161,7 +161,7 @@
 
   "selectCommodityTitle": "商品を選択",
   "selectCommodityNoData": "商品が登録されていません。\n右上の「＋」から登録しましょう！",
-  "selectCommodityDeleteConfirmation": "{commodityName} を削除しますか？",
+  "selectCommodityDeleteConfirmation": "{commodityName}\nを削除しますか？\n※商品の価格情報/登録履歴も見ることができなくなります。",
   "@selectCommodityDeleteConfirmation": {
     "type": "String",
     "placeholders": {

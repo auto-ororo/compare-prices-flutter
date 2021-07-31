@@ -15,9 +15,10 @@ class CommodityPriceRow extends HookWidget {
 
   final Function() _onDelete;
 
-  static const _widgetSize = 30.0;
+  static const _widgetSize = 32.0;
 
   const CommodityPriceRow(this._commodityPrice, this._onDelete) : super();
+
   @override
   Widget build(context) {
     final Widget rankWidget;
