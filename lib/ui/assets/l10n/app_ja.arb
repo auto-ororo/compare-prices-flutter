@@ -76,6 +76,7 @@
   "commodityPriceListTitle": "詳細",
   "commodityPriceListNoData": "価格が登録されていません。\n「＋」ボタンから登録しましょう！",
   "commodityPriceListRanking": "ランキング",
+  "commodityPriceListGroupByShop": "店舗毎にまとめる",
 
   "commodityPriceRowDeleteConfirmation": "店舗:{shopName}\n価格:{price}\n{quantity}{suffix}\n購入日:{purchaseDate}\n\n上記を削除しますか？",
   "@commodityPriceRowDeleteConfirmation": {

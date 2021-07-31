@@ -9,5 +9,7 @@ class CommodityPriceListPageState with _$CommodityPriceListPageState {
   const factory CommodityPriceListPageState({
     required Commodity commodity,
     @Default([]) List<CommodityPrice> commodityPrices,
+    @Default([]) List<CommodityPrice> showingCommodityPrices,
+    @Default(true) bool shouldGroupByShop,
   }) = _CommodityPriceListPageState;
 }
