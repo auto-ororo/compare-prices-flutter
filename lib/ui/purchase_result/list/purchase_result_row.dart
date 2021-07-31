@@ -33,10 +33,11 @@ class PurchaseResultRow extends HookWidget {
                     .purchaseResultRowDeleteConfirmation(
                         _purchaseResult.commodity.name,
                         _purchaseResult.shop.name,
-                        _purchaseResult.price.currency(),
+                        _purchaseResult.price.currency(context),
                         _purchaseResult.quantity.toString(),
                         _purchaseResult.commodity.quantityType.suffix(context),
-                        _purchaseResult.purchaseDate.toFormattedString()),
+                        _purchaseResult.purchaseDate
+                            .toFormattedString(context)),
                 onOk: _onDelete);
           },
         ),
@@ -65,7 +66,7 @@ class PurchaseResultRow extends HookWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    _purchaseResult.price.currency(),
+                    _purchaseResult.price.currency(context),
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   Padding(
@@ -87,7 +88,7 @@ class PurchaseResultRow extends HookWidget {
                     ),
                   ),
                   Text(
-                    _purchaseResult.purchaseDate.toFormattedString(),
+                    _purchaseResult.purchaseDate.toFormattedString(context),
                     style: Theme.of(context).textTheme.caption,
                   )
                 ],

@@ -182,7 +182,8 @@ class CreatePurchaseResultPage extends HookWidget {
                                 textAlign: TextAlign.end,
                                 labelText:
                                     AppLocalizations.of(context)!.commonPrice,
-                                text: price.currency(showSymbol: false),
+                                text:
+                                    price.currency(context, showSymbol: false),
                                 onTap: () async {
                                   final value = await showDialog<int>(
                                       context: context,
@@ -219,7 +220,7 @@ class CreatePurchaseResultPage extends HookWidget {
                             textAlign: TextAlign.end,
                             labelText: AppLocalizations.of(context)!
                                 .commonPurchaseDate,
-                            text: purchaseDate.toFormattedString(),
+                            text: purchaseDate.toFormattedString(context),
                             onTap: () async {
                               final pickedDate = await showDatePicker(
                                   context: context,

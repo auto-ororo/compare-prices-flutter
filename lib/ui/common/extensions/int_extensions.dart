@@ -1,17 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
-final _number_format_with_symbol =
-    NumberFormat.currency(locale: "ja_JP", symbol: "¥");
-
-final _number_format_without_symbol =
-    NumberFormat.currency(locale: "ja_JP", symbol: "");
-
 extension IntExtensions on int {
-  String currency({bool showSymbol = true}) {
+  String currency(BuildContext context, {bool showSymbol = true}) {
+    final locale = Localizations.localeOf(context);
+    final _number_format;
+
     if (showSymbol) {
-      return _number_format_with_symbol.format(this);
+      _number_format = NumberFormat.currency(
+          locale: locale.languageCode,
+          symbol: AppLocalizations.of(context)!.commonCurrencySymbol);
     } else {
-      return _number_format_without_symbol.format(this);
+      _number_format =
+          NumberFormat.currency(locale: locale.languageCode, symbol: "");
     }
+
+    return _number_format.format(this);
   }
 }

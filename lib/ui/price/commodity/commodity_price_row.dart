@@ -1,7 +1,5 @@
 import 'package:compare_prices/domain/entities/commodity_price.dart';
 import 'package:compare_prices/domain/entities/quantity_type.dart';
-import 'package:compare_prices/ui/assets/color/app_colors.dart';
-import 'package:compare_prices/ui/assets/fonts/custom_icons.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
@@ -17,23 +15,41 @@ class CommodityPriceRow extends HookWidget {
 
   final Function() _onDelete;
 
+  static const _widgetSize = 32.0;
+
   const CommodityPriceRow(this._commodityPrice, this._onDelete) : super();
+
   @override
   Widget build(context) {
-    final Color crownColor;
+    final Widget rankWidget;
 
     switch (_commodityPrice.rank) {
       case 1:
-        crownColor = AppColors.gold;
+        rankWidget = Image.asset(
+          "lib/ui/assets/image/crown_gold.png",
+          width: _widgetSize,
+          height: _widgetSize,
+        );
         break;
       case 2:
-        crownColor = AppColors.silver;
+        rankWidget = Image.asset(
+          "lib/ui/assets/image/crown_silver.png",
+          width: _widgetSize,
+          height: _widgetSize,
+        );
         break;
       case 3:
-        crownColor = AppColors.bronze;
+        rankWidget = Image.asset(
+          "lib/ui/assets/image/crown_bronze.png",
+          width: _widgetSize,
+          height: _widgetSize,
+        );
         break;
       default:
-        crownColor = Colors.transparent;
+        rankWidget = SizedBox(
+          width: _widgetSize,
+          height: _widgetSize,
+        );
         break;
     }
 
@@ -50,10 +66,11 @@ class CommodityPriceRow extends HookWidget {
                 message: AppLocalizations.of(context)!
                     .commodityPriceRowDeleteConfirmation(
                         _commodityPrice.shop.name,
-                        _commodityPrice.totalPrice.currency(),
+                        _commodityPrice.totalPrice.currency(context),
                         _commodityPrice.quantity.toString(),
                         _commodityPrice.commodity.quantityType.suffix(context),
-                        _commodityPrice.purchaseDate.toFormattedString()),
+                        _commodityPrice.purchaseDate
+                            .toFormattedString(context)),
                 onOk: _onDelete);
           },
         ),
@@ -67,9 +84,8 @@ class CommodityPriceRow extends HookWidget {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: Icon(CustomIcons.crown, size: 16, color: crownColor),
-                  ),
+                      padding: const EdgeInsets.only(right: 8),
+                      child: rankWidget),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +101,7 @@ class CommodityPriceRow extends HookWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                _commodityPrice.totalPrice.currency(),
+                                _commodityPrice.totalPrice.currency(context),
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
                               Padding(
@@ -107,7 +123,8 @@ class CommodityPriceRow extends HookWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Text(
-                                        _commodityPrice.unitPrice.currency(),
+                                        _commodityPrice.unitPrice
+                                            .currency(context),
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle1,
@@ -147,7 +164,8 @@ class CommodityPriceRow extends HookWidget {
                               ),
                             ),
                             Text(
-                              _commodityPrice.purchaseDate.toFormattedString(),
+                              _commodityPrice.purchaseDate
+                                  .toFormattedString(context),
                               style: Theme.of(context).textTheme.caption,
                             )
                           ],
