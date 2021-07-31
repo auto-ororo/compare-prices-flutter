@@ -30,7 +30,7 @@ class InputNumberDialogViewModel extends StateNotifier<InputNumberDialogState> {
         count: () {},
         quantity: () {},
         currency: () {
-          convertedString = number.currency();
+          convertedString = number.currency(context);
         });
     return convertedString;
   }

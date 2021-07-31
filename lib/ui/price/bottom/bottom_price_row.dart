@@ -47,7 +47,7 @@ class BottomPriceRow extends StatelessWidget {
                           textBaseline: TextBaseline.ideographic,
                           children: [
                             Text(
-                              _bottomPrice.price.currency(),
+                              _bottomPrice.price.currency(context),
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
                             Text(
@@ -69,7 +69,8 @@ class BottomPriceRow extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _bottomPrice.purchaseDate.toFormattedString(),
+                              _bottomPrice.purchaseDate
+                                  .toFormattedString(context),
                               style: Theme.of(context).textTheme.caption,
                             ),
                           ],

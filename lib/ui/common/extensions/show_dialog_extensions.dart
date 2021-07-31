@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 extension ShowDialogExtension on Widget {
   Future<T?> showConfirmDialog<T>(
@@ -11,12 +12,12 @@ extension ShowDialogExtension on Widget {
         context: context,
         builder: (_) {
           return AlertDialog(
-            title: Text(title ?? "確認"),
+            title: Text(title ?? AppLocalizations.of(context)!.commonConfirm),
             content: Text(message),
             actions: [
               // ボタン領域
               TextButton(
-                  child: Text("Cancel"),
+                  child: Text(AppLocalizations.of(context)!.commonCancel),
                   onPressed: () async {
                     if (onCancel != null) {
                       await onCancel();
@@ -24,7 +25,7 @@ extension ShowDialogExtension on Widget {
                     Navigator.pop(context);
                   }),
               TextButton(
-                child: Text("OK"),
+                child: Text(AppLocalizations.of(context)!.commonOk),
                 onPressed: () async {
                   await onOk();
                   Navigator.pop(context);

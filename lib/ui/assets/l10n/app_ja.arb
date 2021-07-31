@@ -6,6 +6,7 @@
 
   "commonOk": "OK",
   "commonCancel": "キャンセル",
+  "commonConfirm": "確認",
   "commonSearch": "検索",
   "commonInputHint": "入力してください。",
   "commonBottomPrice": "底値",
@@ -53,6 +54,8 @@
   "commonLastPurchaseDate": "最終購入日",
   "commonLicense": "ライセンス",
   "commonVersion": "バージョン情報",
+  "commonYyyyMmDd": "yyyy/MM/dd",
+  "commonCurrencySymbol": "¥",
 
   "quantityCountSuffix": "個",
   "quantityMilliliterSuffix": "ml",
