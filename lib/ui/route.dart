@@ -1,7 +1,6 @@
 import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/ui/commodity/list/commodity_list_page.dart';
-import 'package:compare_prices/ui/other/other_page.dart';
 import 'package:compare_prices/ui/purchase_result/list/purchase_result_list_page.dart';
 import 'package:compare_prices/ui/shop/list/shop_list_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,7 +17,6 @@ class RouteName {
   static const commodityListPage = 'commodity-list';
   static const shopListPage = 'shop-list';
   static const commodityPriceListPage = 'commodity-price-list';
-  static const otherPage = 'other';
   static const licensePage = 'license';
 }
 
@@ -58,8 +56,6 @@ RouteFactory route = (RouteSettings settings) {
               title: args![ArgumentName.title],
               isSelectable: args[ArgumentName.isSelectable]),
           fullscreenDialog: args![ArgumentName.isFullscreenDialog] ?? false);
-    case RouteName.otherPage:
-      return MaterialPageRoute(builder: (context) => OtherPage());
     default:
       return MaterialPageRoute(builder: (context) => BottomPriceListPage());
   }
