@@ -10,6 +10,6 @@ class CommodityPriceListPageState with _$CommodityPriceListPageState {
     required Commodity commodity,
     @Default([]) List<CommodityPrice> commodityPrices,
     @Default([]) List<CommodityPrice> showingCommodityPrices,
-    @Default(true) bool shouldGroupByShop,
+    @Default(false) bool shouldGroupByShop,
   }) = _CommodityPriceListPageState;
 }
