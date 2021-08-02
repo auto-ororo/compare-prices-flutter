@@ -92,7 +92,7 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
 
 MVVM をベースとした Layered Architecture
 
-![compare-prices-architecture](https://user-images.githubusercontent.com/23581157/127873558-87e9c8b9-f132-4c23-bded-9c61f2cd4d93.png)
+<img src="https://user-images.githubusercontent.com/23581157/127873558-87e9c8b9-f132-4c23-bded-9c61f2cd4d93.png" width=500>
 
 - View(Widget)
   - HookWidget を継承(Flutter Hooks 提供)
@@ -154,4 +154,3 @@ MVVM をベースとした Layered Architecture
 ```zsh
 flutter build appbundle --flavor prd -t lib/main-prd.dart
 ```
-
