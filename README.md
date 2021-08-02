@@ -12,15 +12,26 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
 ## Features
 
 - 商品の価格登録機能
-  <img src="https://user-images.githubusercontent.com/23581157/127875073-bb87bec0-d3f9-4b04-ab87-498abb400029.PNG" width=200>
+
+    <img src="https://user-images.githubusercontent.com/23581157/127875073-bb87bec0-d3f9-4b04-ab87-498abb400029.PNG" width=200>
+
 - 商品毎の底値一覧表示
-  <img src="https://user-images.githubusercontent.com/23581157/127875068-3d8e41e7-38ca-4dfc-abf8-ef2c718f0380.PNG" width=200>
+
+    <img src="https://user-images.githubusercontent.com/23581157/127875068-3d8e41e7-38ca-4dfc-abf8-ef2c718f0380.PNG" width=200>
+
 - 商品の価格ランキング表示
-  <img src="https://user-images.githubusercontent.com/23581157/127875075-b0cd287c-cb2d-4492-8acc-0146e4fb4d0f.PNG" width=200>
+
+    <img src="https://user-images.githubusercontent.com/23581157/127875075-b0cd287c-cb2d-4492-8acc-0146e4fb4d0f.PNG" width=200>
+
 - 価格登録履歴の一覧表示
-  <img src="https://user-images.githubusercontent.com/23581157/127875081-8e5ba83c-0195-4c91-9ca4-b8840c31d698.jpeg" width=200>
+
+    <img src="https://user-images.githubusercontent.com/23581157/127875081-8e5ba83c-0195-4c91-9ca4-b8840c31d698.jpeg" width=200>
+
 - ダークテーマ対応
-  <img src="https://user-images.githubusercontent.com/23581157/127875060-657bdc14-b962-43fa-93cc-b683271093a9.PNG" width=200><img src="https://user-images.githubusercontent.com/23581157/127875045-6443be3c-b1a7-4546-aa28-69b92cabe561.PNG" width=200>
+
+    <img src="https://user-images.githubusercontent.com/23581157/127875060-657bdc14-b962-43fa-93cc-b683271093a9.PNG" width=200>
+
+    <img src="https://user-images.githubusercontent.com/23581157/127875045-6443be3c-b1a7-4546-aa28-69b92cabe561.PNG" width=200>
 
 ### Requirements
 
