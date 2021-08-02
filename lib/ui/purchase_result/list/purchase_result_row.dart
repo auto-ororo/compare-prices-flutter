@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/purchase_result.dart';
-import 'package:compare_prices/domain/entities/quantity_type.dart';
+import 'package:compare_prices/domain/models/purchase_result.dart';
+import 'package:compare_prices/domain/models/quantity_type.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';

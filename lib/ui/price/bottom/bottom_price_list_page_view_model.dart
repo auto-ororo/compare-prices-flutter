@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/bottom_price_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
+import 'package:compare_prices/domain/models/bottom_price_sort_type.dart';
 import 'package:compare_prices/domain/usecases/filter_bottom_prices_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_bottom_prices_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_bottom_prices_use_case.dart';

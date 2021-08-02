@@ -6,7 +6,7 @@
 // // tree, read text, and verify that the values of widget properties are correct.
 //
 // import 'package:compare_prices/data/providers.dart';
-// import 'package:compare_prices/domain/entities/result.dart';
+// import 'package:compare_prices/domain/models/result.dart';
 // import 'package:compare_prices/domain/repositories/example_repository.dart';
 // import 'package:compare_prices/ui/example/example_page.dart';
 // import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:compare_prices/domain/entities/shop_sort_type.dart';
+import 'package:compare_prices/domain/models/shop_sort_type.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
 import 'package:compare_prices/ui/common/no_data_view.dart';

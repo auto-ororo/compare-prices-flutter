@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:compare_prices/domain/usecases/update_commodity_use_case.dart';
 import 'package:compare_prices/ui/commodity/update/update_commodity_dialog_state.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/quantity_type.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/quantity_type.dart';
 import 'package:hive/hive.dart';
 
 part 'hive_commodity.g.dart';

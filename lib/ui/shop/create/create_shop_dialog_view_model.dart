@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
+import 'package:compare_prices/domain/models/shop.dart';
 import 'package:compare_prices/domain/usecases/create_shop_by_name_use_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
