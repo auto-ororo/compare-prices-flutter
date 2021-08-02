@@ -1,8 +1,8 @@
 import 'package:compare_prices/data/providers.dart';
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/commodity_price.dart';
-import 'package:compare_prices/domain/entities/purchase_result.dart';
-import 'package:compare_prices/domain/entities/result.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/commodity_price.dart';
+import 'package:compare_prices/domain/models/purchase_result.dart';
+import 'package:compare_prices/domain/models/result.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';

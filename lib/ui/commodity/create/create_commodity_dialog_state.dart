@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/quantity_type.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
+import 'package:compare_prices/domain/models/quantity_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_commodity_dialog_state.freezed.dart';

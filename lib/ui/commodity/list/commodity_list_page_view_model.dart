@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/commodity_sort_type.dart';
 import 'package:compare_prices/domain/usecases/disable_commodity_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_commodities_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_commodities_use_case.dart';

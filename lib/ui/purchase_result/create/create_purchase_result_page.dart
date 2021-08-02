@@ -1,7 +1,7 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/number_type.dart';
-import 'package:compare_prices/domain/entities/quantity_type.dart';
-import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/number_type.dart';
+import 'package:compare_prices/domain/models/quantity_type.dart';
+import 'package:compare_prices/domain/models/shop.dart';
 import 'package:compare_prices/ui/common/extensions/exception_type_extensions.dart';
 import 'package:compare_prices/ui/common/input_number_dialog/input_number_dialog.dart';
 import 'package:flutter/material.dart';

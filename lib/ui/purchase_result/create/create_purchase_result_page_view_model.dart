@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/quantity_type.dart';
-import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/quantity_type.dart';
+import 'package:compare_prices/domain/models/shop.dart';
 import 'package:compare_prices/domain/usecases/create_purchase_result_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

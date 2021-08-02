@@ -1,8 +1,8 @@
 import 'package:compare_prices/data/base/hive/box_key.dart';
-import 'package:compare_prices/data/base/hive/dtos/hive_commodity.dart';
-import 'package:compare_prices/data/base/hive/dtos/hive_purchase_result.dart';
-import 'package:compare_prices/data/base/hive/dtos/hive_shop.dart';
-import 'package:compare_prices/domain/entities/purchase_result.dart';
+import 'package:compare_prices/data/base/hive/entities/hive_commodity.dart';
+import 'package:compare_prices/data/base/hive/entities/hive_purchase_result.dart';
+import 'package:compare_prices/data/base/hive/entities/hive_shop.dart';
+import 'package:compare_prices/domain/models/purchase_result.dart';
 import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

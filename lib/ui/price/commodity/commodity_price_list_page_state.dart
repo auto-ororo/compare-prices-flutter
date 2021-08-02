@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/commodity_price.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/commodity_price.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'commodity_price_list_page_state.freezed.dart';

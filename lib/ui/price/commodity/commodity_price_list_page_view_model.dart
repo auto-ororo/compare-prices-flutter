@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/commodity.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:compare_prices/domain/usecases/disable_purchase_result_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_commodity_prices_in_ascending_order_use_case.dart';
 import 'package:compare_prices/domain/usecases/group_commodity_prices_by_shop_use_case.dart';

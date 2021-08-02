@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/shop.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
+import 'package:compare_prices/domain/models/shop.dart';
 import 'package:compare_prices/domain/usecases/update_shop_use_case.dart';
 import 'package:compare_prices/ui/shop/update/update_shop_dialog_state.dart';
 import 'package:flutter/material.dart';

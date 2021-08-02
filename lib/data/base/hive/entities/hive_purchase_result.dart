@@ -1,6 +1,6 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/purchase_result.dart';
-import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/purchase_result.dart';
+import 'package:compare_prices/domain/models/shop.dart';
 import 'package:hive/hive.dart';
 
 part 'hive_purchase_result.g.dart';

@@ -1,4 +1,4 @@
-import 'package:compare_prices/domain/entities/result.dart';
+import 'package:compare_prices/domain/models/result.dart';
 
 abstract class UseCase<Type, Params> {
   Result<Type> call(Params params);

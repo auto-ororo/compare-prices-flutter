@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:compare_prices/data/base/hive/box_key.dart';
-import 'package:compare_prices/data/base/hive/dtos/hive_commodity.dart';
-import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/data/base/hive/entities/hive_commodity.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:compare_prices/domain/repositories/commodity_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

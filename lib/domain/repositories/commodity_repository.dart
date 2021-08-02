@@ -1,4 +1,4 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
 
 abstract class CommodityRepository {
   Future<void> createCommodity(Commodity commodity);

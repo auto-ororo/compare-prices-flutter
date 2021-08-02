@@ -1,4 +1,4 @@
-import 'package:compare_prices/domain/entities/commodity_sort_type.dart';
+import 'package:compare_prices/domain/models/commodity_sort_type.dart';
 import 'package:compare_prices/ui/commodity/create/create_commodity_dialog.dart';
 import 'package:compare_prices/ui/commodity/list/commodity_list_page_view_model.dart';
 import 'package:compare_prices/ui/commodity/list/commodity_popup_action.dart';

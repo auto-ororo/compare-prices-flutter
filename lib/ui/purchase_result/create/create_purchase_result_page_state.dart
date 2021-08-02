@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/shop.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_purchase_result_page_state.freezed.dart';

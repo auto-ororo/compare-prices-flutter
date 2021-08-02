@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
-import 'package:compare_prices/domain/entities/shop.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
+import 'package:compare_prices/domain/models/shop.dart';
 import 'package:compare_prices/ui/commodity/list/commodity_list_page.dart';
 import 'package:compare_prices/ui/purchase_result/list/purchase_result_list_page.dart';
 import 'package:compare_prices/ui/shop/list/shop_list_page.dart';

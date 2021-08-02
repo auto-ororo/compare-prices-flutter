@@ -1,4 +1,4 @@
-import 'package:compare_prices/domain/entities/commodity.dart';
+import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'commodity_popup_action.freezed.dart';

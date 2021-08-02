@@ -792,7 +792,10 @@
 			baseConfigurationReference = 270CB1201AC9C9F5B1C88374 /* Pods-Runner.debug-prd.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEVELOPMENT_TEAM = V93B98246Y;
 				PRODUCT_NAME = Runner;
+				PROVISIONING_PROFILE_SPECIFIER = "Compare Prices Distribution";
 			};
 			name = "Debug-prd";
 		};
@@ -801,7 +804,10 @@
 			baseConfigurationReference = 000EB94354F1B0AC4D474ED1 /* Pods-Runner.profile-prd.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEVELOPMENT_TEAM = V93B98246Y;
 				PRODUCT_NAME = Runner;
+				PROVISIONING_PROFILE_SPECIFIER = "Compare Prices Distribution";
 			};
 			name = "Profile-prd";
 		};
@@ -810,7 +816,10 @@
 			baseConfigurationReference = B475E82F71C120139F3AB1EF /* Pods-Runner.release-prd.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEVELOPMENT_TEAM = V93B98246Y;
 				PRODUCT_NAME = Runner;
+				PROVISIONING_PROFILE_SPECIFIER = "Compare Prices Distribution";
 			};
 			name = "Release-prd";
 		};

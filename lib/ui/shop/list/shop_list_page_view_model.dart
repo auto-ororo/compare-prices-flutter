@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:compare_prices/domain/entities/shop.dart';
-import 'package:compare_prices/domain/entities/shop_sort_type.dart';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
+import 'package:compare_prices/domain/models/shop.dart';
+import 'package:compare_prices/domain/models/shop_sort_type.dart';
 import 'package:compare_prices/domain/usecases/disable_shop_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_shops_by_keyword_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_enabled_shops_use_case.dart';

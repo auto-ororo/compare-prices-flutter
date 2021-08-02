@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/bottom_price.dart';
-import 'package:compare_prices/domain/entities/quantity_type.dart';
+import 'package:compare_prices/domain/models/bottom_price.dart';
+import 'package:compare_prices/domain/models/quantity_type.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:flutter/material.dart';

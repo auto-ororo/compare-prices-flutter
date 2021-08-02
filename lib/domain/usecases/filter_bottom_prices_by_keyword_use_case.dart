@@ -1,5 +1,5 @@
-import 'package:compare_prices/domain/entities/bottom_price.dart';
-import 'package:compare_prices/domain/entities/result.dart';
+import 'package:compare_prices/domain/models/bottom_price.dart';
+import 'package:compare_prices/domain/models/result.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
