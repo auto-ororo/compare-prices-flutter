@@ -3,7 +3,8 @@
 ![google_play_future_graphic](https://user-images.githubusercontent.com/23581157/127868311-5e7dd4a9-52a8-4927-80ba-8e834cd58b8a.png)
 
 Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
-日々のお買い物の際に、このアプリに価格を登録することでお店ごとの商品の底値を簡単に把握することができます。
+
+日々のお買い物でアプリに価格を登録することで、お店ごとの商品の底値を簡単に把握することができます。
 
 [![AppleStore](https://user-images.githubusercontent.com/23581157/127870868-d2d8a22d-726a-4b24-a508-76818496e1be.png)](https://apps.apple.com/jp/app/%E4%BE%A1%E6%A0%BC%E6%AF%94%E8%BC%83%E3%82%A2%E3%83%97%E3%83%AAcompey-%E3%81%93%E3%82%93%E3%81%BA%E3%81%84/id1579223519)
 
@@ -68,7 +69,7 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
   flutter run --flavor dev -t lib/main-dev.dart --debug
   ```
 
-  - Android Studio の Configurations から`Dev Debug`を実行、又は下記コマンドを実行
+  - Android Studio の場合は Configurations から`Dev Debug`を実行でも可
 
 - `Release`ビルドの場合
 
