@@ -62,7 +62,10 @@ class InputNumberDialog extends HookWidget {
                   suffixStyle: Theme.of(context).textTheme.headline5,
                   suffixText: suffix),
               controller: controller,
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
           ),
           Row(
@@ -93,7 +96,7 @@ class InputNumberDialog extends HookWidget {
                 .toList(),
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            _EmptyKey(keySize: keySize),
+            _ClearKey(keySize: keySize, onTap: viewModel.clearNumber),
             _NumberKey(
                 label: "0",
                 keySize: keySize,
@@ -164,27 +167,6 @@ class _KeyContainer extends StatelessWidget {
   }
 }
 
-class _EmptyKey extends StatelessWidget {
-  const _EmptyKey({
-    Key? key,
-    required this.keySize,
-  }) : super(key: key);
-
-  final double keySize;
-
-  @override
-  Widget build(BuildContext context) {
-    return _KeyContainer(
-      keySize: keySize,
-      child: SizedBox(
-        width: 1,
-        height: 1,
-      ),
-      onTap: () {},
-    );
-  }
-}
-
 class _NumberKey extends StatelessWidget {
   const _NumberKey({
     Key? key,
@@ -227,6 +209,29 @@ class _BackKey extends StatelessWidget {
       child: Icon(
         Icons.backspace_outlined,
         color: Theme.of(context).textTheme.headline3!.color,
+      ),
+      onTap: onTap,
+    );
+  }
+}
+
+class _ClearKey extends StatelessWidget {
+  final double keySize;
+  final Function() onTap;
+
+  const _ClearKey({
+    Key? key,
+    required this.keySize,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return _KeyContainer(
+      keySize: keySize,
+      child: Text(
+        "C",
+        style: Theme.of(context).textTheme.headline4,
       ),
       onTap: onTap,
     );

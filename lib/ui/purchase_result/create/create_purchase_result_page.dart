@@ -29,7 +29,7 @@ class CreatePurchaseResultPage extends HookWidget {
         useProvider(provider.select((value) => value.selectedCommodity));
     final selectedShop =
         useProvider(provider.select((value) => value.selectedShop));
-    final count = useProvider(provider.select((value) => value.count));
+    final quantity = useProvider(provider.select((value) => value.quantity));
     final price = useProvider(provider.select((value) => value.price));
     final purchaseDate =
         useProvider(provider.select((value) => value.purchaseDate));
@@ -139,7 +139,7 @@ class CreatePurchaseResultPage extends HookWidget {
                               child: PickerFormField(
                                 textAlign: TextAlign.end,
                                 labelText: quantityType.label(context),
-                                text: count.toString(),
+                                text: quantity.toString(),
                                 onTap: () async {
                                   final value = await showDialog(
                                       context: context,
@@ -147,7 +147,7 @@ class CreatePurchaseResultPage extends HookWidget {
                                       builder: (_) {
                                         return InputNumberDialog(
                                           title: quantityType.label(context),
-                                          initialNumber: count,
+                                          initialNumber: quantity,
                                           suffix: quantityType.suffix(context),
                                           numberType: NumberType.count(),
                                         );
@@ -237,7 +237,12 @@ class CreatePurchaseResultPage extends HookWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.only(
+                  top: 20,
+                  bottom: 20,
+                  left: 16,
+                  right: 16,
+                ),
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

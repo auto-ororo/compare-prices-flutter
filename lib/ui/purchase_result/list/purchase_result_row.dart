@@ -56,9 +56,22 @@ class PurchaseResultRow extends HookWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Text(
-                  _purchaseResult.shop.name,
-                  softWrap: true,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 2),
+                      child: Icon(
+                        Icons.storefront_outlined,
+                        size: 17,
+                      ),
+                    ),
+                    Text(
+                      _purchaseResult.shop.name,
+                      style: Theme.of(context).textTheme.subtitle2,
+                      softWrap: true,
+                    ),
+                  ],
                 ),
               ),
               Row(
