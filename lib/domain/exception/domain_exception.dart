@@ -10,4 +10,8 @@ class DomainException implements Exception, HasExceptionType {
   ExceptionType exceptionType() {
     return _exceptionType;
   }
+
+  @override
+  bool operator ==(other) =>
+      other is DomainException && other._exceptionType == _exceptionType;
 }
