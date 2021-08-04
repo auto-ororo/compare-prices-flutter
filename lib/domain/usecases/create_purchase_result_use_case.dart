@@ -30,7 +30,7 @@ class CreatePurchaseResultUseCase
           commodity: params.commodity,
           shop: params.shop,
           price: params.price,
-          quantity: params.count,
+          quantity: params.quantity,
           purchaseDate: params.purchaseDate);
 
       await _purchaseResultRepository.createPurchaseResult(purchaseResult);
@@ -47,7 +47,7 @@ class CreatePurchaseResultUseCaseParams
     required Commodity commodity,
     required Shop shop,
     required int price,
-    required int count,
+    required int quantity,
     required DateTime purchaseDate,
   }) = _CreatePurchaseResultUseCaseParams;
 }

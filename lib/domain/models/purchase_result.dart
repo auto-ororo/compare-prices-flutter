@@ -15,7 +15,6 @@ class PurchaseResult with _$PurchaseResult {
     required int price,
     required int quantity,
     required DateTime purchaseDate,
-    @Default(true) bool isEnabled,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _PurchaseResult;
@@ -39,9 +38,14 @@ class PurchaseResult with _$PurchaseResult {
   }
 }
 
+const _unitPriceBaseNumber = 10;
+
 extension PurchaseResultExtensions on PurchaseResult {
-  int unitPrice() {
-    return (this.price ~/
-        (this.quantity ~/ this.commodity.quantityType.unit()));
+  double unitPrice() {
+    final unitPriceBeforeRound =
+        (this.price / (this.quantity / this.commodity.quantityType.unit()));
+
+    return ((unitPriceBeforeRound * _unitPriceBaseNumber).round() /
+        _unitPriceBaseNumber);
   }
 }

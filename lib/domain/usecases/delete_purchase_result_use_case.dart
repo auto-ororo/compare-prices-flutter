@@ -21,14 +21,13 @@ class DeletePurchaseResultByIdUseCase extends FutureUseCase<void, String> {
   Future<Result<void>> call(String params) {
     return Result.guardFuture(() async {
       final purchaseResult =
-          await _purchaseResultRepository.getEnabledPurchaseResultById(params);
+          await _purchaseResultRepository.getPurchaseResultById(params);
 
       if (purchaseResult == null) {
         throw DomainException(ExceptionType.notFound());
       }
 
-      await _purchaseResultRepository.updatePurchaseResult(
-          purchaseResult.copyWith(isEnabled: false, updatedAt: DateTime.now()));
+      await _purchaseResultRepository.deletePurchaseResult(purchaseResult);
     });
   }
 }

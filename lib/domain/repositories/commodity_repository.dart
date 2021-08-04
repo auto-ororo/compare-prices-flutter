@@ -5,11 +5,11 @@ abstract class CommodityRepository {
 
   Future<void> updateCommodity(Commodity commodity);
 
-  Future<List<Commodity>> getEnabledCommodities();
+  Future<void> deleteCommodity(Commodity commodity);
 
-  Future<List<Commodity>> getAllCommodities();
+  Future<List<Commodity>> getCommodities();
 
-  Future<Commodity?> getEnabledCommodityById(String id);
+  Future<Commodity?> getCommodityById(String id);
 
-  Future<Commodity?> getEnabledCommodityByName(String name);
+  Future<Commodity?> getCommodityByName(String name);
 }

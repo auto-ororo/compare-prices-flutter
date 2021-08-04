@@ -17,15 +17,11 @@ class HiveShop extends HiveObject {
   @HiveField(3)
   DateTime updatedAt;
 
-  @HiveField(4)
-  bool isEnabled;
-
   HiveShop(
     this.id,
     this.name,
     this.createdAt,
     this.updatedAt,
-    this.isEnabled,
   );
 
   Shop convertToShop() {
@@ -34,13 +30,17 @@ class HiveShop extends HiveObject {
       name: name,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      isEnabled: isEnabled,
     );
   }
 }
 
 extension ShopExtensions on Shop {
   HiveShop convertToHiveShop() {
-    return HiveShop(id, name, createdAt, updatedAt, isEnabled);
+    return HiveShop(
+      id,
+      name,
+      createdAt,
+      updatedAt,
+    );
   }
 }

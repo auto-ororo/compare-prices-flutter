@@ -21,7 +21,7 @@ class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
   @override
   Future<Result<List<BottomPrice>>> call(NoParam params) {
     return Result.guardFuture(() async {
-      final commodities = await _commodityRepository.getEnabledCommodities();
+      final commodities = await _commodityRepository.getCommodities();
 
       var index = 0;
 
@@ -29,15 +29,12 @@ class GetBottomPricesUseCase extends FutureUseCase<List<BottomPrice>, NoParam> {
 
       for (final element in commodities) {
         final purchaseResult = await _purchaseResultRepository
-            .getEnabledMostInexpensivePurchaseResultPerUnitByCommodityId(
-                element.id);
+            .getMostInexpensivePurchaseResultPerUnitByCommodityId(element.id);
 
         if (purchaseResult == null) continue;
 
-        if (!purchaseResult.shop.isEnabled) continue;
-
         final newestPurchaseResult = await _purchaseResultRepository
-            .getEnabledNewestPurchaseResultByCommodityId(element.id);
+            .getNewestPurchaseResultByCommodityId(element.id);
 
         if (newestPurchaseResult == null) continue;
 

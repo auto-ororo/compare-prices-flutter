@@ -19,7 +19,7 @@ class UpdateShopUseCase extends FutureUseCase<void, Shop> {
   @override
   Future<Result<void>> call(Shop params) {
     return Result.guardFuture(() async {
-      final shop = await _shopRepository.getEnabledShopByName(params.name);
+      final shop = await _shopRepository.getShopByName(params.name);
 
       // 別商品データに同名の商品名が存在した場合はエラー
       if (shop != null) {

@@ -5,11 +5,11 @@ abstract class ShopRepository {
 
   Future<void> updateShop(Shop shop);
 
-  Future<List<Shop>> getEnabledShops();
+  Future<void> deleteShop(Shop shop);
 
-  Future<List<Shop>> getAllShops();
+  Future<List<Shop>> getShops();
 
-  Future<Shop?> getEnabledShopById(String id);
+  Future<Shop?> getShopById(String id);
 
-  Future<Shop?> getEnabledShopByName(String name);
+  Future<Shop?> getShopByName(String name);
 }

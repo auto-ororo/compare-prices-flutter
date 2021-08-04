@@ -4,20 +4,19 @@ import 'package:compare_prices/domain/models/result.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final getEnabledCommoditiesUseCaseProvider =
-    Provider.autoDispose<GetEnabledCommoditiesUseCase>(
-        (ref) => GetEnabledCommoditiesUseCase(ref.read));
+final getCommoditiesUseCaseProvider =
+    Provider.autoDispose<GetCommoditiesUseCase>(
+        (ref) => GetCommoditiesUseCase(ref.read));
 
-class GetEnabledCommoditiesUseCase
-    extends FutureUseCase<List<Commodity>, NoParam> {
+class GetCommoditiesUseCase extends FutureUseCase<List<Commodity>, NoParam> {
   final Reader _reader;
 
   late final _commodityRepository = _reader(commodityRepositoryProvider);
 
-  GetEnabledCommoditiesUseCase(this._reader);
+  GetCommoditiesUseCase(this._reader);
 
   @override
   Future<Result<List<Commodity>>> call(NoParam params) {
-    return Result.guardFuture(_commodityRepository.getEnabledCommodities);
+    return Result.guardFuture(_commodityRepository.getCommodities);
   }
 }

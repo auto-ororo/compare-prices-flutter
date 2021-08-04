@@ -16,36 +16,34 @@ class HiveCommodityRepository extends CommodityRepository {
   }
 
   @override
-  Future<List<Commodity>> getAllCommodities() async {
+  Future<List<Commodity>> getCommodities() async {
     final box = await _box;
 
     return box.values.toList().map((e) => e.convertToCommodity()).toList();
   }
 
   @override
-  Future<Commodity?> getEnabledCommodityById(String id) async {
+  Future<Commodity?> getCommodityById(String id) async {
     final box = await _box;
 
     return box.get(id)?.convertToCommodity();
   }
 
   @override
-  Future<Commodity?> getEnabledCommodityByName(String name) async {
-    final list = await getAllCommodities();
-    return list.firstWhereOrNull(
-        (element) => (element.name == name) && element.isEnabled);
-  }
-
-  @override
-  Future<List<Commodity>> getEnabledCommodities() async {
-    final list = await getAllCommodities();
-
-    return list.where((element) => element.isEnabled).toList();
+  Future<Commodity?> getCommodityByName(String name) async {
+    final list = await getCommodities();
+    return list.firstWhereOrNull((element) => (element.name == name));
   }
 
   @override
   Future<void> updateCommodity(Commodity commodity) async {
     final box = await _box;
     await box.put(commodity.id, commodity.convertToHiveCommodity());
+  }
+
+  @override
+  Future<void> deleteCommodity(Commodity commodity) async {
+    final box = await _box;
+    await box.delete(commodity.id);
   }
 }

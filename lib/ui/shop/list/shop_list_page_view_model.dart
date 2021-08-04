@@ -4,9 +4,9 @@ import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/models/shop.dart';
 import 'package:compare_prices/domain/models/shop_sort_type.dart';
-import 'package:compare_prices/domain/usecases/disable_shop_use_case.dart';
+import 'package:compare_prices/domain/usecases/delete_shop_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_shops_by_keyword_use_case.dart';
-import 'package:compare_prices/domain/usecases/get_enabled_shops_use_case.dart';
+import 'package:compare_prices/domain/usecases/get_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:compare_prices/ui/shop/list/shop_list_page_state.dart';
@@ -21,10 +21,9 @@ final shopListPageViewModelProvider =
 class ShopListPageViewModel extends StateNotifier<ShopListPageState> {
   final Reader _reader;
 
-  late final _getEnabledShopsListUseCase =
-      _reader(getEnabledShopsUseCaseProvider);
+  late final _getEnabledShopsListUseCase = _reader(getShopsUseCaseProvider);
 
-  late final _disableShopUseCase = _reader(disableShopUseCaseProvider);
+  late final _disableShopUseCase = _reader(deleteShopUseCaseProvider);
 
   late final _filterShopsByKeywordUseCase =
       _reader(filterShopsByKeywordUseCaseProvider);
@@ -61,8 +60,10 @@ class ShopListPageViewModel extends StateNotifier<ShopListPageState> {
     state = state.copyWith(searchWord: word);
   }
 
-  void selectShop(Shop shop) {
-    _onShopSelected.add(shop);
+  void selectShop(Shop? shop) {
+    if (shop != null) {
+      _onShopSelected.add(shop);
+    }
   }
 
   void disableShop(Shop shop) {

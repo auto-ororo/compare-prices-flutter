@@ -21,7 +21,7 @@ class UpdateCommodityUseCase extends FutureUseCase<void, Commodity> {
   Future<Result<void>> call(Commodity params) {
     return Result.guardFuture(() async {
       final commodity =
-          await _commodityRepository.getEnabledCommodityByName(params.name);
+          await _commodityRepository.getCommodityByName(params.name);
 
       // 別商品データに同名の商品名が存在した場合はエラー
       if (commodity != null) {

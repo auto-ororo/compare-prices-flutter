@@ -26,8 +26,7 @@ class CreateCommodityUseCase
   Future<Result<Commodity>> call(CreateCommodityUseCaseParams params) {
     return Result.guardFuture(() async {
       // 同名の商品名が存在した場合はエラー
-      if (await _commodityRepository.getEnabledCommodityByName(params.name) !=
-          null) {
+      if (await _commodityRepository.getCommodityByName(params.name) != null) {
         throw DomainException(ExceptionType.alreadyExists());
       }
 

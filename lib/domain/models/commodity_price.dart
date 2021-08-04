@@ -14,7 +14,7 @@ class CommodityPrice with _$CommodityPrice {
     required int rank,
     required int quantity,
     required int totalPrice,
-    required int unitPrice,
+    required double unitPrice,
     required Shop shop,
     required DateTime purchaseDate,
   }) = _CommodityPrice;

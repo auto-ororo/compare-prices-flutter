@@ -4,7 +4,7 @@ import 'package:compare_prices/domain/models/result.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final getEnabledPurchaseResultsUseCaseProvider =
+final getPurchaseResultsUseCaseProvider =
     Provider.autoDispose<GetPurchaseResultsUseCase>(
         (ref) => GetPurchaseResultsUseCase(ref.read));
 
@@ -19,7 +19,6 @@ class GetPurchaseResultsUseCase
 
   @override
   Future<Result<List<PurchaseResult>>> call(NoParam params) async {
-    return Result.guardFuture(
-        _purchaseResultRepository.getEnabledPurchaseResults);
+    return Result.guardFuture(_purchaseResultRepository.getPurchaseResults);
   }
 }
