@@ -11,7 +11,7 @@ class BottomPrice with _$BottomPrice {
     required Commodity commodity,
     required Shop mostInexpensiveShop,
     required int price,
-    required int unitPrice,
+    required double unitPrice,
     required int quantity,
     required DateTime purchaseDate,
   }) = _BottomPrice;

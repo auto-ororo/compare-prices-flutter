@@ -28,24 +28,6 @@ class Result<T> with _$Result<T> {
 
   bool get isFailure => !isSuccess;
 
-  void ifSuccess(Function(T data) body) {
-    maybeWhen(
-      success: (data) => body(data),
-      orElse: () {
-        // no-op
-      },
-    );
-  }
-
-  void ifFailure(Function(Exception e) body) {
-    maybeWhen(
-      failure: (e) => body(e),
-      orElse: () {
-        // no-op
-      },
-    );
-  }
-
   T get dataOrThrow {
     return when(
       success: (data) => data,

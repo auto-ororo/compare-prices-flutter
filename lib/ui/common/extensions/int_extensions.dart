@@ -5,17 +5,17 @@ import 'package:intl/intl.dart';
 extension IntExtensions on int {
   String currency(BuildContext context, {bool showSymbol = true}) {
     final locale = Localizations.localeOf(context);
-    final _number_format;
+    final number_format;
 
     if (showSymbol) {
-      _number_format = NumberFormat.currency(
+      number_format = NumberFormat.currency(
           locale: locale.languageCode,
           symbol: AppLocalizations.of(context)!.commonCurrencySymbol);
     } else {
-      _number_format =
+      number_format =
           NumberFormat.currency(locale: locale.languageCode, symbol: "");
     }
 
-    return _number_format.format(this);
+    return number_format.format(this);
   }
 }

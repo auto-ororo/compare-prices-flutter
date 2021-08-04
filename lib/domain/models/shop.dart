@@ -10,7 +10,6 @@ class Shop with _$Shop {
     required String name,
     required DateTime createdAt,
     required DateTime updatedAt,
-    @Default(true) bool isEnabled,
   }) = _Shop;
 
   static Shop createByName(String name) {

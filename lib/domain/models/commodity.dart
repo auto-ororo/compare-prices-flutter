@@ -12,7 +12,6 @@ class Commodity with _$Commodity {
     required QuantityType quantityType,
     required DateTime createdAt,
     required DateTime updatedAt,
-    @Default(true) bool isEnabled,
   }) = _Commodity;
 
   static Commodity create(String name, QuantityType quantityType) {

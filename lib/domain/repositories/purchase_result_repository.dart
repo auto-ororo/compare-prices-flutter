@@ -5,17 +5,18 @@ abstract class PurchaseResultRepository {
 
   Future<void> updatePurchaseResult(PurchaseResult purchaseResult);
 
-  Future<PurchaseResult?> getEnabledNewestPurchaseResultByCommodityId(
+  Future<void> deletePurchaseResult(PurchaseResult purchaseResult);
+
+  Future<PurchaseResult?> getNewestPurchaseResultByCommodityId(
       String commodityId);
 
-  Future<PurchaseResult?>
-      getEnabledMostInexpensivePurchaseResultPerUnitByCommodityId(
-          String commodityId);
-
-  Future<PurchaseResult?> getEnabledPurchaseResultById(String id);
-
-  Future<List<PurchaseResult>> getEnabledPurchaseResultsByCommodityId(
+  Future<PurchaseResult?> getMostInexpensivePurchaseResultPerUnitByCommodityId(
       String commodityId);
 
-  Future<List<PurchaseResult>> getEnabledPurchaseResults();
+  Future<PurchaseResult?> getPurchaseResultById(String id);
+
+  Future<List<PurchaseResult>> getPurchaseResultsByCommodityId(
+      String commodityId);
+
+  Future<List<PurchaseResult>> getPurchaseResults();
 }

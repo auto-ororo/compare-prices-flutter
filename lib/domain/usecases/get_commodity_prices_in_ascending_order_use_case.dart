@@ -24,7 +24,7 @@ class GetCommodityPricesInAscendingOrderUseCase
   Future<Result<List<CommodityPrice>>> call(Commodity params) {
     return Result.guardFuture(() async {
       final purchaseResults = await _purchaseResultRepository
-          .getEnabledPurchaseResultsByCommodityId(params.id);
+          .getPurchaseResultsByCommodityId(params.id);
 
       purchaseResults.sort((c, n) => c.unitPrice().compareTo(n.unitPrice()));
 
@@ -32,8 +32,6 @@ class GetCommodityPricesInAscendingOrderUseCase
 
       var rank = 1;
       for (final element in purchaseResults) {
-        if (!element.shop.isEnabled) continue;
-
         final commodityPrice = CommodityPrice(
             id: Uuid().v4(),
             commodity: params,

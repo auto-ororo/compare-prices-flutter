@@ -4,19 +4,18 @@ import 'package:compare_prices/domain/models/shop.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final getEnabledShopsUseCaseProvider =
-    Provider.autoDispose<GetEnabledShopsUseCase>(
-        (ref) => GetEnabledShopsUseCase(ref.read));
+final deleteShopUseCaseProvider = Provider.autoDispose<DeleteShopUseCase>(
+    (ref) => DeleteShopUseCase(ref.read));
 
-class GetEnabledShopsUseCase extends FutureUseCase<List<Shop>, NoParam> {
+class DeleteShopUseCase extends FutureUseCase<void, Shop> {
   final Reader _reader;
 
   late final _shopRepository = _reader(shopRepositoryProvider);
 
-  GetEnabledShopsUseCase(this._reader);
+  DeleteShopUseCase(this._reader);
 
   @override
-  Future<Result<List<Shop>>> call(NoParam params) {
-    return Result.guardFuture(_shopRepository.getEnabledShops);
+  Future<Result<void>> call(Shop params) {
+    return Result.guardFuture(() => _shopRepository.deleteShop(params));
   }
 }

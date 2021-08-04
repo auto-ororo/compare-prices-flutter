@@ -15,36 +15,34 @@ class HiveShopRepository extends ShopRepository {
   }
 
   @override
-  Future<List<Shop>> getAllShops() async {
+  Future<List<Shop>> getShops() async {
     final box = await _box;
 
     return box.values.toList().map((e) => e.convertToShop()).toList();
   }
 
   @override
-  Future<Shop?> getEnabledShopById(String id) async {
+  Future<Shop?> getShopById(String id) async {
     final box = await _box;
 
     return box.get(id)?.convertToShop();
   }
 
   @override
-  Future<Shop?> getEnabledShopByName(String name) async {
-    final list = await getAllShops();
-    return list.firstWhereOrNull(
-        (element) => (element.name == name) && element.isEnabled);
-  }
-
-  @override
-  Future<List<Shop>> getEnabledShops() async {
-    final list = await getAllShops();
-
-    return list.where((element) => element.isEnabled).toList();
+  Future<Shop?> getShopByName(String name) async {
+    final list = await getShops();
+    return list.firstWhereOrNull((element) => (element.name == name));
   }
 
   @override
   Future<void> updateShop(Shop shop) async {
     final box = await _box;
     await box.put(shop.id, shop.convertToHiveShop());
+  }
+
+  @override
+  Future<void> deleteShop(Shop shop) async {
+    final box = await _box;
+    await box.delete(shop.id);
   }
 }

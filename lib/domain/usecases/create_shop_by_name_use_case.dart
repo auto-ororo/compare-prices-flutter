@@ -21,7 +21,7 @@ class CreateShopByNameUseCase extends FutureUseCase<Shop, String> {
   Future<Result<Shop>> call(String params) {
     return Result.guardFuture(() async {
       // 同名の店舗が存在した場合はエラー
-      if (await _shopRepository.getEnabledShopByName(params) != null) {
+      if (await _shopRepository.getShopByName(params) != null) {
         throw DomainException(ExceptionType.alreadyExists());
       }
 

@@ -21,16 +21,12 @@ class HiveCommodity extends HiveObject {
   @HiveField(4)
   DateTime updatedAt;
 
-  @HiveField(5)
-  bool isEnabled;
-
   HiveCommodity(
     this.id,
     this.name,
     this.quantityTypeId,
     this.createdAt,
     this.updatedAt,
-    this.isEnabled,
   );
 
   Commodity convertToCommodity() {
@@ -40,7 +36,6 @@ class HiveCommodity extends HiveObject {
       quantityType: QuantityType.getTypeById(quantityTypeId),
       createdAt: createdAt,
       updatedAt: updatedAt,
-      isEnabled: isEnabled,
     );
   }
 }
@@ -48,6 +43,11 @@ class HiveCommodity extends HiveObject {
 extension CommodityExtensions on Commodity {
   HiveCommodity convertToHiveCommodity() {
     return HiveCommodity(
-        id, name, quantityType.id(), createdAt, updatedAt, isEnabled);
+      id,
+      name,
+      quantityType.id(),
+      createdAt,
+      updatedAt,
+    );
   }
 }

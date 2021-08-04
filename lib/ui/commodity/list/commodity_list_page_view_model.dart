@@ -4,9 +4,9 @@ import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:compare_prices/domain/models/commodity_sort_type.dart';
-import 'package:compare_prices/domain/usecases/disable_commodity_use_case.dart';
+import 'package:compare_prices/domain/usecases/delete_commodity_use_case.dart';
 import 'package:compare_prices/domain/usecases/filter_commodities_by_keyword_use_case.dart';
-import 'package:compare_prices/domain/usecases/get_enabled_commodities_use_case.dart';
+import 'package:compare_prices/domain/usecases/get_commodities_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_commodities_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:compare_prices/ui/commodity/list/commodity_list_page_state.dart';
@@ -22,10 +22,9 @@ class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
   final Reader _reader;
 
   late final _getEnabledCommoditiesListUseCase =
-      _reader(getEnabledCommoditiesUseCaseProvider);
+      _reader(getCommoditiesUseCaseProvider);
 
-  late final _disableCommodityUseCase =
-      _reader(disableCommodityUseCaseProvider);
+  late final _disableCommodityUseCase = _reader(deleteCommodityUseCaseProvider);
 
   late final _filterCommoditiesByKeywordUseCase =
       _reader(filterCommoditiesByKeywordUseCaseProvider);
@@ -64,8 +63,10 @@ class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
     state = state.copyWith(searchWord: word);
   }
 
-  void selectCommodity(Commodity commodity) {
-    _onCommoditySelected.add(commodity);
+  void selectCommodity(Commodity? commodity) {
+    if (commodity != null) {
+      _onCommoditySelected.add(commodity);
+    }
   }
 
   void disableCommodity(Commodity commodity) {

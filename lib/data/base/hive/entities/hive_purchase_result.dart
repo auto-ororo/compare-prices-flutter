@@ -25,9 +25,6 @@ class HivePurchaseResult extends HiveObject {
   @HiveField(5)
   DateTime purchaseDate;
 
-  @HiveField(6)
-  bool isEnabled;
-
   @HiveField(7)
   DateTime createdAt;
 
@@ -41,7 +38,6 @@ class HivePurchaseResult extends HiveObject {
     this.price,
     this.quantity,
     this.purchaseDate,
-    this.isEnabled,
     this.createdAt,
     this.updatedAt,
   );
@@ -53,7 +49,6 @@ class HivePurchaseResult extends HiveObject {
         shop: shop,
         price: price,
         quantity: quantity,
-        isEnabled: isEnabled,
         purchaseDate: purchaseDate,
         createdAt: createdAt,
         updatedAt: updatedAt);
@@ -69,7 +64,6 @@ extension PurchaseResultExtensions on PurchaseResult {
       price,
       quantity,
       purchaseDate,
-      isEnabled,
       createdAt,
       updatedAt,
     );

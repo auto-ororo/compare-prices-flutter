@@ -4,20 +4,20 @@ import 'package:compare_prices/domain/models/result.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final disableCommodityUseCaseProvider =
-    Provider.autoDispose<DisableCommodityUseCase>(
-        (ref) => DisableCommodityUseCase(ref.read));
+final deleteCommodityUseCaseProvider =
+    Provider.autoDispose<DeleteCommodityUseCase>(
+        (ref) => DeleteCommodityUseCase(ref.read));
 
-class DisableCommodityUseCase extends FutureUseCase<void, Commodity> {
+class DeleteCommodityUseCase extends FutureUseCase<void, Commodity> {
   final Reader _reader;
 
   late final _commodityRepository = _reader(commodityRepositoryProvider);
 
-  DisableCommodityUseCase(this._reader);
+  DeleteCommodityUseCase(this._reader);
 
   @override
   Future<Result<void>> call(Commodity params) {
-    return Result.guardFuture(() => _commodityRepository.updateCommodity(
-        params.copyWith(isEnabled: false, updatedAt: DateTime.now())));
+    return Result.guardFuture(
+        () => _commodityRepository.deleteCommodity(params));
   }
 }
