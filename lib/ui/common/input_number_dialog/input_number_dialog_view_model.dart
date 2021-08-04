@@ -58,6 +58,10 @@ class InputNumberDialogViewModel extends StateNotifier<InputNumberDialogState> {
               int.parse(numberString.substring(0, numberString.length - 1)));
     }
   }
+
+  void clearNumber() {
+    state = state.copyWith(inputtedNumber: 0);
+  }
 }
 
 @freezed

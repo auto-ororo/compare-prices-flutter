@@ -1,6 +1,7 @@
 import 'package:compare_prices/domain/models/commodity_price.dart';
 import 'package:compare_prices/domain/models/quantity_type.dart';
 import 'package:compare_prices/ui/common/extensions/datetime_extensions.dart';
+import 'package:compare_prices/ui/common/extensions/double_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/int_extensions.dart';
 import 'package:compare_prices/ui/common/extensions/show_dialog_extensions.dart';
 import 'package:flutter/cupertino.dart';
@@ -78,7 +79,7 @@ class CommodityPriceRow extends HookWidget {
       child: Card(
         elevation: 0,
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.only(top: 6, bottom: 8, left: 8, right: 8),
           child: Column(
             children: [
               Row(
@@ -96,7 +97,7 @@ class CommodityPriceRow extends HookWidget {
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [

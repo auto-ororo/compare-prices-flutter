@@ -54,7 +54,7 @@ class CreatePurchaseResultPageViewModel
 
   void updateQuantity(int? quantity) {
     if (quantity != null) {
-      state = state.copyWith(count: quantity);
+      state = state.copyWith(quantity: quantity);
     }
   }
 
@@ -62,7 +62,7 @@ class CreatePurchaseResultPageViewModel
     if (selectedCommodity != null) {
       state = state.copyWith(
           selectedCommodity: selectedCommodity,
-          count: selectedCommodity.quantityType.unit());
+          quantity: selectedCommodity.quantityType.unit());
     }
   }
 
@@ -94,7 +94,7 @@ class CreatePurchaseResultPageViewModel
   }
 
   String? validateCount(BuildContext context) {
-    if (state.count == 0) {
+    if (state.quantity == 0) {
       return AppLocalizations.of(context)!.createPurchaseResultInvalidAmount;
     }
     return null;
@@ -105,7 +105,7 @@ class CreatePurchaseResultPageViewModel
         commodity: state.selectedCommodity!,
         shop: state.selectedShop!,
         price: state.price,
-        count: state.count,
+        quantity: state.quantity,
         purchaseDate: state.purchaseDate);
 
     _createPurchaseResultUseCase(params).then((result) {
