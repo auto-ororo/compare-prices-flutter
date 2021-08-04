@@ -33,6 +33,7 @@ void main() {
 
         expect(
             result.exception, DomainException(ExceptionType.alreadyExists()));
+        verifyNever(repository.createShop(any));
       });
 
       test('名前が重複しない場合、Paramの通りに作成されること', () async {
