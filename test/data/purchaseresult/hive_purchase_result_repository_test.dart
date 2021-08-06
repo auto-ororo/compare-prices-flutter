@@ -1,5 +1,5 @@
 import 'package:compare_prices/data/commodity/hive_commodity_repository.dart';
-import 'package:compare_prices/data/purchaseResult/hive_purchase_result_repository.dart';
+import 'package:compare_prices/data/purchaseresult/hive_purchase_result_repository.dart';
 import 'package:compare_prices/data/shop/hive_shop_repository.dart';
 import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:compare_prices/domain/models/purchase_result.dart';
