@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:compare_prices/domain/exception/exception_extensions.dart';
 import 'package:compare_prices/domain/exception/exception_type.dart';
 import 'package:compare_prices/domain/models/purchase_result_sort_type.dart';
-import 'package:compare_prices/domain/usecases/delete_purchase_result_use_case.dart';
+import 'package:compare_prices/domain/usecases/delete_purchase_result_by_id_use_case.dart';
 import 'package:compare_prices/domain/usecases/get_purchase_results_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_purchase_results_use_case.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';

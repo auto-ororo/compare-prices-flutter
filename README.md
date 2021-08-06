@@ -141,6 +141,20 @@ MVVM をベースとした Layered Architecture
 | data      | 永続化先(Repository を継承)、Entity、永続化先固有の Util クラス/関数 |
 | ui        | View(Widget)、ViewModel、文言/画像等の各種リソース(assets)           |
 
+### Test
+
+```zsh
+flutter test
+```
+
+UnitTest,WidgetTest を実装
+
+- UnitTest
+  - domain directory
+  - data directory
+- WidgetTest
+  - ui directory
+
 ### How To Release
 
 #### iOS

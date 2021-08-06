@@ -29,7 +29,7 @@ class UpdateShopUseCase extends FutureUseCase<void, Shop> {
         return;
       }
 
-      _shopRepository.updateShop(params);
+      _shopRepository.updateShop(params.copyWith(updatedAt: DateTime.now()));
     });
   }
 }

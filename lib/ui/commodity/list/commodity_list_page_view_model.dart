@@ -86,7 +86,7 @@ class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
   void filterAndSort() {
     final filteredList = _filterCommoditiesByKeywordUseCase(
             FilterCommoditiesByKeywordUseCaseParams(
-                list: state.commodities, keyword: state.searchWord))
+                commodities: state.commodities, keyword: state.searchWord))
         .dataOrThrow;
 
     final showingCommodities = _sortCommoditiesUseCase(

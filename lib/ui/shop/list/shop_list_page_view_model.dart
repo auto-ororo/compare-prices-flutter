@@ -83,7 +83,7 @@ class ShopListPageViewModel extends StateNotifier<ShopListPageState> {
   void filterAndSort() {
     final filteredList = _filterShopsByKeywordUseCase(
             FilterShopsByKeywordUseCaseParams(
-                list: state.shops, keyword: state.searchWord))
+                shops: state.shops, keyword: state.searchWord))
         .dataOrThrow;
 
     final showingShops = _sortShopsUseCase(SortShopsUseCaseParams(
