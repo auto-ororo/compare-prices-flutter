@@ -9,7 +9,7 @@ on:
 
 env:
   JAVA_VERSION: 12.x
-  FLUTTER_VERSION: 2.12.0
+  FLUTTER_VERSION: 2.2.3
 
 jobs:
   analyze_and_test:
@@ -25,7 +25,7 @@ jobs:
     - name: Setup Flutter
       uses: subosito/flutter-action@v1
       with:
-        java-version: ${{ env.FLUTTER_VERSION }}
+        flutter-version: ${{ env.FLUTTER_VERSION }}
 
     - name: Get Pub Packages
       run: flutter pub get
