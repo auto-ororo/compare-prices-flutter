@@ -18,10 +18,10 @@ class FilterShopsByKeywordUseCase
   Result<List<Shop>> call(FilterShopsByKeywordUseCaseParams params) {
     return Result.guard(() {
       if (params.keyword == "") {
-        return params.list;
+        return params.shops;
       }
 
-      return params.list
+      return params.shops
           .where((element) => element.name.contains(params.keyword))
           .toList();
     });
@@ -32,7 +32,7 @@ class FilterShopsByKeywordUseCase
 class FilterShopsByKeywordUseCaseParams
     with _$FilterShopsByKeywordUseCaseParams {
   const factory FilterShopsByKeywordUseCaseParams({
-    required List<Shop> list,
+    required List<Shop> shops,
     required String keyword,
   }) = _FilterShopsByKeywordUseCaseParams;
 }

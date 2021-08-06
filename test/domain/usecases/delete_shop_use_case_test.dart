@@ -1,14 +1,11 @@
 import 'package:compare_prices/domain/models/shop.dart';
-import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:compare_prices/domain/usecases/delete_shop_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper.dart';
-import 'delete_shop_use_case_test.mocks.dart';
+import '../../mocks/generated.mocks.dart';
 
-@GenerateMocks([ShopRepository])
 void main() {
   group('DeleteShopUseCase', () {
     final repository = MockShopRepository();

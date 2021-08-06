@@ -25,10 +25,10 @@ class SortPurchaseResultsUseCase
         list.sort((n, c) => c.createdAt.compareTo(n.createdAt));
       }, newestPurchaseDate: () {
         // 購入日が新しい順
-        list.sort((n, c) => c.purchaseDate.compareTo(n.createdAt));
+        list.sort((n, c) => c.purchaseDate.compareTo(n.purchaseDate));
       }, oldestPurchaseDate: () {
         // 購入日が古い順
-        list.sort((c, n) => c.purchaseDate.compareTo(n.createdAt));
+        list.sort((c, n) => c.purchaseDate.compareTo(n.purchaseDate));
       });
 
       return list;

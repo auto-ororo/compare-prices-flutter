@@ -2,16 +2,13 @@ import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:compare_prices/domain/models/purchase_result.dart';
 import 'package:compare_prices/domain/models/quantity_type.dart';
 import 'package:compare_prices/domain/models/shop.dart';
-import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 import 'package:compare_prices/domain/usecases/create_purchase_result_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper.dart';
-import 'create_purchase_result_use_case_test.mocks.dart';
+import '../../mocks/generated.mocks.dart';
 
-@GenerateMocks([PurchaseResultRepository])
 void main() {
   group('CreatePurchaseResultUseCase', () {
     final repository = MockPurchaseResultRepository();

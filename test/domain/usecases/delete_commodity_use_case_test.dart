@@ -1,15 +1,12 @@
 import 'package:compare_prices/domain/models/commodity.dart';
 import 'package:compare_prices/domain/models/quantity_type.dart';
-import 'package:compare_prices/domain/repositories/commodity_repository.dart';
 import 'package:compare_prices/domain/usecases/delete_commodity_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper.dart';
-import 'delete_commodity_use_case_test.mocks.dart';
+import '../../mocks/generated.mocks.dart';
 
-@GenerateMocks([CommodityRepository])
 void main() {
   group('DeleteCommodityUseCase', () {
     final repository = MockCommodityRepository();

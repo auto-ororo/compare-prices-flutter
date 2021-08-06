@@ -18,10 +18,10 @@ class FilterCommoditiesByKeywordUseCase
   Result<List<Commodity>> call(FilterCommoditiesByKeywordUseCaseParams params) {
     return Result.guard(() {
       if (params.keyword == "") {
-        return params.list;
+        return params.commodities;
       }
 
-      return params.list
+      return params.commodities
           .where((element) => element.name.contains(params.keyword))
           .toList();
     });
@@ -32,7 +32,7 @@ class FilterCommoditiesByKeywordUseCase
 class FilterCommoditiesByKeywordUseCaseParams
     with _$FilterCommoditiesByKeywordUseCaseParams {
   const factory FilterCommoditiesByKeywordUseCaseParams({
-    required List<Commodity> list,
+    required List<Commodity> commodities,
     required String keyword,
   }) = _FilterCommoditiesByKeywordUseCaseParams;
 }

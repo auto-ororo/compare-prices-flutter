@@ -5,7 +5,6 @@ import 'package:compare_prices/domain/models/purchase_result.dart';
 import 'package:compare_prices/domain/models/result.dart';
 import 'package:compare_prices/domain/usecases/use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 final getCommodityPricesInAscendingOrderUseCaseProvider =
     Provider.autoDispose<GetCommodityPricesInAscendingOrderUseCase>(
@@ -33,7 +32,7 @@ class GetCommodityPricesInAscendingOrderUseCase
       var rank = 1;
       for (final element in purchaseResults) {
         final commodityPrice = CommodityPrice(
-            id: Uuid().v4(),
+            id: rank.toString(),
             commodity: params,
             purchaseResultId: element.id,
             rank: rank,
