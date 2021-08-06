@@ -18,8 +18,7 @@ class CreateCommodityDialogViewModel
     extends StateNotifier<CreateCommodityDialogState> {
   final Reader _reader;
 
-  late final _createCommodityByNameUseCase =
-      _reader(createCommodityUseCaseProvider);
+  late final _createCommodityUseCase = _reader(createCommodityUseCaseProvider);
 
   final _onCommodityCreated = StreamController<Commodity>();
   StreamController<Commodity> get onCommodityCreated => _onCommodityCreated;
@@ -28,7 +27,7 @@ class CreateCommodityDialogViewModel
       : super(const CreateCommodityDialogState());
 
   void createCommodity() {
-    _createCommodityByNameUseCase(
+    _createCommodityUseCase(
       CreateCommodityUseCaseParams(
         name: state.name,
         quantityType: state.quantityType,
