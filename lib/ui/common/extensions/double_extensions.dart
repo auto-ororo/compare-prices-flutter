@@ -7,7 +7,7 @@ extension DoubleExtensions on double {
     final locale = Localizations.localeOf(context);
     final numberFormat;
 
-    final decimalDigits = (this % 10) == 0 ? 0 : 1;
+    final decimalDigits = ((this * 10) % 10) == 0 ? 0 : 1;
 
     if (showSymbol) {
       numberFormat = NumberFormat.currency(
