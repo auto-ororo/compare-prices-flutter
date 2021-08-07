@@ -21,9 +21,9 @@ final shopListPageViewModelProvider =
 class ShopListPageViewModel extends StateNotifier<ShopListPageState> {
   final Reader _reader;
 
-  late final _getEnabledShopsListUseCase = _reader(getShopsUseCaseProvider);
+  late final _getShopsUseCase = _reader(getShopsUseCaseProvider);
 
-  late final _disableShopUseCase = _reader(deleteShopUseCaseProvider);
+  late final _deleteShopUseCase = _reader(deleteShopUseCaseProvider);
 
   late final _filterShopsByKeywordUseCase =
       _reader(filterShopsByKeywordUseCaseProvider);
@@ -47,7 +47,7 @@ class ShopListPageViewModel extends StateNotifier<ShopListPageState> {
   ShopListPageViewModel(this._reader) : super(const ShopListPageState());
 
   void getList() async {
-    _getEnabledShopsListUseCase(NoParam()).then((result) {
+    _getShopsUseCase(NoParam()).then((result) {
       result.when(success: (shops) {
         state = state.copyWith(shops: shops);
       }, failure: (exception) {
@@ -67,7 +67,7 @@ class ShopListPageViewModel extends StateNotifier<ShopListPageState> {
   }
 
   void disableShop(Shop shop) {
-    _disableShopUseCase(shop).then((result) {
+    _deleteShopUseCase(shop).then((result) {
       result.when(success: (shops) {
         getList();
       }, failure: (exception) {
