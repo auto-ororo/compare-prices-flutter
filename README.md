@@ -8,7 +8,7 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
 
 [![AppleStore](https://user-images.githubusercontent.com/23581157/127870868-d2d8a22d-726a-4b24-a508-76818496e1be.png)](https://apps.apple.com/jp/app/%E4%BE%A1%E6%A0%BC%E6%AF%94%E8%BC%83%E3%82%A2%E3%83%97%E3%83%AAcompey-%E3%81%93%E3%82%93%E3%81%BA%E3%81%84/id1579223519)
 
-[![GooglePlayStore](https://user-images.githubusercontent.com/23581157/80559396-58b00400-8a18-11ea-92ba-64eab5907665.png)](https://play.google.com/store/apps/details?id=com.ororo.auto.jigokumimi)
+[![GooglePlayStore](https://user-images.githubusercontent.com/23581157/80559396-58b00400-8a18-11ea-92ba-64eab5907665.png)](https://play.google.com/store/apps/details?id=com.ororoauto.compare_prices)
 
 ## Features
 
@@ -18,15 +18,15 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
 
 - 商品毎の底値一覧表示
 
-    <img src="https://user-images.githubusercontent.com/23581157/127875068-3d8e41e7-38ca-4dfc-abf8-ef2c718f0380.PNG" width=300>
+    <img src="https://user-images.githubusercontent.com/23581157/128594395-1b61547a-748a-4243-b7f4-f8f91f00d517.PNG" width=300>
 
 - 商品の価格ランキング表示
 
-    <img src="https://user-images.githubusercontent.com/23581157/127875075-b0cd287c-cb2d-4492-8acc-0146e4fb4d0f.PNG" width=300>
+    <img src="https://user-images.githubusercontent.com/23581157/128594398-b6a7e46b-099e-4363-8660-4dffaba70661.PNG" width=300>
 
 - 価格登録履歴の一覧表示
 
-    <img src="https://user-images.githubusercontent.com/23581157/127875081-8e5ba83c-0195-4c91-9ca4-b8840c31d698.jpeg" width=300>
+    <img src="https://user-images.githubusercontent.com/23581157/128594399-f5e2054f-3898-44fd-b841-3fa6d76e4546.PNG" width=300>
 
 - ダークテーマ対応
 
