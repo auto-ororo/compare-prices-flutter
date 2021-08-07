@@ -17,13 +17,19 @@ import '../../../mocks/generate.mocks.dart';
 
 void main() {
   group('CreateCommodityDialog', () {
-    final createCommodityUseCase = MockCreateCommodityUseCase();
-    final overrides = [
-      createCommodityUseCaseProvider.overrideWithProvider(
-        Provider.autoDispose<CreateCommodityUseCase>(
-            (ref) => createCommodityUseCase),
-      )
-    ];
+    late MockCreateCommodityUseCase createCommodityUseCase;
+
+    late List<Override> overrides;
+
+    setUp(() {
+      createCommodityUseCase = MockCreateCommodityUseCase();
+      overrides = [
+        createCommodityUseCaseProvider.overrideWithProvider(
+          Provider.autoDispose<CreateCommodityUseCase>(
+              (ref) => createCommodityUseCase),
+        )
+      ];
+    });
 
     group('初期状態', () {
       testWidgets('名前が空欄、単位が数量であること', (WidgetTester tester) async {
