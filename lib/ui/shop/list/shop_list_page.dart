@@ -68,7 +68,7 @@ class ShopListPage extends HookWidget {
           showConfirmDialog(
               context: context,
               message: AppLocalizations.of(context)!
-                  .selectShopDeleteConfirmation(shop.name),
+                  .shopListDeleteConfirmation(shop.name),
               onOk: () => viewModel.disableShop(shop));
         });
       });
@@ -118,18 +118,18 @@ class ShopListPage extends HookWidget {
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
                   text: AppLocalizations.of(context)!
-                      .selectShopSortByNewestCreatedAt,
+                      .shopListSortByNewestCreatedAt,
                   selectedValue: sortType,
                   value: ShopSortType.newestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
                   text: AppLocalizations.of(context)!
-                      .selectShopSortByOldestCreatedAt,
+                      .shopListSortByOldestCreatedAt,
                   selectedValue: sortType,
                   value: ShopSortType.oldestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: AppLocalizations.of(context)!.selectShopSortByName,
+                  text: AppLocalizations.of(context)!.shopListSortByName,
                   selectedValue: sortType,
                   value: ShopSortType.name()),
             ],
@@ -140,14 +140,14 @@ class ShopListPage extends HookWidget {
         children: [
           if (shops.isEmpty)
             NoDataView(
-              message: AppLocalizations.of(context)!.selectShopNoData,
+              message: AppLocalizations.of(context)!.shopListNoData,
             ),
           if (shops.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(8),
               child: SearchTextField(
                 labelText: AppLocalizations.of(context)!.commonShopName,
-                hintText: AppLocalizations.of(context)!.selectShopSearchHint,
+                hintText: AppLocalizations.of(context)!.shopListSearchHint,
                 onChanged: (word) {
                   viewModel.updateSearchWord(word);
                 },

@@ -141,9 +141,10 @@
   "createShopTitle": "店舗を追加",
 
   "selectShopTitle": "店舗を選択",
-  "selectShopNoData": "店舗が登録されていません。\n右上の「＋」から登録しましょう！",
-  "selectShopDeleteConfirmation": "{shopName}\nを削除しますか？\n※この店舗で購入した商品の価格情報/登録履歴も見ることができなくなります。",
-  "@selectShopDeleteConfirmation": {
+
+  "shopListNoData": "店舗が登録されていません。\n右上の「＋」から登録しましょう！",
+  "shopListDeleteConfirmation": "{shopName}\nを削除しますか？\n※この店舗で購入した商品の価格情報/登録履歴も見ることができなくなります。",
+  "@shopListDeleteConfirmation": {
     "type": "String",
     "placeholders": {
       "shopName": {
@@ -151,19 +152,20 @@
       }
     }
   },
-  "selectShopSortByNewestCreatedAt": "追加日が新しい順",
-  "selectShopSortByOldestCreatedAt": "追加日が古い順",
-  "selectShopSortByName": "名前順",
-  "selectShopSearchHint": "店舗名で絞り込み",
+  "shopListSortByNewestCreatedAt": "追加日が新しい順",
+  "shopListSortByOldestCreatedAt": "追加日が古い順",
+  "shopListSortByName": "名前順",
+  "shopListSearchHint": "店舗名で絞り込み",
 
   "updateShopTitle": "店舗を編集",
 
   "createCommodityTitle": "商品を追加",
 
   "selectCommodityTitle": "商品を選択",
-  "selectCommodityNoData": "商品が登録されていません。\n右上の「＋」から登録しましょう！",
-  "selectCommodityDeleteConfirmation": "{commodityName}\nを削除しますか？\n※商品の価格情報/登録履歴も見ることができなくなります。",
-  "@selectCommodityDeleteConfirmation": {
+
+  "commodityListNoData": "商品が登録されていません。\n右上の「＋」から登録しましょう！",
+  "commodityListDeleteConfirmation": "{commodityName}\nを削除しますか？\n※商品の価格情報/登録履歴も見ることができなくなります。",
+  "@commodityListDeleteConfirmation": {
     "type": "String",
     "placeholders": {
       "commodityName": {
@@ -171,10 +173,10 @@
       }
     }
   },
-  "selectCommoditySortByNewestCreatedAt": "追加日が新しい順",
-  "selectCommoditySortByOldestCreatedAt": "追加日が古い順",
-  "selectCommoditySortByName": "名前順",
-  "selectCommoditySearchHint": "商品名で絞り込み",
+  "commodityListSortByNewestCreatedAt": "追加日が新しい順",
+  "commodityListSortByOldestCreatedAt": "追加日が古い順",
+  "commodityListSortByName": "名前順",
+  "commodityListSearchHint": "商品名で絞り込み",
 
   "updateCommodityTitle": "商品を編集",
 

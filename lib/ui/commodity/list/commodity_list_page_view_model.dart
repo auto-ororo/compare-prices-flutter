@@ -21,10 +21,9 @@ final commodityListPageViewModelProvider = StateNotifierProvider.autoDispose<
 class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
   final Reader _reader;
 
-  late final _getEnabledCommoditiesListUseCase =
-      _reader(getCommoditiesUseCaseProvider);
+  late final _getCommoditiesUseCase = _reader(getCommoditiesUseCaseProvider);
 
-  late final _disableCommodityUseCase = _reader(deleteCommodityUseCaseProvider);
+  late final _deleteCommodityUseCase = _reader(deleteCommodityUseCaseProvider);
 
   late final _filterCommoditiesByKeywordUseCase =
       _reader(filterCommoditiesByKeywordUseCaseProvider);
@@ -50,7 +49,7 @@ class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
       : super(const CommodityListPageState());
 
   void getList() async {
-    _getEnabledCommoditiesListUseCase(NoParam()).then((result) {
+    _getCommoditiesUseCase(NoParam()).then((result) {
       result.when(success: (commodities) {
         state = state.copyWith(commodities: commodities);
       }, failure: (exception) {
@@ -70,7 +69,7 @@ class CommodityListPageViewModel extends StateNotifier<CommodityListPageState> {
   }
 
   void disableCommodity(Commodity commodity) {
-    _disableCommodityUseCase(commodity).then((result) {
+    _deleteCommodityUseCase(commodity).then((result) {
       result.when(success: (commodities) {
         getList();
       }, failure: (exception) {

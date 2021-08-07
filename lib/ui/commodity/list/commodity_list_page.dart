@@ -69,7 +69,7 @@ class CommodityListPage extends HookWidget {
           showConfirmDialog(
               context: context,
               message: AppLocalizations.of(context)!
-                  .selectCommodityDeleteConfirmation(commodity.name),
+                  .commodityListDeleteConfirmation(commodity.name),
               onOk: () => viewModel.disableCommodity(commodity));
         });
       });
@@ -118,18 +118,18 @@ class CommodityListPage extends HookWidget {
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
                   text: AppLocalizations.of(context)!
-                      .selectCommoditySortByNewestCreatedAt,
+                      .commodityListSortByNewestCreatedAt,
                   selectedValue: sortType,
                   value: CommoditySortType.newestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
                   text: AppLocalizations.of(context)!
-                      .selectCommoditySortByOldestCreatedAt,
+                      .commodityListSortByOldestCreatedAt,
                   selectedValue: sortType,
                   value: CommoditySortType.oldestCreatedAt()),
               RecognizableSelectedStatePopupMenuItem(
                   context: context,
-                  text: AppLocalizations.of(context)!.selectCommoditySortByName,
+                  text: AppLocalizations.of(context)!.commodityListSortByName,
                   selectedValue: sortType,
                   value: CommoditySortType.name()),
             ],
@@ -140,15 +140,14 @@ class CommodityListPage extends HookWidget {
         children: [
           if (commodities.isEmpty)
             NoDataView(
-              message: AppLocalizations.of(context)!.selectCommodityNoData,
+              message: AppLocalizations.of(context)!.commodityListNoData,
             ),
           if (commodities.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(8),
               child: SearchTextField(
                 labelText: AppLocalizations.of(context)!.commonCommodityName,
-                hintText:
-                    AppLocalizations.of(context)!.selectCommoditySearchHint,
+                hintText: AppLocalizations.of(context)!.commodityListSearchHint,
                 onChanged: (word) {
                   viewModel.updateSearchWord(word);
                 },
