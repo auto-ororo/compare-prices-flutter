@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper.dart';
-import '../../mocks/generated.mocks.dart';
+import '../../mocks/generate.mocks.dart';
 
 void main() {
   group('GetShopsUseCase', () {

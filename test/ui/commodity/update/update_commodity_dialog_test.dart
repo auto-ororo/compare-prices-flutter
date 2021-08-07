@@ -13,7 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../helper.dart';
-import '../../../mocks/generated.mocks.dart';
+import '../../../mocks/generate.mocks.dart';
 
 void main() {
   group('UpdateCommodityDialog', () {
