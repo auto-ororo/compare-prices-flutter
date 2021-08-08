@@ -49,24 +49,18 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
 
 ### How To Set Up
 
-1. ライブラリインストール
+1. ライブラリインストール、必要なソースコードの自動生成
 
    ```zsh
-   flutter pub get
+   make setup
    ```
 
-2. 必要なソースコードの自動生成
-
-   ```zsh
-   flutter packages pub run build_runner build --delete-conflicting-outputs
-   ```
-
-3. アプリ起動
+2. アプリ起動
 
 - `Debug`ビルドの場合
 
   ```bash
-  flutter run --flavor dev -t lib/main-dev.dart --debug
+  make run-debug
   ```
 
   - Android Studio の場合は Configurations から`Dev Debug`を実行でも可
@@ -74,7 +68,7 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
 - `Release`ビルドの場合
 
   ```bash
-  flutter run --flavor dev -t lib/main-dev.dart --release
+  make run-release
   ```
 
   - Android Studio の場合は Configurations から`Dev Release`を実行でも可
@@ -143,8 +137,13 @@ MVVM をベースとした Layered Architecture
 ### Test
 
 ```zsh
-flutter test
+make test
 ```
+
+#### Coverage
+
+- Test 実行時、レポートを`coverage/html/index.html`に出力
+- 自動生成ファイル(`*.freezed.dart`、`*.mock.dart`、`*.g.dart`)は Coverage から除外
 
 UnitTest,WidgetTest を実装
 
@@ -163,7 +162,7 @@ UnitTest,WidgetTest を実装
 2. `ipa`作成
 
    ```zsh
-   flutter build ipa --flavor prd -t lib/main-prd.dart
+   make build-ios-prd
    ```
 
 #### Android
@@ -181,6 +180,6 @@ UnitTest,WidgetTest を実装
 
 3. `AppBundle`作成
 
-```zsh
-flutter build appbundle --flavor prd -t lib/main-prd.dart
-```
+   ```zsh
+   make build-android-prd
+   ```
