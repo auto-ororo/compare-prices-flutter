@@ -140,11 +140,6 @@ MVVM をベースとした Layered Architecture
 make test
 ```
 
-#### Coverage
-
-- Test 実行時、レポートを`coverage/html/index.html`に出力
-- 自動生成ファイル(`*.freezed.dart`、`*.mock.dart`、`*.g.dart`)は Coverage から除外
-
 UnitTest,WidgetTest を実装
 
 - UnitTest
@@ -152,6 +147,11 @@ UnitTest,WidgetTest を実装
   - data directory
 - WidgetTest
   - ui directory
+
+#### Coverage
+
+- Test 実行時、レポートを`coverage/html/index.html`に出力
+- 自動生成ファイル(`*.freezed.dart`、`*.mock.dart`、`*.g.dart`)は Coverage から除外
 
 ### How To Release
 
