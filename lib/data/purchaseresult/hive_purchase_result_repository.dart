@@ -109,13 +109,6 @@ class HivePurchaseResultRepository extends PurchaseResultRepository {
   }
 
   @override
-  Future<void> updatePurchaseResult(PurchaseResult purchaseResult) async {
-    final box = await _box;
-    await box.put(
-        purchaseResult.id, purchaseResult.convertToHivePurchaseResult());
-  }
-
-  @override
   Future<void> deletePurchaseResult(PurchaseResult purchaseResult) async {
     final box = await _box;
     await box.delete(purchaseResult.id);

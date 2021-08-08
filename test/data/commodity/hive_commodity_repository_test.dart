@@ -33,8 +33,9 @@ void main() async {
 
       //更新
       final editedCommodity = commodity.copyWith(name: "b");
-      await repository.createCommodity(editedCommodity);
-      final storedCommodity2 = await repository.getCommodityById(commodity.id);
+      await repository.updateCommodity(editedCommodity);
+      final storedCommodity2 =
+          await repository.getCommodityById(editedCommodity.id);
       expect(storedCommodity2, editedCommodity);
 
       //削除

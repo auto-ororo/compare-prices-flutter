@@ -22,6 +22,10 @@ void main() {
       test('milliliter', () {
         expect(QuantityType.getTypeById("3"), milliliterType);
       });
+
+      test('throw', () {
+        expect(() => QuantityType.getTypeById("4"), throwsUnsupportedError);
+      });
     });
 
     group('values', () {

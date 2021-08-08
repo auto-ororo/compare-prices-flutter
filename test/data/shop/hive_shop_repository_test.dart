@@ -32,8 +32,8 @@ void main() async {
 
       //更新
       final editedShop = shop.copyWith(name: "b");
-      await repository.createShop(editedShop);
-      final storedShop2 = await repository.getShopById(shop.id);
+      await repository.updateShop(editedShop);
+      final storedShop2 = await repository.getShopById(editedShop.id);
       expect(storedShop2, editedShop);
 
       //削除
