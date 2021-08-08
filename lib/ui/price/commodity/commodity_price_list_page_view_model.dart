@@ -23,7 +23,7 @@ class CommodityPriceListPageViewModel
   late final _getCommodityPricesInAscendingOrderUseCase =
       _reader(getCommodityPricesInAscendingOrderUseCaseProvider);
 
-  late final _disablePurchaseResultByIdUseCase =
+  late final _deletePurchaseResultByIdUseCase =
       _reader(deletePurchaseResultByIdUseCaseProvider);
 
   late final _groupCommodityPricesByShopUseCase =
@@ -46,8 +46,8 @@ class CommodityPriceListPageViewModel
     });
   }
 
-  void disablePurchaseResult(String purchaseResultId) async {
-    _disablePurchaseResultByIdUseCase(purchaseResultId).then((result) {
+  void deletePurchaseResult(String purchaseResultId) async {
+    _deletePurchaseResultByIdUseCase(purchaseResultId).then((result) {
       result.when(success: (_) {
         getList();
       }, failure: (exception) {

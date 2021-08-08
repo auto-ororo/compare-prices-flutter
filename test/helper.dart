@@ -5,6 +5,7 @@ import 'package:compare_prices/domain/repositories/infrastructure_config_reposit
 import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:compare_prices/ui/app_theme.dart';
+import 'package:compare_prices/ui/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -73,6 +74,17 @@ ProviderContainer getDisposableProviderContainer({
   return container;
 }
 
+Finder findByAssetImage(String path) {
+  final finder = find.byWidgetPredicate((Widget widget) {
+    if (widget is Image && widget.image is AssetImage) {
+      final assetImage = widget.image as AssetImage;
+      return assetImage.keyName == path;
+    }
+    return false;
+  });
+  return finder;
+}
+
 extension ResultExtensions on Result {
   Exception get exception {
     return when(
@@ -103,6 +115,7 @@ extension WidgetTesterExtensions on WidgetTester {
           supportedLocales: [
             const Locale('ja', ''),
           ],
+          onGenerateRoute: route,
           home: widget,
         ),
       ),
