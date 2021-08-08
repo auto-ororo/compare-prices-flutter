@@ -94,8 +94,7 @@ void main() {
         expect(find.byType(SearchTextField), findsNothing);
       });
 
-      testWidgets('商品が存在する場合、検索欄が表示されず、データ登録を促すメッセージが表示されること',
-          (WidgetTester tester) async {
+      testWidgets('商品が存在する場合、リスト表示されること', (WidgetTester tester) async {
         when(getShopsUseCase.call(any))
             .thenAnswer((realInvocation) async => Result.success(baseShops));
         when(filterShopsByKeywordUseCase.call(any))
