@@ -27,8 +27,8 @@ build-android-prd:
 test:
 	flutter test --coverage
 	lcov --remove coverage/lcov.info '*.freezed.dart' '*.mock.dart' '*.g.dart' -o coverage/excluded_lcov.info
-	genhtml coverage/excluded_lcov.info -o coverage/html
-	rm -f coverage/lcov.info
+	mv -f coverage/excluded_lcov.info coverage/lcov.info
+	genhtml coverage/lcov.info -o coverage/html
 
 .PHONY: analyze
 analyze:
