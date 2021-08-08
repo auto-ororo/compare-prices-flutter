@@ -30,8 +30,6 @@ class ArgumentName {
 RouteFactory route = (RouteSettings settings) {
   final args = _getArguments(settings.arguments);
   switch (settings.name) {
-    case RouteName.bottomPriceListPage:
-      return MaterialPageRoute(builder: (context) => BottomPriceListPage());
     case RouteName.commodityPriceListPage:
       final Map args = settings.arguments as Map;
       return MaterialPageRoute(
@@ -56,7 +54,7 @@ RouteFactory route = (RouteSettings settings) {
               title: args![ArgumentName.title],
               isSelectable: args[ArgumentName.isSelectable]),
           fullscreenDialog: args![ArgumentName.isFullscreenDialog] ?? false);
-    default:
+    default: // RouteName.commodityListPage
       return MaterialPageRoute(builder: (context) => BottomPriceListPage());
   }
 };
