@@ -85,6 +85,9 @@ extension ResultExtensions on Result {
 extension WidgetTesterExtensions on WidgetTester {
   Future<void> pumpAppWidget(
       Widget widget, List<Override>? overrideProviders) async {
+    // 標準的なiphoneサイズを設定
+    binding.window.physicalSizeTestValue = Size(1242, 2268);
+
     await pumpWidget(
       ProviderScope(
         overrides: overrideProviders ?? [],

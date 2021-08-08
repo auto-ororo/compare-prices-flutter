@@ -120,13 +120,7 @@ class InputNumberDialog extends HookWidget {
 
   double _getKeySize(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    final double contentSize;
-    if (deviceSize.width < deviceSize.height) {
-      contentSize = deviceSize.width / 5;
-    } else {
-      contentSize = deviceSize.height / 5;
-    }
-    return contentSize;
+    return deviceSize.width / 5;
   }
 }
 
