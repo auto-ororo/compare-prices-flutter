@@ -74,6 +74,17 @@ ProviderContainer getDisposableProviderContainer({
   return container;
 }
 
+Finder findByAssetImage(String path) {
+  final finder = find.byWidgetPredicate((Widget widget) {
+    if (widget is Image && widget.image is AssetImage) {
+      final assetImage = widget.image as AssetImage;
+      return assetImage.keyName == path;
+    }
+    return false;
+  });
+  return finder;
+}
+
 extension ResultExtensions on Result {
   Exception get exception {
     return when(
