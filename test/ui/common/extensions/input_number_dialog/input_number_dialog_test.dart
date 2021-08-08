@@ -103,14 +103,14 @@ void main() {
         await tester.pump();
 
         await tester.tap(find.text("1"));
-        await tester.tap(find.text("2"));
-        await tester.tap(find.text("3"));
-        await tester.tap(find.text("4"));
+        await tester.tap(find.text("5"));
+        await tester.tap(find.text("9"));
+        await tester.tap(find.text("1"));
 
         await tester.pump();
 
-        expect(find.text("123"), findsOneWidget);
-        expect(find.text("1234"), findsNothing);
+        expect(find.text("159"), findsOneWidget);
+        expect(find.text("1591"), findsNothing);
       });
 
       testWidgets('入力値が0の状態で0入力しても0のままであること', (WidgetTester tester) async {
