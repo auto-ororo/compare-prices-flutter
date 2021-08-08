@@ -27,13 +27,16 @@ jobs:
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
 
-    - name: Setup
-      run: make setup
+    - name: Get Pub Packages
+      run: flutter pub get
+
+    - name: Generate Dart Files
+      run: flutter packages pub run build_runner build --delete-conflicting-outputs
 
     - name: Analyze
       if: always()
-      run: make analyze
+      run: flutter analyze
 
     - name: Test
       if: always()
-      run: make test
+      run: flutter test --verbose
