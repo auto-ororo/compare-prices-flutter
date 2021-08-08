@@ -18,6 +18,7 @@ import 'package:compare_prices/domain/usecases/get_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/group_commodity_prices_by_shop_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_bottom_prices_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_commodities_use_case.dart';
+import 'package:compare_prices/domain/usecases/sort_purchase_results_use_case.dart';
 import 'package:compare_prices/domain/usecases/sort_shops_use_case.dart';
 import 'package:compare_prices/domain/usecases/update_commodity_use_case.dart';
 import 'package:compare_prices/domain/usecases/update_shop_use_case.dart';
@@ -44,8 +45,9 @@ import 'package:mockito/annotations.dart';
   FilterBottomPricesByKeywordUseCase,
   SortBottomPricesUseCase,
   GetPurchaseResultsUseCase,
-  GetCommodityPricesInAscendingOrderUseCase,
+  SortPurchaseResultsUseCase,
   DeletePurchaseResultByIdUseCase,
+  GetCommodityPricesInAscendingOrderUseCase,
   GroupCommodityPricesByShopUseCase
 ])
 Future<void> main() async {}
