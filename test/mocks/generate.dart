@@ -3,6 +3,7 @@ import 'package:compare_prices/domain/repositories/infrastructure_config_reposit
 import 'package:compare_prices/domain/repositories/purchase_result_repository.dart';
 import 'package:compare_prices/domain/repositories/shop_repository.dart';
 import 'package:compare_prices/domain/usecases/create_commodity_use_case.dart';
+import 'package:compare_prices/domain/usecases/create_purchase_result_use_case.dart';
 import 'package:compare_prices/domain/usecases/create_shop_by_name_use_case.dart';
 import 'package:compare_prices/domain/usecases/delete_commodity_use_case.dart';
 import 'package:compare_prices/domain/usecases/delete_purchase_result_by_id_use_case.dart';
@@ -44,6 +45,7 @@ import 'package:mockito/annotations.dart';
   GetBottomPricesUseCase,
   FilterBottomPricesByKeywordUseCase,
   SortBottomPricesUseCase,
+  CreatePurchaseResultUseCase,
   GetPurchaseResultsUseCase,
   SortPurchaseResultsUseCase,
   DeletePurchaseResultByIdUseCase,
