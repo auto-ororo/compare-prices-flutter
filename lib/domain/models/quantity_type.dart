@@ -27,7 +27,7 @@ class QuantityType<T> with _$QuantityType<T> {
       case _milliliterId:
         return QuantityType.milliliter();
       default:
-        throw Error();
+        throw UnsupportedError("${id} is unsupported");
     }
   }
 
