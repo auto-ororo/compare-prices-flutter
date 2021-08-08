@@ -49,3 +49,6 @@ app.*.map.json
 *.freezed.dart
 *.g.dart
 *.mocks.dart
+
+# Coverage
+/coverage/
