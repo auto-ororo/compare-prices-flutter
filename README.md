@@ -98,7 +98,6 @@ Compay(こんぺい)は、とてもシンプルな価格比較アプリです。
 | [intl](https://pub.dev/packages/intl)                                     | 文字列リソース管理、多言語化                       |
 | [uuid](https://pub.dev/packages/uuid)                                     | UUID 生成                                          |
 | [hive](https://pub.dev/packages/hive)                                     | ローカル DB                                        |
-| [package_info](https://pub.dev/packages/package_info)                     | バージョン情報、ビルド番号をアプリ上で取得         |
 | [build_runner](https://pub.dev/packages/build_runner)                     | コード生成                                         |
 | [mockito](https://pub.dev/packages/mockito)                               | クラスのモック化                                   |
 | [flutter_flavorizr](https://pub.dev/packages/flutter_flavorizr)           | Flavor 設定の一括管理                              |
